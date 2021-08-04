@@ -28,8 +28,9 @@ public class SegmentsCodec extends LumpCodec<SegmentsLump> {
 
 	@Override
 	public SegmentsLump decode(FileBufferLump lump) {
-		FileBuffer fileBuffer  = lump.getFileBuffer();
-		int        numSegments = WadIOUtilities.calcNumFields(fileBuffer.remaining(), SEGMENT_FIELD_SIZE, lump.getName());
+		FileBuffer fileBuffer = lump.getFileBuffer();
+		int numSegments =
+				WadIOUtilities.calcNumFields(fileBuffer.remaining(), SEGMENT_FIELD_SIZE, lump.getName());
 
 		SegmentsLump segmentsLump = new SegmentsLump(lump.getName(), numSegments);
 

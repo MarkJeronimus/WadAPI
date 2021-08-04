@@ -28,8 +28,9 @@ public class SubSectorsCodec extends LumpCodec<SubsectorsLump> {
 
 	@Override
 	public SubsectorsLump decode(FileBufferLump lump) {
-		FileBuffer fileBuffer    = lump.getFileBuffer();
-		int        numSubsectors = WadIOUtilities.calcNumFields(fileBuffer.remaining(), SUBSECTOR_FIELD_SIZE, lump.getName());
+		FileBuffer fileBuffer = lump.getFileBuffer();
+		int numSubsectors =
+				WadIOUtilities.calcNumFields(fileBuffer.remaining(), SUBSECTOR_FIELD_SIZE, lump.getName());
 
 		SubsectorsLump subSectorsLump = new SubsectorsLump(lump.getName(), numSubsectors);
 

@@ -26,8 +26,9 @@ public class VerticesCodec extends LumpCodec<VerticesLump> {
 
 	@Override
 	public VerticesLump decode(FileBufferLump lump) {
-		FileBuffer fileBuffer  = lump.getFileBuffer();
-		int        numVertices = WadIOUtilities.calcNumFields(fileBuffer.remaining(), VERTEX_FIELD_SIZE, lump.getName());
+		FileBuffer fileBuffer = lump.getFileBuffer();
+		int numVertices =
+				WadIOUtilities.calcNumFields(fileBuffer.remaining(), VERTEX_FIELD_SIZE, lump.getName());
 
 		VerticesLump verticesLump = new VerticesLump(lump.getName(), numVertices);
 

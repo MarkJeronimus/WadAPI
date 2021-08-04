@@ -26,8 +26,9 @@ public class SidedefsCodec extends LumpCodec<SidedefsLump> {
 
 	@Override
 	public SidedefsLump decode(FileBufferLump lump) {
-		FileBuffer fileBuffer  = lump.getFileBuffer();
-		int        numSidedefs = WadIOUtilities.calcNumFields(fileBuffer.remaining(), SIDEDEF_FIELD_SIZE, lump.getName());
+		FileBuffer fileBuffer = lump.getFileBuffer();
+		int numSidedefs =
+				WadIOUtilities.calcNumFields(fileBuffer.remaining(), SIDEDEF_FIELD_SIZE, lump.getName());
 
 		SidedefsLump sideDefsLump = new SidedefsLump(lump.getName(), numSidedefs);
 

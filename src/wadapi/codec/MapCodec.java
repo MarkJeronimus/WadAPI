@@ -12,7 +12,7 @@ import wadapi.io.MapPointers;
  */
 // Created 2021-08-02
 public class MapCodec {
-	public static @Nullable WadMap makeMap(MapPointers mapPointers) {\
+	public static @Nullable WadMap makeMap(MapPointers mapPointers) {
 		requireNonNull(mapPointers, "mapPointers");
 		return mapPointers.decodeMap();
 	}

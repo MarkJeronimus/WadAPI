@@ -14,6 +14,7 @@ public final class LumpCodecs {
 	private LumpCodecs() {
 		throw new AssertionError();
 	}
+
 	public static LumpCodec<? extends Lump> getCodec(LumpType type, int size) {
 		switch (type) {
 			case BEHAVIOR:

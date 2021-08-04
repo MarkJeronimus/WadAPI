@@ -118,15 +118,15 @@ public class Node {
 		       "x=" + x +
 		       ", y=" + y +
 		       ", dx=" + dx +
-		       ", dy=" +    dy +
-		       ", bboxR=[" + bbox0y2 +
-		       ", " + bbox0y1+
-		       ", " + bbox0x1 +
-		       ", " + bbox0x2  +
-		       "], bboxL=[" + bbox1y2 +
-		       ", " + bbox1y1 +
-		       ", " + bbox1x1 +
+		       ", dy=" + dy +
+		       ", bboxR=[" + bbox0x1 +
+		       ", " + bbox0x2 +
+		       ", " + bbox0y1 +
+		       ", " + bbox0y2 +
+		       "], bboxL=[" + bbox1x1 +
 		       ", " + bbox1x2 +
+		       ", " + bbox1y1 +
+		       ", " + bbox1y2 +
 		       "], childR=" + ((child0 & 0x8000) != 0 ? "subsector " : "node ") + (child0 & 0x7FFF) +
 		       ", childL=" + ((child1 & 0x8000) != 0 ? "subsector " : "node ") + (child1 & 0x7FFF) +
 		       '}';

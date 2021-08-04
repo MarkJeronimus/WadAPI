@@ -27,7 +27,7 @@ public class MapLumpTypeAssigner extends LumpTypeAssigner {
 					continue;
 
 				if (isMandatoryMapLump(lumpType))
-					applyLumpType(lumps, mapMarkerCandidateIndex,  LumpType.MAP);
+					applyLumpType(lumps, mapMarkerCandidateIndex, LumpType.MAP);
 
 				mapMarkerCandidateIndex = -1;
 			}

@@ -26,8 +26,9 @@ public class PaletteCodec extends LumpCodec<PaletteLump> {
 
 	@Override
 	public PaletteLump decode(FileBufferLump lump) {
-		FileBuffer fileBuffer  = lump.getFileBuffer();
-		int        numPalettes = WadIOUtilities.calcNumFields(fileBuffer.remaining(), PALETTE_FIELD_SIZE, lump.getName());
+		FileBuffer fileBuffer = lump.getFileBuffer();
+		int numPalettes =
+				WadIOUtilities.calcNumFields(fileBuffer.remaining(), PALETTE_FIELD_SIZE, lump.getName());
 
 		PaletteLump palettesLump = new PaletteLump(lump.getName(), numPalettes);
 

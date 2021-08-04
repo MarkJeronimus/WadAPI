@@ -46,7 +46,7 @@ public class LumpPointer {
 		wadStorage.getWad(wadIndex).set(lumpIndex, lump);
 	}
 
-	public LumpPointer withLumpIndex(int mapIndex){
+	public LumpPointer withLumpIndex(int mapIndex) {
 		return new LumpPointer(getWadStorage(), getWadIndex(), mapIndex);
 	}
 
