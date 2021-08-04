@@ -41,5 +41,4 @@ public final class LumpUtilities {
 		Lump decodedLump = codec.decode((FileBufferLump)lump);
 		return decodedLump;
 	}
-
 }
