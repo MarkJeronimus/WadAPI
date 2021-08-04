@@ -1,5 +1,8 @@
 package wadapi.io;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
+
 import static org.digitalmodular.utilities.ValidatorUtilities.requireAtLeast;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
@@ -44,6 +47,11 @@ public class LumpPointer {
 
 	public void setLump(Lump lump) {
 		wadStorage.getWad(wadIndex).set(lumpIndex, lump);
+	}
+
+	@Contract("null -> null; !null -> !null")
+	public static @Nullable Lump getNullableLump(@Nullable LumpPointer pointer) {
+		return pointer == null ? null : pointer.getLump();
 	}
 
 	public LumpPointer withLumpIndex(int mapIndex) {

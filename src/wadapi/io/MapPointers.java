@@ -1,29 +1,18 @@
 package wadapi.io;
 
-import org.jetbrains.annotations.Contract;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
 import org.jetbrains.annotations.Nullable;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
-
-import wadapi.LumpUtilities;
-import wadapi.WadMap;
-import wadapi.lump.BinaryLump;
-import wadapi.lump.LinedefsLump;
-import wadapi.lump.Lump;
-import wadapi.lump.NodesLump;
-import wadapi.lump.SectorsLump;
-import wadapi.lump.SegmentsLump;
-import wadapi.lump.SidedefsLump;
-import wadapi.lump.SubsectorsLump;
-import wadapi.lump.TextLump;
-import wadapi.lump.ThingsLump;
-import wadapi.lump.VerticesLump;
 
 /**
  * @author Zom-B
  */
 // Created 2021-08-02
-public class MapPointers {
+public class MapPointers implements Iterable<LumpPointer> {
 	private final           LumpPointer mapTagPointer;
 	private final           LumpPointer thingsPointer;
 	private final           LumpPointer linedefsPointer;
@@ -66,65 +55,91 @@ public class MapPointers {
 		this.behaviorPointer = behaviorPointer;
 	}
 
-	@SuppressWarnings("OverlyCoupledMethod")
-	public WadMap decodeMap() {
-		decodeLumps();
-
-		Lump                     mapLump        = getLump(mapTagPointer);
-		ThingsLump               thingsLump     = (ThingsLump)getLump(thingsPointer);
-		LinedefsLump             linedefsLump   = (LinedefsLump)getLump(linedefsPointer);
-		SidedefsLump             sidedefsLump   = (SidedefsLump)getLump(sidedefsPointer);
-		VerticesLump             verticesLump   = (VerticesLump)getLump(verticesPointer);
-		@Nullable SegmentsLump   segmentsLump   = (SegmentsLump)getLump(segmentsPointer);
-		@Nullable SubsectorsLump subsectorsLump = (SubsectorsLump)getLump(subsectorsPointer);
-		@Nullable NodesLump      nodesLump      = (NodesLump)getLump(nodesPointer);
-		SectorsLump              sectorsLump    = (SectorsLump)getLump(sectorsPointer);
-		@Nullable BinaryLump     rejectLump     = (BinaryLump)getLump(rejectPointer);
-		@Nullable BinaryLump     blockmapLump   = (BinaryLump)getLump(blockmapPointer);
-		@Nullable TextLump       scriptsLump    = (TextLump)getLump(scriptsPointer);
-		@Nullable BinaryLump     behaviorLump   = (BinaryLump)getLump(behaviorPointer);
-
-		return new WadMap(mapLump,
-		                  thingsLump,
-		                  linedefsLump,
-		                  sidedefsLump,
-		                  verticesLump,
-		                  segmentsLump,
-		                  subsectorsLump,
-		                  nodesLump,
-		                  sectorsLump,
-		                  rejectLump,
-		                  blockmapLump,
-		                  scriptsLump,
-		                  behaviorLump);
+	public LumpPointer getMapTagPointer() {
+		return mapTagPointer;
 	}
 
-	private void decodeLumps() {
-		decodeLump(mapTagPointer);
-		decodeLump(thingsPointer);
-		decodeLump(linedefsPointer);
-		decodeLump(sidedefsPointer);
-		decodeLump(verticesPointer);
-		decodeLump(segmentsPointer);
-		decodeLump(subsectorsPointer);
-		decodeLump(nodesPointer);
-		decodeLump(sectorsPointer);
-		decodeLump(rejectPointer);
-		decodeLump(blockmapPointer);
-		decodeLump(scriptsPointer);
-		decodeLump(behaviorPointer);
+	public LumpPointer getThingsPointer() {
+		return thingsPointer;
 	}
 
-	private static void decodeLump(@Nullable LumpPointer lumpPointer) {
-		if (lumpPointer == null)
-			return;
-
-		Lump decodedLump = LumpUtilities.decodeLump(lumpPointer.getLump());
-		lumpPointer.setLump(decodedLump);
+	public LumpPointer getLinedefsPointer() {
+		return linedefsPointer;
 	}
 
-	@Contract("null -> null; !null -> !null")
-	private static @Nullable Lump getLump(@Nullable LumpPointer pointer) {
-		return pointer == null ? null : pointer.getLump();
+	public LumpPointer getSidedefsPointer() {
+		return sidedefsPointer;
+	}
+
+	public LumpPointer getVerticesPointer() {
+		return verticesPointer;
+	}
+
+	public @Nullable LumpPointer getSegmentsPointer() {
+		return segmentsPointer;
+	}
+
+	public @Nullable LumpPointer getSubsectorsPointer() {
+		return subsectorsPointer;
+	}
+
+	public @Nullable LumpPointer getNodesPointer() {
+		return nodesPointer;
+	}
+
+	public LumpPointer getSectorsPointer() {
+		return sectorsPointer;
+	}
+
+	public @Nullable LumpPointer getRejectPointer() {
+		return rejectPointer;
+	}
+
+	public @Nullable LumpPointer getBlockmapPointer() {
+		return blockmapPointer;
+	}
+
+	public @Nullable LumpPointer getScriptsPointer() {
+		return scriptsPointer;
+	}
+
+	public @Nullable LumpPointer getBehaviorPointer() {
+		return behaviorPointer;
+	}
+
+	@Override
+	public Iterator<LumpPointer> iterator() {
+		Collection<LumpPointer> lumpPointers = new ArrayList<>(13);
+
+		lumpPointers.add(mapTagPointer);
+		lumpPointers.add(thingsPointer);
+		lumpPointers.add(linedefsPointer);
+		lumpPointers.add(sidedefsPointer);
+		lumpPointers.add(verticesPointer);
+
+		if (segmentsPointer != null)
+			lumpPointers.add(segmentsPointer);
+
+		if (subsectorsPointer != null)
+			lumpPointers.add(subsectorsPointer);
+
+		if (nodesPointer != null)
+			lumpPointers.add(nodesPointer);
+
+		lumpPointers.add(sectorsPointer);
+
+		if (rejectPointer != null)
+			lumpPointers.add(rejectPointer);
+
+		if (blockmapPointer != null)
+			lumpPointers.add(blockmapPointer);
+
+		if (scriptsPointer != null)
+			lumpPointers.add(scriptsPointer);
+
+		if (behaviorPointer != null)
+			lumpPointers.add(behaviorPointer);
+
+		return lumpPointers.iterator();
 	}
 }
