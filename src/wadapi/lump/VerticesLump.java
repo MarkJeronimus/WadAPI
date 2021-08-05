@@ -13,6 +13,8 @@ import static wadapi.LumpType.VERTEXES;
  */
 // Created 2018-01-21
 public class VerticesLump extends Lump {
+	private static final Rectangle DUMMY_BOUNDING_BOX = new Rectangle(-256, -256, 512, 512);
+
 	private final List<Vertex> vertices;
 
 	public VerticesLump(String name, int initialCapacity) {
@@ -32,7 +34,7 @@ public class VerticesLump extends Lump {
 
 	public Rectangle getBoundingBox() {
 		if (vertices.isEmpty())
-			return new Rectangle(-256, -256, 512, 512);
+			return DUMMY_BOUNDING_BOX;
 		else if (vertices.size() == 1)
 			return new Rectangle(vertices.get(0).getX() - 256, vertices.get(0).getY() - 256, 512, 512);
 

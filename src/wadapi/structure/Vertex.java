@@ -29,26 +29,38 @@ public class Vertex implements Comparable<Vertex> {
 		this.y = y;
 	}
 
-	public boolean equals(Vertex other) {
-		if (x != other.x)
-			return false;
-		if (y != other.y)
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+
+		if (!(o instanceof Vertex))
 			return false;
 
-		return true;
+		Vertex other = (Vertex)o;
+		return Float.floatToIntBits(getX()) == Float.floatToIntBits(other.getX()) &&
+		       Float.floatToIntBits(getY()) == Float.floatToIntBits(other.getY());
+	}
+
+	@Override
+	public int hashCode() {
+		int hashCode = 0x811C9DC5;
+		hashCode = 0x01000193 * (hashCode ^ Float.hashCode(getX()));
+		hashCode = 0x01000193 * (hashCode ^ Float.hashCode(getY()));
+		return hashCode;
+	}
+
+	@Override
+	public int compareTo(Vertex o) {
+		int i = Float.compare(x, o.x);
+		if (i != 0)
+			return i;
+
+		return Float.compare(y, o.y);
 	}
 
 	@Override
 	public String toString() {
 		return "[" + x + ", " + y + ']';
-	}
-
-	@Override
-	public int compareTo(Vertex o) {
-		if (y != o.y)
-			return y > o.y ? 1 : -1;
-		if (x != o.x)
-			return x > o.x ? 1 : -1;
-		return 0;
 	}
 }
