@@ -32,7 +32,7 @@ public final class LumpCodecs {
 			case MARKER:
 				return size > 0 ? BinaryCodec.INSTANCE : MarkerCodec.INSTANCE;
 			case NODES:
-				return NodesCodec.INSTANCE;
+				return DoomNodesCodec.INSTANCE;
 			case PLAYPAL:
 				return PaletteCodec.INSTANCE;
 			case PATCH:

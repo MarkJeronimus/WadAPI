@@ -1,0 +1,136 @@
+package wadapi.codec;
+
+import org.jetbrains.annotations.Nullable;
+
+import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
+import static org.digitalmodular.utilities.ValidatorUtilities.requireOneOf;
+import static org.digitalmodular.utilities.ValidatorUtilities.requireType;
+
+import wadapi.WadMap;
+import wadapi.lump.BinaryLump;
+import wadapi.lump.LinedefsLump;
+import wadapi.lump.Lump;
+import wadapi.lump.MarkerLump;
+import wadapi.lump.NodesLump;
+import wadapi.lump.SectorsLump;
+import wadapi.lump.SegmentsLump;
+import wadapi.lump.SidedefsLump;
+import wadapi.lump.SubsectorsLump;
+import wadapi.lump.TextLump;
+import wadapi.lump.ThingsLump;
+import wadapi.lump.VerticesLump;
+
+/**
+ * @author Zom-B
+ */
+// Created 2018-01-23
+@SuppressWarnings("FieldHasSetterButNoGetter")
+public class WadMapBuilder {
+	private static final Class[] POSSIBLE_MAP_LUMP_CLASSES = {MarkerLump.class,
+	                                                          TextLump.class,
+	                                                          BinaryLump.class};
+
+	private @Nullable Lump           mapLump        = null;
+	private @Nullable ThingsLump     thingsLump     = null;
+	private @Nullable LinedefsLump   linedefsLump   = null;
+	private @Nullable SidedefsLump   sidedefsLump   = null;
+	private @Nullable VerticesLump   verticesLump   = null;
+	private @Nullable SegmentsLump   segmentsLump   = null;
+	private @Nullable SubsectorsLump subsectorsLump = null;
+	private @Nullable NodesLump      nodesLump      = null;
+	private @Nullable SectorsLump    sectorsLump    = null;
+	private @Nullable BinaryLump     rejectLump     = null;
+	private @Nullable BinaryLump     blockmapLump   = null;
+	private @Nullable TextLump       scriptsLump    = null;
+	private @Nullable BinaryLump     behaviorLump   = null;
+
+	public void setMapLump(Lump mapLump) {
+		requireNonNull(mapLump, "mapLump");
+		requireOneOf(POSSIBLE_MAP_LUMP_CLASSES, mapLump.getClass(), "mapLump");
+		this.mapLump = requireNonNull(mapLump, "mapLump");
+	}
+
+	public void setThingsLump(Lump thingsLump) {
+		this.thingsLump = (ThingsLump)requireType(ThingsLump.class, thingsLump, "thingsLump");
+	}
+
+	public void setLinedefsLump(Lump linedefsLump) {
+		this.linedefsLump = (LinedefsLump)requireType(LinedefsLump.class, linedefsLump, "linedefsLump");
+	}
+
+	public void setSidedefsLump(Lump sidedefsLump) {
+		this.sidedefsLump = (SidedefsLump)requireType(SidedefsLump.class, sidedefsLump, "sidedefsLump");
+	}
+
+	public void setVerticesLump(Lump verticesLump) {
+		this.verticesLump = (VerticesLump)requireType(VerticesLump.class, verticesLump, "verticesLump");
+	}
+
+	public void setSegmentsLump(@Nullable Lump segmentsLump) {
+		if (segmentsLump != null)
+			this.segmentsLump = (SegmentsLump)requireType(SegmentsLump.class, segmentsLump, "segmentsLump");
+	}
+
+	public void setSubsectorsLump(@Nullable Lump subsectorsLump) {
+		if (subsectorsLump != null)
+			this.subsectorsLump = (SubsectorsLump)requireType(SubsectorsLump.class, subsectorsLump, "subsectorsLump");
+	}
+
+	public void setNodesLump(@Nullable Lump nodesLump) {
+		if (nodesLump != null)
+			this.nodesLump = (NodesLump)requireType(NodesLump.class, nodesLump, "nodesLump");
+	}
+
+	public void setSectorsLump(Lump sectorsLump) {
+		this.sectorsLump = (SectorsLump)requireType(SectorsLump.class, sectorsLump, "sectorsLump");
+	}
+
+	public void setRejectLump(@Nullable Lump rejectLump) {
+		if (rejectLump != null)
+			this.rejectLump = (BinaryLump)requireType(BinaryLump.class, rejectLump, "rejectLump");
+	}
+
+	public void setBlockmapLump(@Nullable Lump blockmapLump) {
+		if (blockmapLump != null)
+			this.blockmapLump = (BinaryLump)requireType(BinaryLump.class, blockmapLump, "blockmapLump");
+	}
+
+	public void setScriptsLump(@Nullable Lump scriptsLump) {
+		if (scriptsLump != null)
+			this.scriptsLump = (TextLump)requireType(TextLump.class, scriptsLump, "scriptsLump");
+	}
+
+	public void setBehaviorLump(@Nullable Lump behaviorLump) {
+		if (behaviorLump != null)
+			this.behaviorLump = (BinaryLump)requireType(BinaryLump.class, behaviorLump, "behaviorLump");
+	}
+
+	public WadMap build() {
+		if (mapLump == null)
+			throw new IllegalStateException("mapLump not set yet");
+		if (thingsLump == null)
+			throw new IllegalStateException("thingsLump not set yet");
+		if (linedefsLump == null)
+			throw new IllegalStateException("linedefsLump not set yet");
+		if (sidedefsLump == null)
+			throw new IllegalStateException("sidedefsLump not set yet");
+		if (verticesLump == null)
+			throw new IllegalStateException("vertexesLump not set yet");
+		if (sectorsLump == null)
+			throw new IllegalStateException("sectorsLump not set yet");
+
+		return new WadMap(mapLump,
+		                  thingsLump,
+		                  linedefsLump,
+		                  sidedefsLump,
+		                  verticesLump,
+		                  segmentsLump,
+		                  subsectorsLump,
+		                  nodesLump,
+		                  sectorsLump,
+		                  rejectLump,
+		                  blockmapLump,
+		                  scriptsLump,
+		                  behaviorLump);
+	}
+}

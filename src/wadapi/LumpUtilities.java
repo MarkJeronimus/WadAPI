@@ -2,15 +2,11 @@ package wadapi;
 
 import net.jcip.annotations.NotThreadSafe;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.Nullable;
-
 import org.digitalmodular.utilities.annotation.UtilityClass;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
 import wadapi.codec.LumpCodec;
 import wadapi.codec.LumpCodecs;
-import wadapi.io.LumpPointer;
 import wadapi.lump.FileBufferLump;
 import wadapi.lump.Lump;
 
