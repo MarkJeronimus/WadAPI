@@ -1,7 +1,5 @@
 package wadapi.codec;
 
-import java.util.List;
-
 import org.digitalmodular.utilities.annotation.Singleton;
 
 import wadapi.FileBuffer;
@@ -32,10 +30,9 @@ public class SidedefsCodec extends LumpCodec<SidedefsLump> {
 
 		SidedefsLump sideDefsLump = new SidedefsLump(lump.getName(), numSidedefs);
 
-		List<Sidedef> sidedefs = sideDefsLump.getSidedefs();
 		for (int i = 0; i < numSidedefs; i++) {
 			Sidedef sidedef = readSidedef(fileBuffer);
-			sidedefs.add(sidedef);
+			sideDefsLump.add(sidedef);
 		}
 
 		return sideDefsLump;
@@ -43,8 +40,7 @@ public class SidedefsCodec extends LumpCodec<SidedefsLump> {
 
 	@Override
 	public void encode(SidedefsLump sideDefsLump, FileBuffer buffer) {
-		List<Sidedef> sidedefs = sideDefsLump.getSidedefs();
-		for (Sidedef sideDef : sidedefs)
+		for (Sidedef sideDef : sideDefsLump)
 			writeSidedef(sideDef, buffer);
 	}
 
