@@ -51,11 +51,11 @@ public class VerticesCodec extends LumpCodec<VerticesLump> {
 	private static Vertex readVertex(FileBuffer buffer) {
 		int x = buffer.getShort();
 		int y = buffer.getShort();
-		return new Vertex(x, y);
+		return Vertex.fromMapUnits(x, y);
 	}
 
 	private static void writeVertex(Vertex vertex, FileBuffer buffer) {
-		buffer.putShort((short)vertex.getX());
-		buffer.putShort((short)vertex.getY());
+		buffer.putShort(vertex.getMapUnitX());
+		buffer.putShort(vertex.getMapUnitY());
 	}
 }

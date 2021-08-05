@@ -36,13 +36,13 @@ public class VerticesLump extends Lump {
 		if (vertices.isEmpty())
 			return DUMMY_BOUNDING_BOX;
 		else if (vertices.size() == 1)
-			return new Rectangle(vertices.get(0).getX() - 256, vertices.get(0).getY() - 256, 512, 512);
+			return new Rectangle(vertices.get(0).getMapUnitX() - 256, vertices.get(0).getMapUnitY() - 256, 512, 512);
 
-		Rectangle boundingBox = new Rectangle(vertices.get(0).getX(), vertices.get(0).getY(), 0, 0);
+		Rectangle boundingBox = new Rectangle(vertices.get(0).getMapUnitX(), vertices.get(0).getMapUnitY(), 0, 0);
 
 		for (int i = 1; i < vertices.size(); i++) {
 			Vertex vertex = vertices.get(i);
-			boundingBox.add(vertex.getX(), vertex.getY());
+			boundingBox.add(vertex.getMapUnitX(), vertex.getMapUnitY());
 		}
 
 		return boundingBox;
