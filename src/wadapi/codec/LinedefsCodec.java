@@ -1,7 +1,5 @@
 package wadapi.codec;
 
-import java.util.List;
-
 import org.digitalmodular.utilities.annotation.Singleton;
 
 import wadapi.FileBuffer;
@@ -34,18 +32,17 @@ public class LinedefsCodec extends LumpCodec<LinedefsLump> {
 		int        fieldSize   = getFieldSize(getWadFormat());
 		int        numLinedefs = LumpUtilities.calcNumFields(fileBuffer.remaining(), fieldSize, lump.getName());
 
-		LinedefsLump  linedefsLump = new LinedefsLump(lump.getName(), numLinedefs);
-		List<Linedef> linedefs     = linedefsLump.getLinedefs();
+		LinedefsLump linedefsLump = new LinedefsLump(lump.getName(), numLinedefs);
 
 		switch (getWadFormat()) {
 			case DOOM:
 				for (int i = 0; i < numLinedefs; i++)
-					linedefs.add(readDoomLinedef(fileBuffer));
+					linedefsLump.add(readDoomLinedef(fileBuffer));
 
 				break;
 			case HEXEN: // hasBehavior
 				for (int i = 0; i < numLinedefs; i++)
-					linedefs.add(readHexenLinedef(fileBuffer));
+					linedefsLump.add(readHexenLinedef(fileBuffer));
 
 				break;
 			default:
@@ -57,16 +54,14 @@ public class LinedefsCodec extends LumpCodec<LinedefsLump> {
 
 	@Override
 	public void encode(LinedefsLump linedefsLump, FileBuffer buffer) {
-		List<Linedef> linedefs = linedefsLump.getLinedefs();
-
 		switch (getWadFormat()) {
 			case DOOM:
-				for (Linedef linedef : linedefs)
+				for (Linedef linedef : linedefsLump)
 					writeDoomLinedef((DoomLinedef)linedef, buffer);
 
 				break;
 			case HEXEN:
-				for (Linedef linedef : linedefs)
+				for (Linedef linedef : linedefsLump)
 					writeHexenLinedef((HexenLinedef)linedef, buffer);
 
 				break;
