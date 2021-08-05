@@ -1,7 +1,5 @@
 package wadapi.codec;
 
-import java.util.List;
-
 import org.digitalmodular.utilities.annotation.Singleton;
 
 import wadapi.FileBuffer;
@@ -32,10 +30,9 @@ public class VerticesCodec extends LumpCodec<VerticesLump> {
 
 		VerticesLump verticesLump = new VerticesLump(lump.getName(), numVertices);
 
-		List<Vertex> vertices = verticesLump.getVertices();
 		for (int i = 0; i < numVertices; i++) {
 			Vertex vertex = readVertex(fileBuffer);
-			vertices.add(vertex);
+			verticesLump.add(vertex);
 		}
 
 		return verticesLump;
@@ -43,8 +40,7 @@ public class VerticesCodec extends LumpCodec<VerticesLump> {
 
 	@Override
 	public void encode(VerticesLump verticesLump, FileBuffer buffer) {
-		List<Vertex> vertices = verticesLump.getVertices();
-		for (Vertex vertex : vertices)
+		for (Vertex vertex : verticesLump)
 			writeVertex(vertex, buffer);
 	}
 
