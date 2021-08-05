@@ -5,7 +5,7 @@ import java.util.List;
 import org.digitalmodular.utilities.annotation.Singleton;
 
 import wadapi.FileBuffer;
-import wadapi.io.WadIOUtilities;
+import wadapi.LumpUtilities;
 import wadapi.lump.FileBufferLump;
 import wadapi.lump.SubsectorsLump;
 import wadapi.structure.SubSector;
@@ -30,7 +30,7 @@ public class SubSectorsCodec extends LumpCodec<SubsectorsLump> {
 	public SubsectorsLump decode(FileBufferLump lump) {
 		FileBuffer fileBuffer = lump.getFileBuffer();
 		int numSubsectors =
-				WadIOUtilities.calcNumFields(fileBuffer.remaining(), SUBSECTOR_FIELD_SIZE, lump.getName());
+				LumpUtilities.calcNumFields(fileBuffer.remaining(), SUBSECTOR_FIELD_SIZE, lump.getName());
 
 		SubsectorsLump subSectorsLump = new SubsectorsLump(lump.getName(), numSubsectors);
 

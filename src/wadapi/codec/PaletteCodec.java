@@ -5,7 +5,7 @@ import java.util.List;
 import org.digitalmodular.utilities.annotation.Singleton;
 
 import wadapi.FileBuffer;
-import wadapi.io.WadIOUtilities;
+import wadapi.LumpUtilities;
 import wadapi.lump.FileBufferLump;
 import wadapi.lump.PaletteLump;
 import wadapi.structure.Palette;
@@ -28,7 +28,7 @@ public class PaletteCodec extends LumpCodec<PaletteLump> {
 	public PaletteLump decode(FileBufferLump lump) {
 		FileBuffer fileBuffer = lump.getFileBuffer();
 		int numPalettes =
-				WadIOUtilities.calcNumFields(fileBuffer.remaining(), PALETTE_FIELD_SIZE, lump.getName());
+				LumpUtilities.calcNumFields(fileBuffer.remaining(), PALETTE_FIELD_SIZE, lump.getName());
 
 		PaletteLump palettesLump = new PaletteLump(lump.getName(), numPalettes);
 

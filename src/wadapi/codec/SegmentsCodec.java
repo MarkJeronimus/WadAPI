@@ -5,7 +5,7 @@ import java.util.List;
 import org.digitalmodular.utilities.annotation.Singleton;
 
 import wadapi.FileBuffer;
-import wadapi.io.WadIOUtilities;
+import wadapi.LumpUtilities;
 import wadapi.lump.FileBufferLump;
 import wadapi.lump.SegmentsLump;
 import wadapi.structure.Segment;
@@ -30,7 +30,7 @@ public class SegmentsCodec extends LumpCodec<SegmentsLump> {
 	public SegmentsLump decode(FileBufferLump lump) {
 		FileBuffer fileBuffer = lump.getFileBuffer();
 		int numSegments =
-				WadIOUtilities.calcNumFields(fileBuffer.remaining(), SEGMENT_FIELD_SIZE, lump.getName());
+				LumpUtilities.calcNumFields(fileBuffer.remaining(), SEGMENT_FIELD_SIZE, lump.getName());
 
 		SegmentsLump segmentsLump = new SegmentsLump(lump.getName(), numSegments);
 

@@ -5,7 +5,7 @@ import java.util.List;
 import org.digitalmodular.utilities.annotation.Singleton;
 
 import wadapi.FileBuffer;
-import wadapi.io.WadIOUtilities;
+import wadapi.LumpUtilities;
 import wadapi.lump.FileBufferLump;
 import wadapi.lump.NodesLump;
 import wadapi.structure.Node;
@@ -29,7 +29,7 @@ public class DoomNodesCodec extends LumpCodec<NodesLump> {
 	@Override
 	public NodesLump decode(FileBufferLump lump) {
 		FileBuffer fileBuffer = lump.getFileBuffer();
-		int        numNodes   = WadIOUtilities.calcNumFields(fileBuffer.remaining(), NODES_FIELD_SIZE, lump.getName());
+		int        numNodes   = LumpUtilities.calcNumFields(fileBuffer.remaining(), NODES_FIELD_SIZE, lump.getName());
 
 		NodesLump nodesLump = new NodesLump(lump.getName(), numNodes);
 

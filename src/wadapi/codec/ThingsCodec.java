@@ -6,8 +6,8 @@ import org.digitalmodular.utilities.annotation.Singleton;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
 import wadapi.FileBuffer;
+import wadapi.LumpUtilities;
 import wadapi.MapFormat;
-import wadapi.io.WadIOUtilities;
 import wadapi.lump.FileBufferLump;
 import wadapi.lump.ThingsLump;
 import wadapi.structure.DoomThing;
@@ -33,7 +33,7 @@ public class ThingsCodec extends LumpCodec<ThingsLump> {
 	public ThingsLump decode(FileBufferLump lump) {
 		FileBuffer fileBuffer = lump.getFileBuffer();
 		int numThings =
-				WadIOUtilities.calcNumFields(fileBuffer.remaining(), getFieldSize(getWadFormat()), lump.getName());
+				LumpUtilities.calcNumFields(fileBuffer.remaining(), getFieldSize(getWadFormat()), lump.getName());
 
 		ThingsLump thingsLump = new ThingsLump(lump.getName(), numThings);
 

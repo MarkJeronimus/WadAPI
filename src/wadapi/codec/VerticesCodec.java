@@ -5,7 +5,7 @@ import java.util.List;
 import org.digitalmodular.utilities.annotation.Singleton;
 
 import wadapi.FileBuffer;
-import wadapi.io.WadIOUtilities;
+import wadapi.LumpUtilities;
 import wadapi.lump.FileBufferLump;
 import wadapi.lump.VerticesLump;
 import wadapi.structure.Vertex;
@@ -28,7 +28,7 @@ public class VerticesCodec extends LumpCodec<VerticesLump> {
 	public VerticesLump decode(FileBufferLump lump) {
 		FileBuffer fileBuffer = lump.getFileBuffer();
 		int numVertices =
-				WadIOUtilities.calcNumFields(fileBuffer.remaining(), VERTEX_FIELD_SIZE, lump.getName());
+				LumpUtilities.calcNumFields(fileBuffer.remaining(), VERTEX_FIELD_SIZE, lump.getName());
 
 		VerticesLump verticesLump = new VerticesLump(lump.getName(), numVertices);
 

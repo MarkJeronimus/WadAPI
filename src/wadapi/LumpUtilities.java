@@ -1,5 +1,8 @@
 package wadapi;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import net.jcip.annotations.NotThreadSafe;
 
 import org.digitalmodular.utilities.annotation.UtilityClass;
@@ -36,5 +39,16 @@ public final class LumpUtilities {
 
 		Lump decodedLump = codec.decode((FileBufferLump)lump);
 		return decodedLump;
+	}
+
+	public static int calcNumFields(int size, int fieldSize, String name) {
+		int numFields = size / fieldSize;
+
+		int extra = size - numFields * fieldSize;
+		if (extra != 0)
+			Logger.getGlobal().log(Level.WARNING, extra + " extra bytes after data: name = " + name +
+			                                      ", size = " + size + ", fieldSize = " + fieldSize);
+
+		return numFields;
 	}
 }

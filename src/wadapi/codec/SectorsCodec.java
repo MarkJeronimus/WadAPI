@@ -5,7 +5,7 @@ import java.util.List;
 import org.digitalmodular.utilities.annotation.Singleton;
 
 import wadapi.FileBuffer;
-import wadapi.io.WadIOUtilities;
+import wadapi.LumpUtilities;
 import wadapi.lump.FileBufferLump;
 import wadapi.lump.SectorsLump;
 import wadapi.structure.Sector;
@@ -27,7 +27,7 @@ public class SectorsCodec extends LumpCodec<SectorsLump> {
 	@Override
 	public SectorsLump decode(FileBufferLump lump) {
 		FileBuffer fileBuffer = lump.getFileBuffer();
-		int        numSectors = WadIOUtilities.calcNumFields(fileBuffer.remaining(), SECTOR_FIELD_SIZE, lump.getName());
+		int        numSectors = LumpUtilities.calcNumFields(fileBuffer.remaining(), SECTOR_FIELD_SIZE, lump.getName());
 
 		SectorsLump sectorsLump = new SectorsLump(lump.getName(), numSectors);
 

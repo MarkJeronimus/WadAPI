@@ -5,8 +5,8 @@ import java.util.List;
 import org.digitalmodular.utilities.annotation.Singleton;
 
 import wadapi.FileBuffer;
+import wadapi.LumpUtilities;
 import wadapi.MapFormat;
-import wadapi.io.WadIOUtilities;
 import wadapi.lump.FileBufferLump;
 import wadapi.lump.LinedefsLump;
 import wadapi.structure.DoomLinedef;
@@ -32,7 +32,7 @@ public class LinedefsCodec extends LumpCodec<LinedefsLump> {
 	public LinedefsLump decode(FileBufferLump lump) {
 		FileBuffer fileBuffer  = lump.getFileBuffer();
 		int        fieldSize   = getFieldSize(getWadFormat());
-		int        numLinedefs = WadIOUtilities.calcNumFields(fileBuffer.remaining(), fieldSize, lump.getName());
+		int        numLinedefs = LumpUtilities.calcNumFields(fileBuffer.remaining(), fieldSize, lump.getName());
 
 		LinedefsLump  linedefsLump = new LinedefsLump(lump.getName(), numLinedefs);
 		List<Linedef> linedefs     = linedefsLump.getLinedefs();

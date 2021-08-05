@@ -5,7 +5,7 @@ import java.util.List;
 import org.digitalmodular.utilities.annotation.Singleton;
 
 import wadapi.FileBuffer;
-import wadapi.io.WadIOUtilities;
+import wadapi.LumpUtilities;
 import wadapi.lump.FileBufferLump;
 import wadapi.lump.SidedefsLump;
 import wadapi.structure.Sidedef;
@@ -28,7 +28,7 @@ public class SidedefsCodec extends LumpCodec<SidedefsLump> {
 	public SidedefsLump decode(FileBufferLump lump) {
 		FileBuffer fileBuffer = lump.getFileBuffer();
 		int numSidedefs =
-				WadIOUtilities.calcNumFields(fileBuffer.remaining(), SIDEDEF_FIELD_SIZE, lump.getName());
+				LumpUtilities.calcNumFields(fileBuffer.remaining(), SIDEDEF_FIELD_SIZE, lump.getName());
 
 		SidedefsLump sideDefsLump = new SidedefsLump(lump.getName(), numSidedefs);
 
