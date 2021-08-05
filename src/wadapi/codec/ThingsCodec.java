@@ -1,7 +1,5 @@
 package wadapi.codec;
 
-import java.util.List;
-
 import org.digitalmodular.utilities.annotation.Singleton;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
@@ -37,19 +35,18 @@ public class ThingsCodec extends LumpCodec<ThingsLump> {
 
 		ThingsLump thingsLump = new ThingsLump(lump.getName(), numThings);
 
-		List<Thing> things = thingsLump.getThings();
 		switch (getWadFormat()) {
 			case DOOM:
 				for (int i = 0; i < numThings; i++) {
 					DoomThing thing = readDoomThing(fileBuffer);
-					things.add(thing);
+					thingsLump.add(thing);
 				}
 
 				break;
 			case HEXEN:
 				for (int i = 0; i < numThings; i++) {
 					HexenThing thing = readHexenThing(fileBuffer);
-					things.add(thing);
+					thingsLump.add(thing);
 				}
 
 				break;
@@ -62,16 +59,14 @@ public class ThingsCodec extends LumpCodec<ThingsLump> {
 
 	@Override
 	public void encode(ThingsLump thingsLump, FileBuffer buffer) {
-		List<Thing> things = thingsLump.getThings();
-
 		switch (getWadFormat()) {
 			case DOOM:
-				for (Thing thing : things)
+				for (Thing thing : thingsLump)
 					writeDoomThing((DoomThing)thing, buffer);
 
 				break;
 			case HEXEN:
-				for (Thing thing : things)
+				for (Thing thing : thingsLump)
 					writeHexenThing((HexenThing)thing, buffer);
 
 				break;
