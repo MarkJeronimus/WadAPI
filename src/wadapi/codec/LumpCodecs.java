@@ -46,7 +46,7 @@ public final class LumpCodecs {
 			case SIDEDEFS:
 				return SidedefsCodec.INSTANCE;
 			case SSECTORS:
-				return SubSectorsCodec.INSTANCE;
+				return SubsectorsCodec.INSTANCE;
 			case SCRIPTS:
 			case TEXT:
 				return TextCodec.INSTANCE;

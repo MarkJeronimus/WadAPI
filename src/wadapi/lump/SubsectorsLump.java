@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wadapi.LumpType;
-import wadapi.structure.SubSector;
+import wadapi.structure.Subsector;
 import static wadapi.LumpType.SSECTORS;
 
 /**
@@ -12,16 +12,16 @@ import static wadapi.LumpType.SSECTORS;
  */
 // Created 2018-01-21
 public class SubsectorsLump extends Lump {
-	private final List<SubSector> subSectors;
+	private final List<Subsector> subsectors;
 
 	public SubsectorsLump(String name, int initialCapacity) {
 		super(name);
 
-		subSectors = new ArrayList<>(initialCapacity);
+		subsectors = new ArrayList<>(initialCapacity);
 	}
 
-	public List<SubSector> getSubSectors() {
-		return subSectors;
+	public List<Subsector> getSubsectors() {
+		return subsectors;
 	}
 
 	@Override
