@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
-import wadapi.LumpType;
 import wadapi.structure.Thing;
 import static wadapi.LumpType.THINGS;
 
@@ -17,14 +16,9 @@ public class ThingsLump extends Lump implements Iterable<Thing> {
 	private final ArrayList<Thing> things;
 
 	public ThingsLump(String name, int initialCapacity) {
-		super(name);
+		super(name, THINGS);
 
 		things = new ArrayList<>(initialCapacity);
-	}
-
-	@Override
-	public LumpType getLumpType() {
-		return THINGS;
 	}
 
 	public int numThings() {

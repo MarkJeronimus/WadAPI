@@ -3,7 +3,6 @@ package wadapi.lump;
 import java.util.ArrayList;
 import java.util.List;
 
-import wadapi.LumpType;
 import static wadapi.LumpType.PNAMES;
 
 /**
@@ -14,17 +13,12 @@ public class PatchNamesLump extends Lump {
 	private final List<String> patchNames;
 
 	public PatchNamesLump(String name, int initialCapacity) {
-		super(name);
+		super(name, PNAMES);
 
 		patchNames = new ArrayList<>(initialCapacity);
 	}
 
 	public List<String> getPatchNames() {
 		return patchNames;
-	}
-
-	@Override
-	public LumpType getLumpType() {
-		return PNAMES;
 	}
 }

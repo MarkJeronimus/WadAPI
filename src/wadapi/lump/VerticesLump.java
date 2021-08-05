@@ -6,7 +6,6 @@ import java.util.Iterator;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
-import wadapi.LumpType;
 import wadapi.structure.Vertex;
 import static wadapi.LumpType.VERTEXES;
 
@@ -20,14 +19,9 @@ public class VerticesLump extends Lump implements Iterable<Vertex> {
 	private final ArrayList<Vertex> vertices;
 
 	public VerticesLump(String name, int initialCapacity) {
-		super(name);
+		super(name, VERTEXES);
 
 		vertices = new ArrayList<>(initialCapacity);
-	}
-
-	@Override
-	public LumpType getLumpType() {
-		return VERTEXES;
 	}
 
 	public int numVertices() {

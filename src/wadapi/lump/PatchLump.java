@@ -3,7 +3,6 @@ package wadapi.lump;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireArrayLengthExactly;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireAtLeast;
 
-import wadapi.LumpType;
 import static wadapi.LumpType.PATCH;
 
 /**
@@ -21,7 +20,7 @@ public class PatchLump extends Lump {
 //	public  short colorMap;
 
 	public PatchLump(String name, int width, int height, int xOffset, int yOffset, int[] pixels) {
-		super(name);
+		super(name, PATCH);
 
 		this.width = requireAtLeast(1, width, "width");
 		this.height = requireAtLeast(1, height, "height");
@@ -69,11 +68,6 @@ public class PatchLump extends Lump {
 
 	public void setPixels(int[] pixels) {
 		this.pixels = pixels;
-	}
-
-	@Override
-	public LumpType getLumpType() {
-		return PATCH;
 	}
 
 //	public BufferedImage getBitmap(Palette palette) {

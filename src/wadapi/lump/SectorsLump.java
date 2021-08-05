@@ -3,7 +3,6 @@ package wadapi.lump;
 import java.util.ArrayList;
 import java.util.List;
 
-import wadapi.LumpType;
 import wadapi.structure.Sector;
 import static wadapi.LumpType.SECTORS;
 
@@ -15,17 +14,12 @@ public class SectorsLump extends Lump {
 	private final List<Sector> sectors;
 
 	public SectorsLump(String name, int initialCapacity) {
-		super(name);
+		super(name, SECTORS);
 
 		sectors = new ArrayList<>(initialCapacity);
 	}
 
 	public List<Sector> getSectors() {
 		return sectors;
-	}
-
-	@Override
-	public LumpType getLumpType() {
-		return SECTORS;
 	}
 }

@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
-import wadapi.LumpType;
 import wadapi.structure.Subsector;
 import static wadapi.LumpType.SSECTORS;
 
@@ -17,14 +16,9 @@ public class SubsectorsLump extends Lump implements Iterable<Subsector> {
 	private final ArrayList<Subsector> subsectors;
 
 	public SubsectorsLump(String name, int initialCapacity) {
-		super(name);
+		super(name, SSECTORS);
 
 		subsectors = new ArrayList<>(initialCapacity);
-	}
-
-	@Override
-	public LumpType getLumpType() {
-		return SSECTORS;
 	}
 
 	public int numVertices() {

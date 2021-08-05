@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
-import wadapi.LumpType;
 import wadapi.structure.Sidedef;
 import static wadapi.LumpType.SIDEDEFS;
 
@@ -17,14 +16,9 @@ public class SidedefsLump extends Lump implements Iterable<Sidedef> {
 	private final ArrayList<Sidedef> sidedefs;
 
 	public SidedefsLump(String name, int initialCapacity) {
-		super(name);
+		super(name, SIDEDEFS);
 
 		sidedefs = new ArrayList<>(initialCapacity);
-	}
-
-	@Override
-	public LumpType getLumpType() {
-		return SIDEDEFS;
 	}
 
 	public int numSidedefs() {

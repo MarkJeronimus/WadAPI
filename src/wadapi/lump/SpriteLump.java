@@ -3,10 +3,10 @@ package wadapi.lump;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import wadapi.LumpType;
 import wadapi.structure.Palette;
 import wadapi.structure.Sprite;
 import wadapi.structure.SpritePost;
+import static wadapi.LumpType.SPRITE;
 
 /**
  * @author Zom-B
@@ -19,7 +19,7 @@ public class SpriteLump extends Lump {
 	private final List<List<SpritePost>> columns;
 
 	public SpriteLump(String name, int height, int leftOffset, int topOffset, List<List<SpritePost>> columns) {
-		super(name);
+		super(name, SPRITE);
 
 		this.height = height;
 		this.leftOffset = leftOffset;
@@ -67,10 +67,5 @@ public class SpriteLump extends Lump {
 		}
 
 		return new Sprite(leftOffset, topOffset, image);
-	}
-
-	@Override
-	public LumpType getLumpType() {
-		return LumpType.SPRITE;
 	}
 }
