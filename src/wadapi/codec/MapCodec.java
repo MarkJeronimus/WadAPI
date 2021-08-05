@@ -54,6 +54,8 @@ public final class MapCodec {
 						decodeDoomNodes(rawNodesLump, mapPointers, builder);
 						break;
 					case XNOD:
+						decodeExtendedNodes(rawNodesLump, mapPointers, builder);
+						break;
 					case ZNOD:
 					case ZGLN:
 					case ZGL2:
@@ -95,6 +97,7 @@ public final class MapCodec {
 	private static NodeFormat getNodeFormat(FileBufferLump lump) {
 		FileBuffer fileBuffer = lump.getFileBuffer();
 
+		fileBuffer.rewind();
 		double size       = fileBuffer.remaining();
 		int    signature0 = size < 4 ? 0 : fileBuffer.getInt();
 		int    signature1 = size < 8 ? 0 : fileBuffer.getInt();
@@ -124,7 +127,18 @@ public final class MapCodec {
 	}
 
 	private static void decodeDoomNodes(FileBufferLump rawNodesLump, MapPointers mapPointers, WadMapBuilder builder) {
-		builder.setNodesLump(DoomNodesCodec.INSTANCE.decode(rawNodesLump));
+		builder.setNodesLump(DoomNodesCodec.decode(rawNodesLump));
+		builder.setSectorsLump(mapPointers.getSectorsPointer().getLump());
+		builder.setRejectLump(LumpPointer.getNullableLump(mapPointers.getRejectPointer()));
+		builder.setBlockmapLump(LumpPointer.getNullableLump(mapPointers.getBlockmapPointer()));
+		builder.setScriptsLump(LumpPointer.getNullableLump(mapPointers.getScriptsPointer()));
+		builder.setBehaviorLump(LumpPointer.getNullableLump(mapPointers.getBehaviorPointer()));
+	}
+
+	private static void decodeExtendedNodes(
+			FileBufferLump rawNodesLump, MapPointers mapPointers, WadMapBuilder builder) {
+		ExtendedNodesCodec.decode(rawNodesLump, builder);
+
 		builder.setSectorsLump(mapPointers.getSectorsPointer().getLump());
 		builder.setRejectLump(LumpPointer.getNullableLump(mapPointers.getRejectPointer()));
 		builder.setBlockmapLump(LumpPointer.getNullableLump(mapPointers.getBlockmapPointer()));
