@@ -1,7 +1,5 @@
 package wadapi.codec;
 
-import java.util.List;
-
 import org.digitalmodular.utilities.annotation.Singleton;
 
 import wadapi.FileBuffer;
@@ -31,10 +29,9 @@ public class SectorsCodec extends LumpCodec<SectorsLump> {
 
 		SectorsLump sectorsLump = new SectorsLump(lump.getName(), numSectors);
 
-		List<Sector> sectors = sectorsLump.getSectors();
 		for (int i = 0; i < numSectors; i++) {
 			Sector sector = readSector(fileBuffer);
-			sectors.add(sector);
+			sectorsLump.add(sector);
 		}
 
 		return sectorsLump;
@@ -42,8 +39,7 @@ public class SectorsCodec extends LumpCodec<SectorsLump> {
 
 	@Override
 	public void encode(SectorsLump sectorsLump, FileBuffer buffer) {
-		List<Sector> sectors = sectorsLump.getSectors();
-		for (Sector linedef : sectors)
+		for (Sector linedef : sectorsLump)
 			writeSector(linedef, buffer);
 	}
 
