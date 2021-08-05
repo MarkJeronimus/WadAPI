@@ -1,7 +1,5 @@
 package wadapi.codec;
 
-import java.util.List;
-
 import org.digitalmodular.utilities.annotation.Singleton;
 
 import wadapi.FileBuffer;
@@ -33,10 +31,9 @@ public class DoomNodesCodec extends LumpCodec<NodesLump> {
 
 		NodesLump nodesLump = new NodesLump(lump.getName(), numNodes);
 
-		List<Node> nodes = nodesLump.getNodes();
 		for (int i = 0; i < numNodes; i++) {
 			Node node = readNode(fileBuffer);
-			nodes.add(node);
+			nodesLump.add(node);
 		}
 
 		return nodesLump;
