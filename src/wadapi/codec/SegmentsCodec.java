@@ -1,7 +1,5 @@
 package wadapi.codec;
 
-import java.util.List;
-
 import org.digitalmodular.utilities.annotation.Singleton;
 
 import wadapi.FileBuffer;
@@ -34,10 +32,9 @@ public class SegmentsCodec extends LumpCodec<SegmentsLump> {
 
 		SegmentsLump segmentsLump = new SegmentsLump(lump.getName(), numSegments);
 
-		List<Segment> segments = segmentsLump.getSegments();
 		for (int i = 0; i < numSegments; i++) {
 			Segment segment = readSegment(fileBuffer);
-			segments.add(segment);
+			segmentsLump.add(segment);
 		}
 
 		return segmentsLump;
