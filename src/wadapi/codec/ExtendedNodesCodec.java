@@ -11,7 +11,6 @@ import wadapi.FileBuffer;
 import wadapi.LumpType;
 import wadapi.WadMap;
 import wadapi.lump.FileBufferLump;
-import wadapi.lump.ListLump;
 import wadapi.lump.NodesLump;
 import wadapi.lump.SegmentsLump;
 import wadapi.lump.SubsectorsLump;
@@ -47,19 +46,17 @@ public final class ExtendedNodesCodec {
 	 * It's assumed the signature is 4 bytes, and is already been verified by the calling class.
 	 * This decoder will explicitly skip to the 4th byte before decoding.
 	 */
-	public static NodesLump decode(FileBufferLump lump, WadMapBuilder builder) {
+	public static void decode(FileBufferLump lump, WadMapBuilder builder) {
 		@Nullable VerticesLump verticesLump = builder.getVerticesLump();
 		if (verticesLump == null)
 			throw new IllegalArgumentException(LumpType.VERTEXES + " not loaded yet");
 
 		lump.getFileBuffer().position(SIGNATURE_SIZE);
 
-		decodeVerticesPart(lump, verticesLump);       // Vertices are augmented.
-		SubsectorsLump subsectorsLump = decodeSubsectorPart(lump);
-		builder.setSubsectorsLump(subsectorsLump);    // Subsectors are only stored in the NODES lump.
-		SegmentsLump segmentsLump = decodeSegmentsPart(lump);
-		builder.setSegmentsLump(segmentsLump);        // Segments   are only stored in the NODES lump.
-		return decodeNodesPart(lump, subsectorsLump); // Nodes      are only stored in the NODES lump.
+		decodeVerticesPart(lump, verticesLump);               // Vertices are augmented.
+		builder.setSubsectorsLump(decodeSubsectorPart(lump)); // Subsectors are only stored in the NODES lump.
+		builder.setSegmentsLump(decodeSegmentsPart(lump));    // Segments   are only stored in the NODES lump.
+		builder.setNodesLump(decodeNodesPart(lump));          // Nodes      are only stored in the NODES lump.
 	}
 
 	public static void encode(WadMap map, FileBuffer buffer) {
@@ -157,7 +154,7 @@ public final class ExtendedNodesCodec {
 		return segmentsLump;
 	}
 
-	private static NodesLump decodeNodesPart(FileBufferLump lump, @Nullable SubsectorsLump subsectorsLump) {
+	private static NodesLump decodeNodesPart(FileBufferLump lump) {
 		String     lumpName   = lump.getName();
 		FileBuffer fileBuffer = lump.getFileBuffer();
 
@@ -176,46 +173,28 @@ public final class ExtendedNodesCodec {
 		NodesLump nodesLump = new NodesLump(lump.getName(), numNodes);
 
 		for (int i = 0; i < numNodes; i++) {
-			Node node = readNode(lump, fileBuffer, nodesLump, subsectorsLump);
+			Node node = readNode(fileBuffer);
 			nodesLump.add(node);
 		}
 
 		return nodesLump;
 	}
 
-	private static Node readNode(
-			FileBufferLump lump, FileBuffer buffer, NodesLump nodesLump, SubsectorsLump subsectorsLump) {
-		int x          = buffer.getShort();
-		int y          = buffer.getShort();
-		int dx         = buffer.getShort();
-		int dy         = buffer.getShort();
-		int bbox0y2    = buffer.getShort();
-		int bbox0y1    = buffer.getShort();
-		int bbox0x1    = buffer.getShort();
-		int bbox0x2    = buffer.getShort();
-		int bbox1y2    = buffer.getShort();
-		int bbox1y1    = buffer.getShort();
-		int bbox1x1    = buffer.getShort();
-		int bbox1x2    = buffer.getShort();
-		int child0Code = buffer.getInt();
-		int child1Code = buffer.getInt();
-
-		ListLump<?> child0Source = (child0Code & 0x80000000) == 0 ? nodesLump : subsectorsLump;
-		ListLump<?> child1Source = (child1Code & 0x80000000) == 0 ? nodesLump : subsectorsLump;
-		child0Code &= 0x7FFFFFFF;
-		child1Code &= 0x7FFFFFFF;
-
-		if (child0Code >= child0Source.size())
-			throw new IllegalArgumentException("Corrupt or invalid " + lump.getName() +
-			                                   " lump. " + child0Source.getName() + " index out of bounds: " +
-			                                   child0Code + " (size = " + child0Source.size() + ')');
-		if (child1Code >= child1Source.size())
-			throw new IllegalArgumentException("Corrupt or invalid " + lump.getName() +
-			                                   " lump. " + child1Source.getName() + " index out of bounds: " +
-			                                   child1Code + " (size = " + child1Source.size() + ')');
-
-		Object child0 = child0Source.get(child0Code);
-		Object child1 = child1Source.get(child1Code);
+	private static Node readNode(FileBuffer buffer) {
+		int x       = buffer.getShort();
+		int y       = buffer.getShort();
+		int dx      = buffer.getShort();
+		int dy      = buffer.getShort();
+		int bbox0y2 = buffer.getShort();
+		int bbox0y1 = buffer.getShort();
+		int bbox0x1 = buffer.getShort();
+		int bbox0x2 = buffer.getShort();
+		int bbox1y2 = buffer.getShort();
+		int bbox1y1 = buffer.getShort();
+		int bbox1x1 = buffer.getShort();
+		int bbox1x2 = buffer.getShort();
+		int child0  = buffer.getInt();
+		int child1  = buffer.getInt();
 
 		return new Node(x << 16,
 		                y << 16,
@@ -229,7 +208,9 @@ public final class ExtendedNodesCodec {
 		                bbox1y1 << 16,
 		                bbox1x1 << 16,
 		                bbox1x2 << 16,
-		                child0,
-		                child1);
+		                (child0 & 0x80000000) == 0 ? child0 & 0x7FFFFFFF : -1,
+		                (child1 & 0x80000000) == 0 ? child1 & 0x7FFFFFFF : -1,
+		                (child0 & 0x80000000) != 0 ? child0 & 0x7FFFFFFF : -1,
+		                (child1 & 0x80000000) != 0 ? child1 & 0x7FFFFFFF : -1);
 	}
 }

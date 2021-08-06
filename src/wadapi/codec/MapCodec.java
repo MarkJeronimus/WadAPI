@@ -137,7 +137,7 @@ public final class MapCodec {
 
 	private static void decodeExtendedNodes(
 			FileBufferLump rawNodesLump, MapPointers mapPointers, WadMapBuilder builder) {
-		builder.setNodesLump(ExtendedNodesCodec.decode(rawNodesLump, builder));
+		ExtendedNodesCodec.decode(rawNodesLump, builder);
 		builder.setSectorsLump(mapPointers.getSectorsPointer().getLump());
 		builder.setRejectLump(LumpPointer.getNullableLump(mapPointers.getRejectPointer()));
 		builder.setBlockmapLump(LumpPointer.getNullableLump(mapPointers.getBlockmapPointer()));
