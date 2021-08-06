@@ -70,13 +70,14 @@ public final class MapCodec {
 				}
 			} else {
 				builder.setNodesLump(nodesLump);
-				builder.setSectorsLump(mapPointers.getSectorsPointer().getLump());
-				builder.setRejectLump(LumpPointer.getNullableLump(mapPointers.getRejectPointer()));
-				builder.setBlockmapLump(LumpPointer.getNullableLump(mapPointers.getBlockmapPointer()));
-				builder.setScriptsLump(LumpPointer.getNullableLump(mapPointers.getScriptsPointer()));
-				builder.setBehaviorLump(LumpPointer.getNullableLump(mapPointers.getBehaviorPointer()));
 			}
 		}
+
+		builder.setSectorsLump(mapPointers.getSectorsPointer().getLump());
+		builder.setRejectLump(LumpPointer.getNullableLump(mapPointers.getRejectPointer()));
+		builder.setBlockmapLump(LumpPointer.getNullableLump(mapPointers.getBlockmapPointer()));
+		builder.setScriptsLump(LumpPointer.getNullableLump(mapPointers.getScriptsPointer()));
+		builder.setBehaviorLump(LumpPointer.getNullableLump(mapPointers.getBehaviorPointer()));
 
 		return builder.build();
 	}
