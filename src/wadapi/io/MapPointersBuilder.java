@@ -45,89 +45,113 @@ public class MapPointersBuilder {
 
 		switch (lump.getLumpType()) {
 			case THINGS:
-				if (thingsPointer != null)
+				if (thingsPointer != null) {
 					Logger.getGlobal().log(
 							WARNING, "Duplicate " + LumpType.THINGS + " found for map " + mapTag.getName());
+					break;
+				}
 
 				thingsPointer = lumpPointer;
-				return;
+				break;
 			case LINEDEFS:
-				if (linedefsPointer != null)
+				if (linedefsPointer != null) {
 					Logger.getGlobal().log(
 							WARNING, "Duplicate " + LumpType.LINEDEFS + " found for map " + mapTag.getName());
+					break;
+				}
 
 				linedefsPointer = lumpPointer;
-				return;
+				break;
 			case SIDEDEFS:
-				if (sidedefsPointer != null)
+				if (sidedefsPointer != null) {
 					Logger.getGlobal().log(
 							WARNING, "Duplicate " + LumpType.SIDEDEFS + " found for map " + mapTag.getName());
+					break;
+				}
 
 				sidedefsPointer = lumpPointer;
-				return;
+				break;
 			case VERTEXES:
-				if (verticesPointer != null)
+				if (verticesPointer != null) {
 					Logger.getGlobal().log(
 							WARNING, "Duplicate " + LumpType.VERTEXES + " found for map " + mapTag.getName());
+					break;
+				}
 
 				verticesPointer = lumpPointer;
-				return;
+				break;
 			case SEGS:
-				if (segmentsPointer != null)
+				if (segmentsPointer != null) {
 					Logger.getGlobal().log(
 							WARNING, "Duplicate " + LumpType.SEGS + " found for map " + mapTag.getName());
+					break;
+				}
 
 				segmentsPointer = lumpPointer;
-				return;
+				break;
 			case SSECTORS:
-				if (subsectorsPointer != null)
+				if (subsectorsPointer != null) {
 					Logger.getGlobal().log(
 							WARNING, "Duplicate " + LumpType.SSECTORS + " found for map " + mapTag.getName());
+					break;
+				}
 
 				subsectorsPointer = lumpPointer;
-				return;
+				break;
 			case NODES:
-				if (nodesPointer != null)
+				if (nodesPointer != null) {
 					Logger.getGlobal().log(
 							WARNING, "Duplicate " + LumpType.NODES + " found for map " + mapTag.getName());
+					break;
+				}
 
 				nodesPointer = lumpPointer;
-				return;
+				break;
 			case SECTORS:
-				if (sectorsPointer != null)
+				if (sectorsPointer != null) {
 					Logger.getGlobal().log(
 							WARNING, "Duplicate " + LumpType.SECTORS + " found for map " + mapTag.getName());
+					break;
+				}
 
 				sectorsPointer = lumpPointer;
-				return;
+				break;
 			case REJECT:
-				if (rejectPointer != null)
+				if (rejectPointer != null) {
 					Logger.getGlobal().log(
 							WARNING, "Duplicate " + LumpType.REJECT + " found for map " + mapTag.getName());
+					break;
+				}
 
 				rejectPointer = lumpPointer;
-				return;
+				break;
 			case BLOCKMAP:
-				if (blockmapPointer != null)
+				if (blockmapPointer != null) {
 					Logger.getGlobal().log(
 							WARNING, "Duplicate " + LumpType.BLOCKMAP + " found for map " + mapTag.getName());
+					break;
+				}
 
 				blockmapPointer = lumpPointer;
-				return;
+				break;
 			case SCRIPTS:
-				if (scriptsPointer != null)
+				if (scriptsPointer != null) {
 					Logger.getGlobal().log(
 							WARNING, "Duplicate " + LumpType.SCRIPTS + " found for map " + mapTag.getName());
+					break;
+				}
 
 				scriptsPointer = lumpPointer;
-				return;
+				break;
 			case BEHAVIOR:
-				if (behaviorPointer != null)
+				if (behaviorPointer != null) {
 					Logger.getGlobal().log(
 							WARNING, "Duplicate " + LumpType.BEHAVIOR + " found for map " + mapTag.getName());
+					break;
+				}
 
 				behaviorPointer = lumpPointer;
-				return;
+				break;
 			default:
 				throw new IllegalArgumentException("Not a map lump: " + lump.getName());
 		}
