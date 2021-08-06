@@ -47,12 +47,12 @@ public class SegmentsCodec extends LumpCodec<SegmentsLump> {
 	}
 
 	private static Segment readSegment(FileBuffer buffer) {
-		int     v1       = buffer.getUnsignedShort();
-		int     v2       = buffer.getUnsignedShort();
-		int     angle    = buffer.getShort();
+		int v1 = buffer.getUnsignedShort();
+		int v2 = buffer.getUnsignedShort();
+		buffer.getShort(); // Unused angle
 		int     linedef  = buffer.getUnsignedShort();
 		boolean backSide = buffer.getShort() != 0;
-		int     offset   = buffer.getShort();
-		return new Segment(v1, v2, angle, linedef, backSide, offset);
+		buffer.getShort(); // Unused offset
+		return new Segment(v1, v2, linedef, backSide);
 	}
 }

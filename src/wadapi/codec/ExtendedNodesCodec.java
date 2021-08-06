@@ -151,7 +151,7 @@ public final class ExtendedNodesCodec {
 			int     linedef  = fileBuffer.getUnsignedShort();
 			boolean backSide = fileBuffer.getUnsignedByte() != 0;
 
-			segmentsLump.add(new Segment(v1, v2, 0, linedef, backSide, 0));
+			segmentsLump.add(new Segment(v1, v2, linedef, backSide));
 		}
 
 		return segmentsLump;

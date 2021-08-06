@@ -9,18 +9,14 @@ package wadapi.structure;
 public class Segment {
 	private int     v1;
 	private int     v2;
-	private int     angle;
 	private int     linedef;
 	private boolean backSide;
-	private int     offset;
 
-	public Segment(int v1, int v2, int angle, int linedef, boolean backSide, int offset) {
+	public Segment(int v1, int v2, int linedef, boolean backSide) {
 		this.v1 = v1;
 		this.v2 = v2;
-		this.angle = angle;
 		this.linedef = linedef;
 		this.backSide = backSide;
-		this.offset = offset;
 	}
 
 	public int getV1() {
@@ -31,10 +27,6 @@ public class Segment {
 		return v2;
 	}
 
-	public int getAngle() {
-		return angle;
-	}
-
 	public int getLinedef() {
 		return linedef;
 	}
@@ -43,18 +35,12 @@ public class Segment {
 		return backSide;
 	}
 
-	public int getOffset() {
-		return offset;
-	}
-
 	@Override
 	public String toString() {
 		return "[" + v1 +
 		       ", " + v2 +
-		       ", a=" + angle / 32768.0f +
 		       ", ld=" + linedef +
 		       ", " + (backSide ? "back" : "front") +
-		       ", o=" + offset +
 		       ']';
 	}
 }
