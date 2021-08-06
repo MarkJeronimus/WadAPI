@@ -1,5 +1,9 @@
 package wadapi.structure;
 
+import org.jetbrains.annotations.Nullable;
+
+import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
+
 /**
  * @author Zom-B
  */
@@ -11,7 +15,6 @@ public class Node {
 	private int dy;
 
 	// Bounding box for each child,
-	// clip against view frustum.
 	private int bbox0y2;
 	private int bbox0y1;
 	private int bbox0x1;
@@ -21,10 +24,10 @@ public class Node {
 	private int bbox1x1;
 	private int bbox1x2;
 
-	// If NF_SUBSECTOR its a subsector,
-	// else it's a node of another subtree.
-	private int child0;
-	private int child1;
+	private @Nullable Node      childNode0;
+	private @Nullable Node      childNode1;
+	private @Nullable Subsector subsector0;
+	private @Nullable Subsector subsector1;
 
 	public Node(int x,
 	            int y,
@@ -38,8 +41,8 @@ public class Node {
 	            int bbox1y1,
 	            int bbox1x1,
 	            int bbox1x2,
-	            int child0,
-	            int child1) {
+	            Object child0,
+	            Object child1) {
 		this.x = x;
 		this.y = y;
 		this.dx = dx;
@@ -52,8 +55,16 @@ public class Node {
 		this.bbox1y1 = bbox1y1;
 		this.bbox1x1 = bbox1x1;
 		this.bbox1x2 = bbox1x2;
-		this.child0 = child0;
-		this.child1 = child1;
+		requireNonNull(child0, "child0");
+		requireNonNull(child1, "child1");
+		childNode0 = child0 instanceof Node ? (Node)child0 : null;
+		childNode1 = child1 instanceof Node ? (Node)child1 : null;
+		subsector0 = child0 instanceof Subsector ? (Subsector)child0 : null;
+		subsector1 = child1 instanceof Subsector ? (Subsector)child1 : null;
+		if (childNode0 == null && subsector0 == null)
+			throw new IllegalArgumentException("'child0' must be of type Subsector or Node: " + child0.getClass());
+		if (childNode1 == null && subsector1 == null)
+			throw new IllegalArgumentException("'child1' must be of type Subsector or Node: " + child1.getClass());
 	}
 
 	public int getX() {
@@ -104,12 +115,20 @@ public class Node {
 		return bbox1x2;
 	}
 
-	public int getChild0() {
-		return child0;
+	public @Nullable Node getChildNode0() {
+		return childNode0;
 	}
 
-	public int getChild1() {
-		return child1;
+	public @Nullable Node getChildNode1() {
+		return childNode1;
+	}
+
+	public @Nullable Subsector getSubsector0() {
+		return subsector0;
+	}
+
+	public @Nullable Subsector getSubsector1() {
+		return subsector1;
 	}
 
 	@Override
@@ -127,8 +146,8 @@ public class Node {
 		       ", " + bbox1x2 +
 		       ", " + bbox1y1 +
 		       ", " + bbox1y2 +
-		       "], childR=" + ((child0 & 0x8000) != 0 ? "subsector " : "node ") + (child0 & 0x7FFF) +
-		       ", childL=" + ((child1 & 0x8000) != 0 ? "subsector " : "node ") + (child1 & 0x7FFF) +
+		       "], childR=" + (childNode0 != null ? "node" : "subsector") +
+		       ", childL=" + (childNode1 != null ? "node" : "subsector") +
 		       '}';
 	}
 }
