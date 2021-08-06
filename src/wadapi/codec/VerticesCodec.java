@@ -51,7 +51,7 @@ public class VerticesCodec extends LumpCodec<VerticesLump> {
 	}
 
 	private static void writeVertex(Vertex vertex, FileBuffer buffer) {
-		buffer.putShort(vertex.getMapUnitX());
-		buffer.putShort(vertex.getMapUnitY());
+		buffer.putShort((vertex.getX() + 32768) >> 16);
+		buffer.putShort((vertex.getY() + 32768) >> 16);
 	}
 }

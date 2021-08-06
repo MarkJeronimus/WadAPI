@@ -25,53 +25,17 @@ public class Vertex implements Comparable<Vertex> {
 	}
 
 	/**
-	 * Returns the x coordinate at full precision, as an int.
+	 * Returns the x coordinate at full "fixed" (16.16) precision, as an int.
 	 */
-	public int getFixedX() {
+	public int getX() {
 		return x;
 	}
 
 	/**
-	 * Returns the x coordinate at full precision, as a float.
-	 * <p>
-	 * This getter has slightly less performance than {@link #getFixedY()} because of the scaling calculation.
+	 * Returns the y coordinate at full "fixed" (16.16) precision, as an int.
 	 */
-	public float getFloatX() {
-		return x / 65536.0f;
-	}
-
-	/**
-	 * Returns the x coordinate rounded to the nearest map unit.
-	 * <p>
-	 * This getter has slightly less performance than {@link #getFixedX()} because of the rounding calculation.
-	 */
-	public int getMapUnitX() {
-		return (x + 32768) >> 16;
-	}
-
-	/**
-	 * Returns the y coordinate at full precision, as an int.
-	 */
-	public int getFixedY() {
+	public int getY() {
 		return y;
-	}
-
-	/**
-	 * Returns the y coordinate at full precision, as a float.
-	 * <p>
-	 * This getter has slightly less performance than {@link #getFixedY()} because of the scaling calculation.
-	 */
-	public float getFloatY() {
-		return y / 65536.0f;
-	}
-
-	/**
-	 * Returns the Y coordinate rounded to the nearest map unit.
-	 * <p>
-	 * This getter has slightly less performance than {@link #getFixedY()} because of the rounding calculation.
-	 */
-	public int getMapUnitY() {
-		return (y + 32768) >> 16;
 	}
 
 	@Override
@@ -106,6 +70,6 @@ public class Vertex implements Comparable<Vertex> {
 
 	@Override
 	public String toString() {
-		return "[" + x + ", " + y + ']';
+		return "[" + x / 65536.0f + ", " + y / 65536.0f + ']';
 	}
 }

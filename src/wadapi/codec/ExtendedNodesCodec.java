@@ -22,6 +22,10 @@ import wadapi.structure.Subsector;
 import wadapi.structure.Vertex;
 
 /**
+ * Handles XNOD nodes.
+ * <p>
+ * See https://zdoom.org/wiki/Node#ZDoom_extended_nodes
+ *
  * @author Zom-B
  */
 // Created 2011-08-15
