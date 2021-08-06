@@ -105,10 +105,10 @@ public class HexenThing extends Thing {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + '[' + getType()
-		       + ", x=" + getX()
-		       + ", y=" + getY()
-		       + ", z=" + z
-		       + ", a=" + getAngle()
+		       + ", x=" + getX() / 65536.0
+		       + ", y=" + getY() / 65536.0
+		       + ", z=" + z / 65536.0
+		       + ", a=" + getAngle() * 180.0f / 2147483648.0f
 		       + ", fl=" + getFlags()
 		       + ", tid=" + tid
 		       + ", sp=" + action

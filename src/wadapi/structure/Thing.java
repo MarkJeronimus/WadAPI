@@ -62,9 +62,9 @@ public class Thing {
 	@Override
 	public String toString() {
 		return "[" + getType()
-		       + ", x=" + getX()
-		       + ", y=" + getY()
-		       + ", angle=" + getAngle()
+		       + ", x=" + getX() / 65536.0
+		       + ", y=" + getY() / 65536.0
+		       + ", angle=" + getAngle() * 180.0f / 2147483648.0f
 		       + ", flags=" + getFlags()
 		       + ']';
 	}

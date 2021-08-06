@@ -87,9 +87,9 @@ public class ThingsCodec extends LumpCodec<ThingsLump> {
 	}
 
 	private static DoomThing readDoomThing(FileBuffer buffer) {
-		int x     = buffer.getShort();
-		int y     = buffer.getShort();
-		int angle = buffer.getUnsignedShort();
+		int x     = buffer.getShort() << 16;
+		int y     = buffer.getShort() << 16;
+		int angle = (int)(buffer.getUnsignedShort() * 0x80000000L / 180);
 		int type  = buffer.getUnsignedShort();
 		int flags = buffer.getUnsignedShort();
 		return new DoomThing(x, y, angle, type, flags);
@@ -97,10 +97,10 @@ public class ThingsCodec extends LumpCodec<ThingsLump> {
 
 	private static HexenThing readHexenThing(FileBuffer buffer) {
 		int tid     = buffer.getUnsignedShort();
-		int x       = buffer.getShort();
-		int y       = buffer.getShort();
-		int z       = buffer.getShort();
-		int angle   = buffer.getUnsignedShort();
+		int x       = buffer.getShort() << 16;
+		int y       = buffer.getShort() << 16;
+		int z       = buffer.getShort() << 16;
+		int angle   = (int)(buffer.getUnsignedShort() * 0x80000000L / 180);
 		int type    = buffer.getUnsignedShort();
 		int flags   = buffer.getUnsignedShort();
 		int special = buffer.getUnsignedByte();
@@ -115,7 +115,7 @@ public class ThingsCodec extends LumpCodec<ThingsLump> {
 	private static void writeDoomThing(DoomThing thing, FileBuffer buffer) {
 		buffer.putShort((short)thing.getX());
 		buffer.putShort((short)thing.getY());
-		buffer.putUnsignedShort(thing.getAngle());
+		buffer.putUnsignedShort((int)(thing.getAngle() * 180L / 0x80000000L));
 		buffer.putUnsignedShort(thing.getType());
 		buffer.putUnsignedShort(thing.getFlags());
 	}

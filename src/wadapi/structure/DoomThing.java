@@ -63,7 +63,7 @@ public class DoomThing extends Thing {
 		sb.append('[').append(getType()).append(" (").append(thingName).append(')');
 		sb.append(", x=").append(getX());
 		sb.append(", y=").append(getY());
-		sb.append(", angle=").append(getAngle());
+		sb.append(", angle=").append(getAngle() * 180.0f / 2147483648.0f);
 		sb.append(", flags=").append(getFlags());
 		if (getFlags() != 0) {
 			sb.append(" (");
