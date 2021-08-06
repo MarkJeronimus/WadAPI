@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import static java.util.logging.Level.FINE;
 import static java.util.logging.Level.FINER;
+import static java.util.logging.Level.WARNING;
 
 import wadapi.lump.FileBufferLump;
 
@@ -72,8 +73,8 @@ public class SectionLumpTypeAssigner extends LumpTypeAssigner {
 				applyLumpType(lumps, i, LumpType.MARKER);
 
 				if (startMarkerIndex < 0) {
-					Logger.getGlobal().info("Found " + endMarker + " without corresponding " + startMarker +
-					                        " Marking all prior lumps with size 4096 as " + LumpType.FLAT);
+					Logger.getGlobal().log(WARNING, "Found " + endMarker + " without corresponding " + startMarker +
+					                                " Marking all prior lumps with size 4096 as " + LumpType.FLAT);
 					if (flatHack)
 						applyFlatHack(lumps, endMarkerIndex, i, lumpType);
 
