@@ -134,18 +134,18 @@ public class Node {
 	@Override
 	public String toString() {
 		return "Node{" +
-		       "x=" + x +
-		       ", y=" + y +
-		       ", dx=" + dx +
-		       ", dy=" + dy +
-		       ", bboxR=[" + bbox0x1 +
-		       ", " + bbox0x2 +
-		       ", " + bbox0y1 +
-		       ", " + bbox0y2 +
-		       "], bboxL=[" + bbox1x1 +
-		       ", " + bbox1x2 +
-		       ", " + bbox1y1 +
-		       ", " + bbox1y2 +
+		       "x=" + x / 65536.0 +
+		       ", y=" + y / 65536.0 +
+		       ", dx=" + dx / 65536.0 +
+		       ", dy=" + dy / 65536.0 +
+		       ", bboxR=[" + bbox0x1 / 65536.0 +
+		       ", " + bbox0x2 / 65536.0 +
+		       ", " + bbox0y1 / 65536.0 +
+		       ", " + bbox0y2 / 65536.0 +
+		       "], bboxL=[" + bbox1x1 / 65536.0 +
+		       ", " + bbox1x2 / 65536.0 +
+		       ", " + bbox1y1 / 65536.0 +
+		       ", " + bbox1y2 / 65536.0 +
 		       "], childR=" + (childNode0 != null ? "node" : "subsector") +
 		       ", childL=" + (childNode1 != null ? "node" : "subsector") +
 		       '}';

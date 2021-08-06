@@ -217,18 +217,18 @@ public final class ExtendedNodesCodec {
 		Object child0 = child0Source.get(child0Code);
 		Object child1 = child1Source.get(child1Code);
 
-		return new Node(x,
-		                y,
-		                dx,
-		                dy,
-		                bbox0y2,
-		                bbox0y1,
-		                bbox0x1,
-		                bbox0x2,
-		                bbox1y2,
-		                bbox1y1,
-		                bbox1x1,
-		                bbox1x2,
+		return new Node(x << 16,
+		                y << 16,
+		                dx << 16,
+		                dy << 16,
+		                bbox0y2 << 16,
+		                bbox0y1 << 16,
+		                bbox0x1 << 16,
+		                bbox0x2 << 16,
+		                bbox1y2 << 16,
+		                bbox1y1 << 16,
+		                bbox1x1 << 16,
+		                bbox1x2 << 16,
 		                child0,
 		                child1);
 	}
