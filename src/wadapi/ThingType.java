@@ -22,5 +22,6 @@ public enum ThingType {
 	RUNE,
 	FLAG,
 	SCORE_PILLAR,
-	PUZZLE
+	PUZZLE,
+	BRIDGE
 }
