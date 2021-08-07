@@ -1,6 +1,6 @@
 package wadapi.codec;
 
-import org.digitalmodular.utilities.annotation.UtilityClass;
+import org.digitalmodular.utilities.annotation.Singleton;
 
 import wadapi.FileBuffer;
 import wadapi.LumpUtilities;
@@ -12,11 +12,14 @@ import wadapi.structure.Node;
  * @author Zom-B
  */
 // Created 2011-08-15
-@UtilityClass
-public class NodesCodec {
+@Singleton
+public class NodesCodec extends LumpCodec<NodesLump> {
 	private static final int NODE_FIELD_SIZE = 28;
 
-	public static NodesLump decode(FileBufferLump lump) {
+	public static final NodesCodec INSTANCE = new NodesCodec();
+
+	@Override
+	public NodesLump decode(FileBufferLump lump) {
 		String     name       = lump.getName();
 		FileBuffer fileBuffer = lump.getFileBuffer();
 
@@ -32,7 +35,8 @@ public class NodesCodec {
 		return nodesLump;
 	}
 
-	public static void encode(NodesLump nodes, FileBuffer buffer) {
+	@Override
+	public void encode(NodesLump segmentsLump, FileBuffer buffer) {
 		throw new UnsupportedOperationException("Not implemented: " + NodesCodec.class.getSimpleName() +
 		                                        ".encode()");
 	}
