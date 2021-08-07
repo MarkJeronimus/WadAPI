@@ -35,5 +35,4 @@ public abstract class LumpCodec<E extends Lump> {
 	public abstract E decode(FileBufferLump lump);
 
 	public abstract void encode(E e, FileBuffer buffer);
-
 }
