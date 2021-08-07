@@ -38,8 +38,7 @@ public final class MapCodec {
 		builder.setLinedefsLump(mapPointers.getLinedefsPointer().getLump());
 		builder.setSidedefsLump(mapPointers.getSidedefsPointer().getLump());
 		builder.setVerticesLump(mapPointers.getVerticesPointer().getLump());
-		builder.setSegmentsLump(LumpPointer.getNullableLump(mapPointers.getSegmentsPointer()));
-		builder.setSubsectorsLump(LumpPointer.getNullableLump(mapPointers.getSubsectorsPointer()));
+		builder.setSectorsLump(mapPointers.getSectorsPointer().getLump());
 
 		@Nullable LumpPointer nodesPointer = mapPointers.getNodesPointer();
 		if (nodesPointer != null) {
@@ -51,10 +50,12 @@ public final class MapCodec {
 				NodeFormat nodeFormat = getNodeFormat(rawNodesLump);
 				switch (nodeFormat) {
 					case DOOM:
-						decodeDoomNodes(rawNodesLump, mapPointers, builder);
+						builder.setSegmentsLump(LumpPointer.getNullableLump(mapPointers.getSegmentsPointer()));
+						builder.setSubsectorsLump(LumpPointer.getNullableLump(mapPointers.getSubsectorsPointer()));
+						builder.setNodesLump(DoomNodesCodec.decode(rawNodesLump, builder));
 						break;
 					case XNOD:
-						decodeExtendedNodes(rawNodesLump, mapPointers, builder);
+						ExtendedNodesCodec.decode(rawNodesLump, builder);
 						break;
 					case ZNOD:
 					case ZGLN:
@@ -73,7 +74,6 @@ public final class MapCodec {
 			}
 		}
 
-		builder.setSectorsLump(mapPointers.getSectorsPointer().getLump());
 		builder.setRejectLump(LumpPointer.getNullableLump(mapPointers.getRejectPointer()));
 		builder.setBlockmapLump(LumpPointer.getNullableLump(mapPointers.getBlockmapPointer()));
 		builder.setScriptsLump(LumpPointer.getNullableLump(mapPointers.getScriptsPointer()));
@@ -125,24 +125,5 @@ public final class MapCodec {
 			return false;
 
 		return true;
-	}
-
-	private static void decodeDoomNodes(FileBufferLump rawNodesLump, MapPointers mapPointers, WadMapBuilder builder) {
-		builder.setNodesLump(DoomNodesCodec.decode(rawNodesLump, builder));
-		builder.setSectorsLump(mapPointers.getSectorsPointer().getLump());
-		builder.setRejectLump(LumpPointer.getNullableLump(mapPointers.getRejectPointer()));
-		builder.setBlockmapLump(LumpPointer.getNullableLump(mapPointers.getBlockmapPointer()));
-		builder.setScriptsLump(LumpPointer.getNullableLump(mapPointers.getScriptsPointer()));
-		builder.setBehaviorLump(LumpPointer.getNullableLump(mapPointers.getBehaviorPointer()));
-	}
-
-	private static void decodeExtendedNodes(
-			FileBufferLump rawNodesLump, MapPointers mapPointers, WadMapBuilder builder) {
-		ExtendedNodesCodec.decode(rawNodesLump, builder);
-		builder.setSectorsLump(mapPointers.getSectorsPointer().getLump());
-		builder.setRejectLump(LumpPointer.getNullableLump(mapPointers.getRejectPointer()));
-		builder.setBlockmapLump(LumpPointer.getNullableLump(mapPointers.getBlockmapPointer()));
-		builder.setScriptsLump(LumpPointer.getNullableLump(mapPointers.getScriptsPointer()));
-		builder.setBehaviorLump(LumpPointer.getNullableLump(mapPointers.getBehaviorPointer()));
 	}
 }
