@@ -1,12 +1,12 @@
 package wadapi.codec;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
 import org.digitalmodular.utilities.annotation.UtilityClass;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
 import wadapi.FileBuffer;
-import wadapi.LumpType;
 import wadapi.LumpUtilities;
 import wadapi.WadMap;
 import wadapi.io.LumpPointer;
@@ -27,18 +27,17 @@ public final class MapCodec {
 	public static WadMap makeMap(MapPointers mapPointers) {
 		requireNonNull(mapPointers, "mapPointers");
 
-		for (LumpPointer mapPointer : mapPointers)
-			decodeLump(mapPointer);
-
 		boolean isHexenFormat = mapPointers.getBehaviorPointer() != null;
+		if (isHexenFormat)
+			Thread.yield();
 
 		WadMapBuilder builder = new WadMapBuilder();
-		builder.setMapLump(mapPointers.getMapTagPointer().getLump());
-		builder.setThingsLump(mapPointers.getThingsPointer().getLump());
-		builder.setLinedefsLump(mapPointers.getLinedefsPointer().getLump());
-		builder.setSidedefsLump(mapPointers.getSidedefsPointer().getLump());
-		builder.setVerticesLump(mapPointers.getVerticesPointer().getLump());
-		builder.setSectorsLump(mapPointers.getSectorsPointer().getLump());
+		builder.setMapLump(decodeLump(mapPointers.getMapTagPointer()));
+		builder.setThingsLump(decodeLump(mapPointers.getThingsPointer()));
+		builder.setLinedefsLump(decodeLump(mapPointers.getLinedefsPointer()));
+		builder.setSidedefsLump(decodeLump(mapPointers.getSidedefsPointer()));
+		builder.setVerticesLump(decodeLump(mapPointers.getVerticesPointer()));
+		builder.setSectorsLump(decodeLump(mapPointers.getSectorsPointer()));
 
 		@Nullable LumpPointer nodesPointer = mapPointers.getNodesPointer();
 		if (nodesPointer != null) {
@@ -50,9 +49,9 @@ public final class MapCodec {
 				NodeFormat nodeFormat = getNodeFormat(rawNodesLump);
 				switch (nodeFormat) {
 					case DOOM:
-						builder.setSegmentsLump(LumpPointer.getNullableLump(mapPointers.getSegmentsPointer()));
-						builder.setSubsectorsLump(LumpPointer.getNullableLump(mapPointers.getSubsectorsPointer()));
-						builder.setNodesLump(DoomNodesCodec.decode(rawNodesLump, builder));
+						builder.setSegmentsLump(decodeLump(mapPointers.getSegmentsPointer()));
+						builder.setSubsectorsLump(decodeLump(mapPointers.getSubsectorsPointer()));
+						builder.setNodesLump(DoomNodesCodec.decode(rawNodesLump));
 						break;
 					case XNOD:
 						ExtendedNodesCodec.decode(rawNodesLump, builder);
@@ -74,25 +73,24 @@ public final class MapCodec {
 			}
 		}
 
-		builder.setRejectLump(LumpPointer.getNullableLump(mapPointers.getRejectPointer()));
-		builder.setBlockmapLump(LumpPointer.getNullableLump(mapPointers.getBlockmapPointer()));
-		builder.setScriptsLump(LumpPointer.getNullableLump(mapPointers.getScriptsPointer()));
-		builder.setBehaviorLump(LumpPointer.getNullableLump(mapPointers.getBehaviorPointer()));
+		builder.setRejectLump(decodeLump(mapPointers.getRejectPointer()));
+		builder.setBlockmapLump(decodeLump(mapPointers.getBlockmapPointer()));
+		builder.setScriptsLump(decodeLump(mapPointers.getScriptsPointer()));
+		builder.setBehaviorLump(decodeLump(mapPointers.getBehaviorPointer()));
 
 		return builder.build();
 	}
 
-	private static void decodeLump(@Nullable LumpPointer lumpPointer) {
+	@Contract("null -> null; !null -> !null")
+	private static @Nullable Lump decodeLump(@Nullable LumpPointer lumpPointer) {
 		if (lumpPointer == null)
-			return;
+			return null;
 
-		// Nodes are handled differently.
-		Lump lump = lumpPointer.getLump();
-		if (lump.getLumpType() == LumpType.NODES)
-			return;
-
+		Lump lump        = lumpPointer.getLump();
 		Lump decodedLump = LumpUtilities.decodeLump(lump);
 		lumpPointer.setLump(decodedLump);
+
+		return decodedLump;
 	}
 
 	private static NodeFormat getNodeFormat(FileBufferLump lump) {

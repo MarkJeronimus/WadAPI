@@ -205,7 +205,6 @@ public final class FileBuffer {
 	}
 
 	public void reallocate(int length) {
-		Thread.yield();
 		if (length == 0) {
 			buffer = EMPTY_BYTE_BUFFER;
 			return;
@@ -219,6 +218,7 @@ public final class FileBuffer {
 		if (buffer.capacity() >= length)
 			return;
 
+		Thread.yield();
 		reallocate(length);
 	}
 }

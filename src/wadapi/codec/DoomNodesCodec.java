@@ -16,7 +16,7 @@ import wadapi.structure.Node;
 public class DoomNodesCodec {
 	private static final int NODE_FIELD_SIZE = 28;
 
-	public static NodesLump decode(FileBufferLump lump, WadMapBuilder builder) {
+	public static NodesLump decode(FileBufferLump lump) {
 		FileBuffer fileBuffer = lump.getFileBuffer();
 		int        numNodes   = LumpUtilities.calcNumFields(fileBuffer.remaining(), NODE_FIELD_SIZE, lump.getName());
 

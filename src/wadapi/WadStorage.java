@@ -187,6 +187,7 @@ public class WadStorage implements Iterable<WadFile> {
 			}
 		}
 
+		Thread.yield();
 		return null;
 	}
 
