@@ -29,11 +29,13 @@ public class LinedefsCodec extends LumpCodec<LinedefsLump> {
 
 	@Override
 	public LinedefsLump decode(FileBufferLump lump) {
-		FileBuffer fileBuffer  = lump.getFileBuffer();
-		int        fieldSize   = getFieldSize(getWadFormat());
-		int        numLinedefs = LumpUtilities.calcNumFields(fileBuffer.remaining(), fieldSize, lump.getName());
+		String     name       = lump.getName();
+		FileBuffer fileBuffer = lump.getFileBuffer();
 
-		LinedefsLump linedefsLump = new LinedefsLump(lump.getName(), numLinedefs);
+		int fieldSize   = getFieldSize(getWadFormat());
+		int numLinedefs = LumpUtilities.calcNumFields(fileBuffer.remaining(), fieldSize, name);
+
+		LinedefsLump linedefsLump = new LinedefsLump(name, numLinedefs);
 
 		switch (getWadFormat()) {
 			case DOOM:

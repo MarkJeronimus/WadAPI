@@ -76,15 +76,87 @@ public class DoomLinedef extends Linedef {
 
 	@Override
 	public String toString() {
-		StringBuilder out = new StringBuilder().append('(');
+		StringBuilder sb = new StringBuilder(128);
 
-		out.append(getVertexFrom()).append('-').append(getVertexTo()).append(',').append(' ');
-		out.append(getFlags()).append(',').append(' ');
-		out.append(special).append(',').append(' ');
-		out.append(tag).append(',').append(' ');
-		out.append("f ").append(getFrontSidedef()).append(',').append(' ');
-		out.append("b ").append(getBackSidedef()).append(',').append(' ');
+		sb.append('[').append(getVertexFrom()).append('-').append(getVertexTo());
+		sb.append(", f=").append(getFrontSidedef());
+		sb.append(", b=").append(getBackSidedef());
+		sb.append(", special=").append(special);
+		sb.append(", tag=").append(tag);
+		sb.append(", flags=").append(getFlags());
+		if (getFlags() != 0) {
+			sb.append(" (");
 
-		return out.append(')').toString();
+			boolean addComma = false;
+			if (isImpassable()) {
+				sb.append("Impassable");
+				addComma = true;
+			}
+
+			if (isBlock_monster()) {
+				if (addComma)
+					sb.append(", ");
+
+				sb.append("Block monster");
+				addComma = true;
+			}
+
+			if (isDouble_sided()) {
+				if (addComma)
+					sb.append(", ");
+
+				sb.append("Double sided");
+				addComma = true;
+			}
+
+			if (isUpper_unpegged()) {
+				if (addComma)
+					sb.append(", ");
+
+				sb.append("Upper unpegged");
+				addComma = true;
+			}
+
+			if (isLower_unpegged()) {
+				if (addComma)
+					sb.append(", ");
+
+				sb.append("Lower unpegged");
+				addComma = true;
+			}
+
+			if (isSecret()) {
+				if (addComma)
+					sb.append(", ");
+
+				sb.append("Secret");
+				addComma = true;
+			}
+
+			if (isBlock_sound()) {
+				if (addComma)
+					sb.append(", ");
+
+				sb.append("Block sound");
+			}
+
+			if (isHidden()) {
+				if (addComma)
+					sb.append(", ");
+
+				sb.append("Hidden");
+			}
+
+			if (isShown()) {
+				if (addComma)
+					sb.append(", ");
+
+				sb.append("Shown");
+			}
+
+			sb.append(')');
+		}
+
+		return sb.append(']').toString();
 	}
 }

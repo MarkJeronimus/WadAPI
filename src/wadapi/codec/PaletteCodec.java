@@ -26,11 +26,12 @@ public class PaletteCodec extends LumpCodec<PaletteLump> {
 
 	@Override
 	public PaletteLump decode(FileBufferLump lump) {
+		String     name       = lump.getName();
 		FileBuffer fileBuffer = lump.getFileBuffer();
-		int numPalettes =
-				LumpUtilities.calcNumFields(fileBuffer.remaining(), PALETTE_FIELD_SIZE, lump.getName());
 
-		PaletteLump palettesLump = new PaletteLump(lump.getName(), numPalettes);
+		int numPalettes = LumpUtilities.calcNumFields(fileBuffer.remaining(), PALETTE_FIELD_SIZE, name);
+
+		PaletteLump palettesLump = new PaletteLump(name, numPalettes);
 
 		List<Palette> palettes = palettesLump.getPalettes();
 		for (int i = 0; i < numPalettes; i++) {

@@ -27,7 +27,7 @@ import wadapi.structure.Vertex;
  *
  * @author Zom-B
  */
-// Created 2011-08-15
+// Created 2021-08-05
 @UtilityClass
 public final class ExtendedNodesCodec {
 	private ExtendedNodesCodec() {
@@ -41,7 +41,7 @@ public final class ExtendedNodesCodec {
 	private static final int NODE_FIELD_SIZE      = 32;
 
 	/**
-	 * Decode an extended NODES lump (for now only the "XNOD" variant).
+	 * Decode an 'extended nodes' lump into the existing VERTEXES lump and into new SSECTORS, SEGS, and NODES lumps.
 	 * <p>
 	 * It's assumed the signature is 4 bytes, and is already been verified by the calling class.
 	 * This decoder will explicitly skip to the 4th byte before decoding.
@@ -53,10 +53,14 @@ public final class ExtendedNodesCodec {
 
 		lump.getFileBuffer().position(SIGNATURE_SIZE);
 
-		decodeVerticesPart(lump, verticesLump);               // Vertices are augmented.
-		builder.setSubsectorsLump(decodeSubsectorPart(lump)); // Subsectors are only stored in the NODES lump.
-		builder.setSegmentsLump(decodeSegmentsPart(lump));    // Segments   are only stored in the NODES lump.
-		builder.setNodesLump(decodeNodesPart(lump));          // Nodes      are only stored in the NODES lump.
+		decodeVerticesPart(lump, verticesLump);                     // Vertices are augmented.
+		SubsectorsLump subsectorsLump = decodeSubsectorsPart(lump); // Subsectors are only stored in the NODES lump.
+		SegmentsLump   segmentsLump   = decodeSegmentsPart(lump);   // Segments   are only stored in the NODES lump.
+		NodesLump      nodesLump      = decodeNodesPart(lump);      // Nodes      are only stored in the NODES lump.
+
+		builder.setSegmentsLump(segmentsLump);
+		builder.setSubsectorsLump(subsectorsLump);
+		builder.setNodesLump(nodesLump);
 	}
 
 	public static void encode(WadMap map, FileBuffer buffer) {
@@ -105,7 +109,7 @@ public final class ExtendedNodesCodec {
 			verticesLump.add(Vertex.fromMapUnits(0, 0));
 	}
 
-	private static SubsectorsLump decodeSubsectorPart(FileBufferLump lump) {
+	private static SubsectorsLump decodeSubsectorsPart(FileBufferLump lump) {
 		String     lumpName   = lump.getName();
 		FileBuffer fileBuffer = lump.getFileBuffer();
 

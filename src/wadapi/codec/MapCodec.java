@@ -51,7 +51,7 @@ public final class MapCodec {
 					case DOOM:
 						builder.setSegmentsLump(decodeLump(mapPointers.getSegmentsPointer()));
 						builder.setSubsectorsLump(decodeLump(mapPointers.getSubsectorsPointer()));
-						builder.setNodesLump(DoomNodesCodec.decode(rawNodesLump));
+						builder.setNodesLump(NodesCodec.decode(rawNodesLump));
 						break;
 					case XNOD:
 						ExtendedNodesCodec.decode(rawNodesLump, builder);

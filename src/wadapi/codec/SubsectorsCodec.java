@@ -26,11 +26,12 @@ public class SubsectorsCodec extends LumpCodec<SubsectorsLump> {
 
 	@Override
 	public SubsectorsLump decode(FileBufferLump lump) {
+		String     name       = lump.getName();
 		FileBuffer fileBuffer = lump.getFileBuffer();
-		int numSubsectors =
-				LumpUtilities.calcNumFields(fileBuffer.remaining(), SUBSECTOR_FIELD_SIZE, lump.getName());
 
-		SubsectorsLump subsectorsLump = new SubsectorsLump(lump.getName(), numSubsectors);
+		int numSubsectors = LumpUtilities.calcNumFields(fileBuffer.remaining(), SUBSECTOR_FIELD_SIZE, name);
+
+		SubsectorsLump subsectorsLump = new SubsectorsLump(name, numSubsectors);
 
 		for (int i = 0; i < numSubsectors; i++) {
 			Subsector subsector = readSubsector(fileBuffer);
@@ -49,6 +50,7 @@ public class SubsectorsCodec extends LumpCodec<SubsectorsLump> {
 	private static Subsector readSubsector(FileBuffer buffer) {
 		int numSegs  = buffer.getUnsignedShort();
 		int firstSeg = buffer.getUnsignedShort();
+
 		return new Subsector(numSegs, firstSeg);
 	}
 }

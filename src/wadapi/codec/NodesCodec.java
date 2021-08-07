@@ -13,14 +13,16 @@ import wadapi.structure.Node;
  */
 // Created 2011-08-15
 @UtilityClass
-public class DoomNodesCodec {
+public class NodesCodec {
 	private static final int NODE_FIELD_SIZE = 28;
 
 	public static NodesLump decode(FileBufferLump lump) {
+		String     name       = lump.getName();
 		FileBuffer fileBuffer = lump.getFileBuffer();
-		int        numNodes   = LumpUtilities.calcNumFields(fileBuffer.remaining(), NODE_FIELD_SIZE, lump.getName());
 
-		NodesLump nodesLump = new NodesLump(lump.getName(), numNodes);
+		int numNodes = LumpUtilities.calcNumFields(fileBuffer.remaining(), NODE_FIELD_SIZE, name);
+
+		NodesLump nodesLump = new NodesLump(name, numNodes);
 
 		for (int i = 0; i < numNodes; i++) {
 			Node node = readNode(fileBuffer);
@@ -31,7 +33,7 @@ public class DoomNodesCodec {
 	}
 
 	public static void encode(NodesLump nodes, FileBuffer buffer) {
-		throw new UnsupportedOperationException("Not implemented: " + DoomNodesCodec.class.getSimpleName() +
+		throw new UnsupportedOperationException("Not implemented: " + NodesCodec.class.getSimpleName() +
 		                                        ".encode()");
 	}
 

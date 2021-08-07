@@ -29,11 +29,12 @@ public class ThingsCodec extends LumpCodec<ThingsLump> {
 
 	@Override
 	public ThingsLump decode(FileBufferLump lump) {
+		String     name       = lump.getName();
 		FileBuffer fileBuffer = lump.getFileBuffer();
-		int numThings =
-				LumpUtilities.calcNumFields(fileBuffer.remaining(), getFieldSize(getWadFormat()), lump.getName());
 
-		ThingsLump thingsLump = new ThingsLump(lump.getName(), numThings);
+		int numThings = LumpUtilities.calcNumFields(fileBuffer.remaining(), getFieldSize(getWadFormat()), name);
+
+		ThingsLump thingsLump = new ThingsLump(name, numThings);
 
 		switch (getWadFormat()) {
 			case DOOM:
@@ -92,6 +93,7 @@ public class ThingsCodec extends LumpCodec<ThingsLump> {
 		int angle = (int)(buffer.getUnsignedShort() * 0x80000000L / 180);
 		int type  = buffer.getUnsignedShort();
 		int flags = buffer.getUnsignedShort();
+
 		return new DoomThing(x, y, angle, type, flags);
 	}
 
@@ -109,6 +111,7 @@ public class ThingsCodec extends LumpCodec<ThingsLump> {
 		int ar3     = buffer.getUnsignedByte();
 		int ar4     = buffer.getUnsignedByte();
 		int ar5     = buffer.getUnsignedByte();
+
 		return new HexenThing(tid, x, y, z, angle, type, flags, special, ar1, ar2, ar3, ar4, ar5);
 	}
 

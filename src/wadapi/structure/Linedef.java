@@ -109,10 +109,6 @@ public abstract class Linedef {
 		this.backSidedef = backSidedef;
 	}
 
-	public boolean isTwoSided() {
-		return frontSidedef != NO_SIDEDEF && backSidedef != NO_SIDEDEF;
-	}
-
 	public void flip() {
 		int temp = vertexFrom;
 		vertexFrom = vertexTo;

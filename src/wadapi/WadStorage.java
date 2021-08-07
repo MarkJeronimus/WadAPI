@@ -180,8 +180,8 @@ public class WadStorage implements Iterable<WadFile> {
 				if (lump.getLumpType() != LumpType.MAP || !lump.getName().equals(mapName))
 					continue;
 
-				@Nullable MapPointers mapPointers = getMapPointers(new LumpPointer(this, wadIndex, lumpIndex));
-				@Nullable WadMap      map         = MapCodec.makeMap(mapPointers);
+				MapPointers      mapPointers = getMapPointers(new LumpPointer(this, wadIndex, lumpIndex));
+				@Nullable WadMap map         = MapCodec.makeMap(mapPointers);
 				if (map != null)
 					return map;
 			}

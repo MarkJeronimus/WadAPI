@@ -26,11 +26,12 @@ public class SegmentsCodec extends LumpCodec<SegmentsLump> {
 
 	@Override
 	public SegmentsLump decode(FileBufferLump lump) {
+		String     name       = lump.getName();
 		FileBuffer fileBuffer = lump.getFileBuffer();
-		int numSegments =
-				LumpUtilities.calcNumFields(fileBuffer.remaining(), SEGMENT_FIELD_SIZE, lump.getName());
 
-		SegmentsLump segmentsLump = new SegmentsLump(lump.getName(), numSegments);
+		int numSegments = LumpUtilities.calcNumFields(fileBuffer.remaining(), SEGMENT_FIELD_SIZE, name);
+
+		SegmentsLump segmentsLump = new SegmentsLump(name, numSegments);
 
 		for (int i = 0; i < numSegments; i++) {
 			Segment segment = readSegment(fileBuffer);
@@ -50,9 +51,10 @@ public class SegmentsCodec extends LumpCodec<SegmentsLump> {
 		int v1 = buffer.getUnsignedShort();
 		int v2 = buffer.getUnsignedShort();
 		buffer.getShort(); // Unused angle
-		int     linedef  = buffer.getUnsignedShort();
-		boolean backSide = buffer.getShort() != 0;
+		int linedef  = buffer.getUnsignedShort();
+		int backSide = buffer.getShort();
 		buffer.getShort(); // Unused offset
-		return new Segment(v1, v2, linedef, backSide);
+
+		return new Segment(v1, v2, linedef, backSide != 0);
 	}
 }

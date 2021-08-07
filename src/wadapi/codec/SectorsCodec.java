@@ -24,10 +24,12 @@ public class SectorsCodec extends LumpCodec<SectorsLump> {
 
 	@Override
 	public SectorsLump decode(FileBufferLump lump) {
+		String     name       = lump.getName();
 		FileBuffer fileBuffer = lump.getFileBuffer();
-		int        numSectors = LumpUtilities.calcNumFields(fileBuffer.remaining(), SECTOR_FIELD_SIZE, lump.getName());
 
-		SectorsLump sectorsLump = new SectorsLump(lump.getName(), numSectors);
+		int numSectors = LumpUtilities.calcNumFields(fileBuffer.remaining(), SECTOR_FIELD_SIZE, name);
+
+		SectorsLump sectorsLump = new SectorsLump(name, numSectors);
 
 		for (int i = 0; i < numSectors; i++) {
 			Sector sector = readSector(fileBuffer);

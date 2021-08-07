@@ -24,11 +24,12 @@ public class VerticesCodec extends LumpCodec<VerticesLump> {
 
 	@Override
 	public VerticesLump decode(FileBufferLump lump) {
+		String     name       = lump.getName();
 		FileBuffer fileBuffer = lump.getFileBuffer();
-		int numVertices =
-				LumpUtilities.calcNumFields(fileBuffer.remaining(), VERTEX_FIELD_SIZE, lump.getName());
 
-		VerticesLump verticesLump = new VerticesLump(lump.getName(), numVertices);
+		int numVertices = LumpUtilities.calcNumFields(fileBuffer.remaining(), VERTEX_FIELD_SIZE, name);
+
+		VerticesLump verticesLump = new VerticesLump(name, numVertices);
 
 		for (int i = 0; i < numVertices; i++) {
 			Vertex vertex = readVertex(fileBuffer);
@@ -47,6 +48,7 @@ public class VerticesCodec extends LumpCodec<VerticesLump> {
 	private static Vertex readVertex(FileBuffer buffer) {
 		int x = buffer.getShort();
 		int y = buffer.getShort();
+
 		return Vertex.fromMapUnits(x, y);
 	}
 

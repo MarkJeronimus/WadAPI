@@ -24,11 +24,12 @@ public class SidedefsCodec extends LumpCodec<SidedefsLump> {
 
 	@Override
 	public SidedefsLump decode(FileBufferLump lump) {
+		String     name       = lump.getName();
 		FileBuffer fileBuffer = lump.getFileBuffer();
-		int numSidedefs =
-				LumpUtilities.calcNumFields(fileBuffer.remaining(), SIDEDEF_FIELD_SIZE, lump.getName());
 
-		SidedefsLump sideDefsLump = new SidedefsLump(lump.getName(), numSidedefs);
+		int numSidedefs = LumpUtilities.calcNumFields(fileBuffer.remaining(), SIDEDEF_FIELD_SIZE, name);
+
+		SidedefsLump sideDefsLump = new SidedefsLump(name, numSidedefs);
 
 		for (int i = 0; i < numSidedefs; i++) {
 			Sidedef sidedef = readSidedef(fileBuffer);
@@ -51,6 +52,7 @@ public class SidedefsCodec extends LumpCodec<SidedefsLump> {
 		String bottomTexture = buffer.getString(8);
 		String midTexture    = buffer.getString(8);
 		int    sectorID      = buffer.getUnsignedShort();
+
 		return new Sidedef(xOffset, yOffset, topTexture, bottomTexture, midTexture, sectorID);
 	}
 
