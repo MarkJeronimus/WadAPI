@@ -18,10 +18,6 @@ public class SidedefsCodec extends LumpCodec<SidedefsLump> {
 
 	public static final SidedefsCodec INSTANCE = new SidedefsCodec();
 
-	public SidedefsCodec() {
-		super(SidedefsLump.class);
-	}
-
 	@Override
 	public SidedefsLump decode(FileBufferLump lump) {
 		String     name       = lump.getName();

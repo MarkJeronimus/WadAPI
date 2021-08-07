@@ -11,10 +11,6 @@ import wadapi.lump.FileBufferLump;
 public final class BinaryCodec extends LumpCodec<BinaryLump> {
 	public static final BinaryCodec INSTANCE = new BinaryCodec();
 
-	public BinaryCodec() {
-		super(BinaryLump.class);
-	}
-
 	@Override
 	public BinaryLump decode(FileBufferLump lump) {
 		FileBuffer fileBuffer = lump.getFileBuffer();

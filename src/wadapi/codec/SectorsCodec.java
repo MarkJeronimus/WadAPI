@@ -18,10 +18,6 @@ public class SectorsCodec extends LumpCodec<SectorsLump> {
 
 	public static final SectorsCodec INSTANCE = new SectorsCodec();
 
-	public SectorsCodec() {
-		super(SectorsLump.class);
-	}
-
 	@Override
 	public SectorsLump decode(FileBufferLump lump) {
 		String     name       = lump.getName();

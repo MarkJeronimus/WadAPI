@@ -20,10 +20,6 @@ public class SubsectorsCodec extends LumpCodec<SubsectorsLump> {
 
 	public static final SubsectorsCodec INSTANCE = new SubsectorsCodec();
 
-	public SubsectorsCodec() {
-		super(SubsectorsLump.class);
-	}
-
 	@Override
 	public SubsectorsLump decode(FileBufferLump lump) {
 		String     name       = lump.getName();

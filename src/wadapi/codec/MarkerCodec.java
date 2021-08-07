@@ -11,10 +11,6 @@ import wadapi.lump.MarkerLump;
 public final class MarkerCodec extends LumpCodec<MarkerLump> {
 	public static final MarkerCodec INSTANCE = new MarkerCodec();
 
-	public MarkerCodec() {
-		super(MarkerLump.class);
-	}
-
 	@Override
 	public MarkerLump decode(FileBufferLump lump) {
 		return new MarkerLump(lump.getName(), lump.getLumpType());

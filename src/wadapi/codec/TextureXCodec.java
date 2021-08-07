@@ -18,10 +18,6 @@ import wadapi.structure.MapTexture;
 public class TextureXCodec extends LumpCodec<MapTexturesLump> {
 	public static final TextureXCodec INSTANCE = new TextureXCodec();
 
-	public TextureXCodec() {
-		super(MapTexturesLump.class);
-	}
-
 	@Override
 	public MapTexturesLump decode(FileBufferLump lump) {
 		FileBuffer fileBuffer = lump.getFileBuffer();

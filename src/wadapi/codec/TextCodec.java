@@ -15,10 +15,6 @@ import wadapi.lump.TextLump;
 public class TextCodec extends LumpCodec<TextLump> {
 	public static final TextCodec INSTANCE = new TextCodec();
 
-	public TextCodec() {
-		super(TextLump.class);
-	}
-
 	@Override
 	public TextLump decode(FileBufferLump lump) {
 		FileBuffer fileBuffer  = lump.getFileBuffer();

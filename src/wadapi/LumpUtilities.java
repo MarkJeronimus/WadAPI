@@ -3,7 +3,6 @@ package wadapi;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import net.jcip.annotations.NotThreadSafe;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 

@@ -20,10 +20,6 @@ public class SegmentsCodec extends LumpCodec<SegmentsLump> {
 
 	public static final SegmentsCodec INSTANCE = new SegmentsCodec();
 
-	public SegmentsCodec() {
-		super(SegmentsLump.class);
-	}
-
 	@Override
 	public SegmentsLump decode(FileBufferLump lump) {
 		String     name       = lump.getName();

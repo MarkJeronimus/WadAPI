@@ -23,10 +23,6 @@ public class LinedefsCodec extends LumpCodec<LinedefsLump> {
 
 	public static final LinedefsCodec INSTANCE = new LinedefsCodec();
 
-	public LinedefsCodec() {
-		super(LinedefsLump.class);
-	}
-
 	@Override
 	public LinedefsLump decode(FileBufferLump lump) {
 		String     name       = lump.getName();

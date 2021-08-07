@@ -18,10 +18,6 @@ import wadapi.structure.SpritePost;
 public class SpriteCodec extends LumpCodec<SpriteLump> {
 	public static final SpriteCodec INSTANCE = new SpriteCodec();
 
-	public SpriteCodec() {
-		super(SpriteLump.class);
-	}
-
 	@Override
 	public SpriteLump decode(FileBufferLump lump) {
 		FileBuffer fileBuffer  = lump.getFileBuffer();

@@ -16,10 +16,6 @@ import wadapi.lump.PatchNamesLump;
 public class PatchNamesCodec extends LumpCodec<PatchNamesLump> {
 	public static final PatchNamesCodec INSTANCE = new PatchNamesCodec();
 
-	public PatchNamesCodec() {
-		super(PatchNamesLump.class);
-	}
-
 	@Override
 	public PatchNamesLump decode(FileBufferLump lump) {
 		FileBuffer fileBuffer = lump.getFileBuffer();

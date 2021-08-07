@@ -13,14 +13,8 @@ import wadapi.lump.Lump;
  */
 // Created 2018-01-20
 public abstract class LumpCodec<E extends Lump> {
-	private final Class<E> lumpClass;
-
 	@Deprecated
 	private MapFormat wadFormat = MapFormat.DOOM;
-
-	protected LumpCodec(Class<E> lumpClass) {
-		this.lumpClass = lumpClass;
-	}
 
 	@Deprecated
 	public MapFormat getWadFormat() {

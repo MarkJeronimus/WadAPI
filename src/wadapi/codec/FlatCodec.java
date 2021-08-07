@@ -14,10 +14,6 @@ import wadapi.structure.FlatLump;
 public class FlatCodec extends LumpCodec<FlatLump> {
 	public static final FlatCodec INSTANCE = new FlatCodec();
 
-	public FlatCodec() {
-		super(FlatLump.class);
-	}
-
 	@Override
 	public FlatLump decode(FileBufferLump lump) {
 		FileBuffer fileBuffer = lump.getFileBuffer();

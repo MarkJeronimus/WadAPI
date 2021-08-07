@@ -20,10 +20,6 @@ public class PaletteCodec extends LumpCodec<PaletteLump> {
 
 	public static final PaletteCodec INSTANCE = new PaletteCodec();
 
-	public PaletteCodec() {
-		super(PaletteLump.class);
-	}
-
 	@Override
 	public PaletteLump decode(FileBufferLump lump) {
 		String     name       = lump.getName();

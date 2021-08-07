@@ -23,10 +23,6 @@ public class ThingsCodec extends LumpCodec<ThingsLump> {
 
 	public static final ThingsCodec INSTANCE = new ThingsCodec();
 
-	public ThingsCodec() {
-		super(ThingsLump.class);
-	}
-
 	@Override
 	public ThingsLump decode(FileBufferLump lump) {
 		String     name       = lump.getName();

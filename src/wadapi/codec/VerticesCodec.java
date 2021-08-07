@@ -18,10 +18,6 @@ public class VerticesCodec extends LumpCodec<VerticesLump> {
 
 	public static final VerticesCodec INSTANCE = new VerticesCodec();
 
-	public VerticesCodec() {
-		super(VerticesLump.class);
-	}
-
 	@Override
 	public VerticesLump decode(FileBufferLump lump) {
 		String     name       = lump.getName();
