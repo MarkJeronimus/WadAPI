@@ -32,11 +32,11 @@ public final class MapCodec {
 
 		WadMapBuilder builder = new WadMapBuilder();
 		builder.setMapLump(LumpUtilities.decodeLump(mapPointers.getMapTagPointer()));
-		builder.setThingsLump(LumpUtilities.decodeLump(mapPointers.getThingsPointer()));
-		builder.setLinedefsLump(LumpUtilities.decodeLump(mapPointers.getLinedefsPointer()));
-		builder.setSidedefsLump(LumpUtilities.decodeLump(mapPointers.getSidedefsPointer()));
-		builder.setVerticesLump(LumpUtilities.decodeLump(mapPointers.getVerticesPointer()));
-		builder.setSectorsLump(LumpUtilities.decodeLump(mapPointers.getSectorsPointer()));
+		builder.setThingsLump(ThingsCodec.INSTANCE.decode(mapPointers.getThingsPointer()));
+		builder.setLinedefsLump(LinedefsCodec.INSTANCE.decode(mapPointers.getLinedefsPointer()));
+		builder.setSidedefsLump(SidedefsCodec.INSTANCE.decode(mapPointers.getSidedefsPointer()));
+		builder.setVerticesLump(VerticesCodec.INSTANCE.decode(mapPointers.getVerticesPointer()));
+		builder.setSectorsLump(SectorsCodec.INSTANCE.decode(mapPointers.getSectorsPointer()));
 
 		@Nullable LumpPointer nodesPointer = mapPointers.getNodesPointer();
 		if (nodesPointer != null) {
@@ -48,8 +48,8 @@ public final class MapCodec {
 				NodeFormat nodeFormat = getNodeFormat(rawNodesLump);
 				switch (nodeFormat) {
 					case DOOM:
-						builder.setSegmentsLump(LumpUtilities.decodeLump(mapPointers.getSegmentsPointer()));
-						builder.setSubsectorsLump(LumpUtilities.decodeLump(mapPointers.getSubsectorsPointer()));
+						builder.setSegmentsLump(SegmentsCodec.INSTANCE.decode(mapPointers.getSegmentsPointer()));
+						builder.setSubsectorsLump(SubsectorsCodec.INSTANCE.decode(mapPointers.getSubsectorsPointer()));
 						builder.setNodesLump(NodesCodec.decode(rawNodesLump));
 						break;
 					case XNOD:
@@ -72,10 +72,10 @@ public final class MapCodec {
 			}
 		}
 
-		builder.setRejectLump(LumpUtilities.decodeLump(mapPointers.getRejectPointer()));
-		builder.setBlockmapLump(LumpUtilities.decodeLump(mapPointers.getBlockmapPointer()));
-		builder.setScriptsLump(LumpUtilities.decodeLump(mapPointers.getScriptsPointer()));
-		builder.setBehaviorLump(LumpUtilities.decodeLump(mapPointers.getBehaviorPointer()));
+		builder.setRejectLump(BinaryCodec.INSTANCE.decode(mapPointers.getRejectPointer()));
+		builder.setBlockmapLump(BinaryCodec.INSTANCE.decode(mapPointers.getBlockmapPointer()));
+		builder.setScriptsLump(TextCodec.INSTANCE.decode(mapPointers.getScriptsPointer()));
+		builder.setBehaviorLump(BinaryCodec.INSTANCE.decode(mapPointers.getBehaviorPointer()));
 
 		return builder.build();
 	}
