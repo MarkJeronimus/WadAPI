@@ -25,16 +25,12 @@ public abstract class Linedef {
 	private int frontSidedef; // "Right" side
 	private int backSidedef;  // "Left" side
 
-	@SuppressWarnings("OverridableMethodCallDuringObjectConstruction")
 	protected Linedef(int vertexFrom, int vertexTo, int flags, int frontSidedef, int backSidedef) {
 		this.vertexFrom = vertexFrom;
 		this.vertexTo = vertexTo;
 		this.flags = flags;
 		this.frontSidedef = frontSidedef;
 		this.backSidedef = backSidedef;
-
-		if (isBackSided())
-			flip();
 	}
 
 	public int getVertexFrom() {
@@ -113,12 +109,8 @@ public abstract class Linedef {
 		this.backSidedef = backSidedef;
 	}
 
-	public boolean isBackSided() {
-		return frontSidedef == NO_SIDEDEF || backSidedef != NO_SIDEDEF;
-	}
-
-	public boolean isSingleSided() {
-		return frontSidedef == NO_SIDEDEF || backSidedef == NO_SIDEDEF;
+	public boolean isTwoSided() {
+		return frontSidedef != NO_SIDEDEF && backSidedef != NO_SIDEDEF;
 	}
 
 	public void flip() {
