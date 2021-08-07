@@ -4,6 +4,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import net.jcip.annotations.NotThreadSafe;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 
 import org.digitalmodular.utilities.annotation.UtilityClass;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
@@ -25,6 +27,7 @@ import wadapi.codec.TextCodec;
 import wadapi.codec.TextureXCodec;
 import wadapi.codec.ThingsCodec;
 import wadapi.codec.VerticesCodec;
+import wadapi.io.LumpPointer;
 import wadapi.lump.FileBufferLump;
 import wadapi.lump.Lump;
 
@@ -32,11 +35,29 @@ import wadapi.lump.Lump;
  * @author Zom-B
  */
 // Created 2018-01-21
-@NotThreadSafe
 @UtilityClass
 public final class LumpUtilities {
 	private LumpUtilities() {
 		throw new AssertionError();
+	}
+
+	/**
+	 * Decodes the proto lump pointed to by the pointer, and if successful,
+	 * overwrites the proto lump in storage with the decoded lump.
+	 */
+	@Contract("null -> null; !null -> !null")
+	public static @Nullable Lump decodeLump(@Nullable LumpPointer lumpPointer) {
+		if (lumpPointer == null)
+			return null;
+
+		Lump lump        = lumpPointer.getLump();
+		Lump decodedLump = decodeLump(lump);
+
+		//noinspection ObjectEquality // Comparing identity, not equality
+		if (decodedLump != lump)
+			lumpPointer.setLump(decodedLump);
+
+		return decodedLump;
 	}
 
 	public static Lump decodeLump(Lump lump) {
