@@ -21,9 +21,9 @@ public class HexenLinedef extends Linedef {
 	                    int ar3,
 	                    int ar4,
 	                    int ar5,
-	                    int frontSidedefID,
-	                    int backSidedefID) {
-		super(vertexFrom, vertexTo, flags, frontSidedefID, backSidedefID);
+	                    int frontSidedef,
+	                    int backSidedef) {
+		super(vertexFrom, vertexTo, flags, frontSidedef, backSidedef);
 		this.action = action;
 		this.ar1 = ar1;
 		this.ar2 = ar2;

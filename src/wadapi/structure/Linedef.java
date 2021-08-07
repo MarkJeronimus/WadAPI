@@ -7,7 +7,7 @@ package wadapi.structure;
  */
 // Created 2011-08-14
 public abstract class Linedef {
-	public static final int NONE_ID = 0xFFFF;
+	public static final int NO_SIDEDEF = -1;
 
 	public static final int FLAG_IMPASSABLE     = 0x0001;
 	public static final int FLAG_BLOCK_MONSTER  = 0x0002;
@@ -19,23 +19,19 @@ public abstract class Linedef {
 	public static final int FLAG_HIDDEN         = 0x0080;
 	public static final int FLAG_SHOWN          = 0x0100;
 
-	private int vertexFrom;     // 2
-	private int vertexTo;       // 2
-	private int flags;          // 2
-	private int frontSidedefID; // 2 "Right" side
-	private int backSidedefID;  // 2 "Left" side
+	private int vertexFrom;
+	private int vertexTo;
+	private int flags;
+	private int frontSidedef; // "Right" side
+	private int backSidedef;  // "Left" side
 
 	@SuppressWarnings("OverridableMethodCallDuringObjectConstruction")
-	protected Linedef(int vertexFrom,
-	                  int vertexTo,
-	                  int flags,
-	                  int frontSidedefID,
-	                  int backSidedefID) {
+	protected Linedef(int vertexFrom, int vertexTo, int flags, int frontSidedef, int backSidedef) {
 		this.vertexFrom = vertexFrom;
 		this.vertexTo = vertexTo;
 		this.flags = flags;
-		this.frontSidedefID = frontSidedefID;
-		this.backSidedefID = backSidedefID;
+		this.frontSidedef = frontSidedef;
+		this.backSidedef = backSidedef;
 
 		if (isBackSided())
 			flip();
@@ -101,28 +97,28 @@ public abstract class Linedef {
 		return (getFlags() & FLAG_SHOWN) != 0;
 	}
 
-	public int getFrontSidedefID() {
-		return frontSidedefID;
+	public int getFrontSidedef() {
+		return frontSidedef;
 	}
 
-	public void setFrontSidedefID(int frontSidedefID) {
-		this.frontSidedefID = frontSidedefID;
+	public void setFrontSidedef(int frontSidedef) {
+		this.frontSidedef = frontSidedef;
 	}
 
-	public int getBackSidedefID() {
-		return backSidedefID;
+	public int getBackSidedef() {
+		return backSidedef;
 	}
 
-	public void setBackSidedefID(int backSidedefID) {
-		this.backSidedefID = backSidedefID;
+	public void setBackSidedef(int backSidedef) {
+		this.backSidedef = backSidedef;
 	}
 
 	public boolean isBackSided() {
-		return frontSidedefID == NONE_ID || backSidedefID != NONE_ID;
+		return frontSidedef == NO_SIDEDEF || backSidedef != NO_SIDEDEF;
 	}
 
 	public boolean isSingleSided() {
-		return frontSidedefID == NONE_ID || backSidedefID == NONE_ID;
+		return frontSidedef == NO_SIDEDEF || backSidedef == NO_SIDEDEF;
 	}
 
 	public void flip() {
@@ -130,8 +126,8 @@ public abstract class Linedef {
 		vertexFrom = vertexTo;
 		vertexTo = temp;
 
-		temp = frontSidedefID;
-		frontSidedefID = backSidedefID;
-		backSidedefID = temp;
+		temp = frontSidedef;
+		frontSidedef = backSidedef;
+		backSidedef = temp;
 	}
 }

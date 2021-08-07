@@ -10,6 +10,7 @@ import wadapi.lump.LinedefsLump;
 import wadapi.structure.DoomLinedef;
 import wadapi.structure.HexenLinedef;
 import wadapi.structure.Linedef;
+import static wadapi.structure.Linedef.NO_SIDEDEF;
 
 /**
  * @author Zom-B
@@ -90,7 +91,13 @@ public class LinedefsCodec extends LumpCodec<LinedefsLump> {
 		int frontSidedefID = buffer.getUnsignedShort();
 		int backSidedefID  = buffer.getUnsignedShort();
 
-		return new DoomLinedef(vertexFrom, vertexTo, flags, special, tag, frontSidedefID, backSidedefID);
+		return new DoomLinedef(vertexFrom,
+		                       vertexTo,
+		                       flags,
+		                       special,
+		                       tag,
+		                       frontSidedefID == 65535 ? NO_SIDEDEF : frontSidedefID,
+		                       backSidedefID == 65535 ? NO_SIDEDEF : backSidedefID);
 	}
 
 	private static void writeDoomLinedef(DoomLinedef linedef, FileBuffer buffer) {
@@ -99,8 +106,10 @@ public class LinedefsCodec extends LumpCodec<LinedefsLump> {
 		buffer.putUnsignedShort(linedef.getFlags());
 		buffer.putUnsignedShort(linedef.getSpecial());
 		buffer.putUnsignedShort(linedef.getTag());
-		buffer.putUnsignedShort(linedef.getFrontSidedefID());
-		buffer.putUnsignedShort(linedef.getBackSidedefID());
+		int frontSidedef = linedef.getFrontSidedef();
+		int backSidedef  = linedef.getBackSidedef();
+		buffer.putUnsignedShort(frontSidedef == NO_SIDEDEF ? 65535 : frontSidedef);
+		buffer.putUnsignedShort(backSidedef == NO_SIDEDEF ? 65535 : backSidedef);
 	}
 
 	private static HexenLinedef readHexenLinedef(FileBuffer buffer) {
@@ -125,8 +134,8 @@ public class LinedefsCodec extends LumpCodec<LinedefsLump> {
 		                        ar3,
 		                        ar4,
 		                        ar5,
-		                        frontSidedefID,
-		                        backSidedefID);
+		                        frontSidedefID == 65535 ? NO_SIDEDEF : frontSidedefID,
+		                        backSidedefID == 65535 ? NO_SIDEDEF : backSidedefID);
 	}
 
 	private static void writeHexenLinedef(HexenLinedef linedef, FileBuffer buffer) {

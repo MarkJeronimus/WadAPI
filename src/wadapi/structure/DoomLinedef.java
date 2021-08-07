@@ -5,17 +5,17 @@ package wadapi.structure;
  */
 // Created 2018-01-25
 public class DoomLinedef extends Linedef {
-	private int special;        // 2
-	private int tag;            // 2
+	private int special;
+	private int tag;
 
 	public DoomLinedef(int vertexFrom,
 	                   int vertexTo,
 	                   int flags,
 	                   int special,
 	                   int tag,
-	                   int frontSidedefID,
-	                   int backSidedefID) {
-		super(vertexFrom, vertexTo, flags, frontSidedefID, backSidedefID);
+	                   int frontSidedef,
+	                   int backSidedef) {
+		super(vertexFrom, vertexTo, flags, frontSidedef, backSidedef);
 		this.special = special;
 		this.tag = tag;
 	}
@@ -79,11 +79,11 @@ public class DoomLinedef extends Linedef {
 		StringBuilder out = new StringBuilder().append('(');
 
 		out.append(getVertexFrom()).append('-').append(getVertexTo()).append(',').append(' ');
-		out.append("f ").append(getFrontSidedefID()).append(',').append(' ');
-		out.append("b ").append(getBackSidedefID()).append(',').append(' ');
 		out.append(getFlags()).append(',').append(' ');
 		out.append(special).append(',').append(' ');
 		out.append(tag).append(',').append(' ');
+		out.append("f ").append(getFrontSidedef()).append(',').append(' ');
+		out.append("b ").append(getBackSidedef()).append(',').append(' ');
 
 		return out.append(')').toString();
 	}
