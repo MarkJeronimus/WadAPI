@@ -72,6 +72,5 @@ public enum LumpType {
 		       lumpType == BLOCKMAP ||
 		       lumpType == SCRIPTS ||
 		       lumpType == BEHAVIOR;
-
 	}
 }
