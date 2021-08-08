@@ -51,10 +51,6 @@ public class DoomThing extends Thing {
 		return (getFlags() & FLAG_NOT_COOPERATIVE) == 0;
 	}
 
-	public boolean isNetwork() {
-		return isDeathmatch() || isCooperative();
-	}
-
 	@Override
 	public String toString() {
 		@Nullable ThingData thingData = ThingConstants.getThingData(GameType.DOOM, this);

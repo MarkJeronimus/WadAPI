@@ -27,13 +27,14 @@ public final class MapCodec {
 		requireNonNull(mapPointers, "mapPointers");
 
 		boolean isHexenFormat = mapPointers.getBehaviorPointer() != null;
-		if (isHexenFormat)
-			Thread.yield();
+
+		LumpCodec<?> thingsCodec   = isHexenFormat ? HexenThingsCodec.INSTANCE : DoomThingsCodec.INSTANCE;
+		LumpCodec<?> linedefsCodec = isHexenFormat ? HexenLinedefsCodec.INSTANCE : DoomLinedefsCodec.INSTANCE;
 
 		WadMapBuilder builder = new WadMapBuilder();
 		builder.setMapLump(LumpUtilities.decodeLump(mapPointers.getMapTagPointer()));
-		builder.setThingsLump(ThingsCodec.INSTANCE.decode(mapPointers.getThingsPointer()));
-		builder.setLinedefsLump(LinedefsCodec.INSTANCE.decode(mapPointers.getLinedefsPointer()));
+		builder.setThingsLump(thingsCodec.decode(mapPointers.getThingsPointer()));
+		builder.setLinedefsLump(linedefsCodec.decode(mapPointers.getLinedefsPointer()));
 		builder.setSidedefsLump(SidedefsCodec.INSTANCE.decode(mapPointers.getSidedefsPointer()));
 		builder.setVerticesLump(VerticesCodec.INSTANCE.decode(mapPointers.getVerticesPointer()));
 		builder.setSectorsLump(SectorsCodec.INSTANCE.decode(mapPointers.getSectorsPointer()));
