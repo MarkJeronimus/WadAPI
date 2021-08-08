@@ -1,4 +1,4 @@
-package wadapi.codec;
+package org.digitalmodular.wadapi.codec;
 
 import java.util.logging.Logger;
 import static java.util.logging.Level.WARNING;
@@ -7,18 +7,18 @@ import org.jetbrains.annotations.Nullable;
 
 import org.digitalmodular.utilities.annotation.UtilityClass;
 
-import wadapi.FileBuffer;
-import wadapi.LumpType;
-import wadapi.WadMap;
-import wadapi.lump.FileBufferLump;
-import wadapi.lump.NodesLump;
-import wadapi.lump.SegmentsLump;
-import wadapi.lump.SubsectorsLump;
-import wadapi.lump.VerticesLump;
-import wadapi.structure.Node;
-import wadapi.structure.Segment;
-import wadapi.structure.Subsector;
-import wadapi.structure.Vertex;
+import org.digitalmodular.wadapi.FileBuffer;
+import org.digitalmodular.wadapi.LumpType;
+import org.digitalmodular.wadapi.WadMap;
+import org.digitalmodular.wadapi.lump.FileBufferLump;
+import org.digitalmodular.wadapi.lump.NodesLump;
+import org.digitalmodular.wadapi.lump.SegmentsLump;
+import org.digitalmodular.wadapi.lump.SubsectorsLump;
+import org.digitalmodular.wadapi.lump.VerticesLump;
+import org.digitalmodular.wadapi.structure.Node;
+import org.digitalmodular.wadapi.structure.Segment;
+import org.digitalmodular.wadapi.structure.Subsector;
+import org.digitalmodular.wadapi.structure.Vertex;
 
 /**
  * Decode "ZDoom Extended nodes" (XNOD) lump into the existing VERTEXES lump and into new SSECTORS, SEGS, and NODES lumps.

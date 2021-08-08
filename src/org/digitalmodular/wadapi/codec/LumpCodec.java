@@ -1,15 +1,15 @@
-package wadapi.codec;
+package org.digitalmodular.wadapi.codec;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
-import wadapi.FileBuffer;
-import wadapi.MapFormat;
-import wadapi.io.LumpPointer;
-import wadapi.lump.FileBufferLump;
-import wadapi.lump.Lump;
+import org.digitalmodular.wadapi.FileBuffer;
+import org.digitalmodular.wadapi.MapFormat;
+import org.digitalmodular.wadapi.io.LumpPointer;
+import org.digitalmodular.wadapi.lump.FileBufferLump;
+import org.digitalmodular.wadapi.lump.Lump;
 
 /**
  * @param <E> Type of {@code WadLump} this codec handles

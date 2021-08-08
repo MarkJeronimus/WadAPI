@@ -1,4 +1,4 @@
-package wadapi.io;
+package org.digitalmodular.wadapi.io;
 
 import java.util.logging.Logger;
 import static java.util.logging.Level.WARNING;
@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
-import wadapi.LumpType;
-import wadapi.lump.Lump;
+import org.digitalmodular.wadapi.LumpType;
+import org.digitalmodular.wadapi.lump.Lump;
 
 /**
  * @author Zom-B

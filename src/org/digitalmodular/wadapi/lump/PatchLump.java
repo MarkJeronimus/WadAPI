@@ -1,9 +1,9 @@
-package wadapi.lump;
+package org.digitalmodular.wadapi.lump;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireArrayLengthExactly;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireAtLeast;
 
-import static wadapi.LumpType.PATCH;
+import org.digitalmodular.wadapi.LumpType;
 
 /**
  * @author Zom-B
@@ -20,7 +20,7 @@ public class PatchLump extends Lump {
 //	public  short colorMap;
 
 	public PatchLump(String name, int width, int height, int xOffset, int yOffset, int[] pixels) {
-		super(name, PATCH);
+		super(name, LumpType.PATCH);
 
 		this.width = requireAtLeast(1, width, "width");
 		this.height = requireAtLeast(1, height, "height");

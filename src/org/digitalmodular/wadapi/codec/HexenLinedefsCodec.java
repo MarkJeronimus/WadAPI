@@ -1,14 +1,13 @@
-package wadapi.codec;
+package org.digitalmodular.wadapi.codec;
 
 import org.digitalmodular.utilities.annotation.Singleton;
 
-import wadapi.FileBuffer;
-import wadapi.LumpUtilities;
-import wadapi.lump.FileBufferLump;
-import wadapi.lump.LinedefsLump;
-import wadapi.structure.HexenLinedef;
-import wadapi.structure.Linedef;
-import static wadapi.structure.Linedef.NO_SIDEDEF;
+import org.digitalmodular.wadapi.FileBuffer;
+import org.digitalmodular.wadapi.LumpUtilities;
+import org.digitalmodular.wadapi.lump.FileBufferLump;
+import org.digitalmodular.wadapi.lump.LinedefsLump;
+import org.digitalmodular.wadapi.structure.HexenLinedef;
+import org.digitalmodular.wadapi.structure.Linedef;
 
 /**
  * @author Zom-B
@@ -68,8 +67,8 @@ public class HexenLinedefsCodec extends LumpCodec<LinedefsLump> {
 		                        ar3,
 		                        ar4,
 		                        ar5,
-		                        frontSidedefID == 65535 ? NO_SIDEDEF : frontSidedefID,
-		                        backSidedefID == 65535 ? NO_SIDEDEF : backSidedefID);
+		                        frontSidedefID == 65535 ? Linedef.NO_SIDEDEF : frontSidedefID,
+		                        backSidedefID == 65535 ? Linedef.NO_SIDEDEF : backSidedefID);
 	}
 
 	private static void writeLinedef(HexenLinedef linedef, FileBuffer buffer) {

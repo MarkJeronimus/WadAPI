@@ -1,9 +1,9 @@
-package wadapi.structure;
+package org.digitalmodular.wadapi.structure;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
-import wadapi.lump.Lump;
-import static wadapi.LumpType.FLAT;
+import org.digitalmodular.wadapi.lump.Lump;
+import static org.digitalmodular.wadapi.LumpType.FLAT;
 
 /**
  * @author Zom-B

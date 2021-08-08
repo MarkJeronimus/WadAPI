@@ -1,14 +1,14 @@
-package wadapi.codec;
+package org.digitalmodular.wadapi.codec;
 
 import java.util.List;
 
 import org.digitalmodular.utilities.annotation.Singleton;
 
-import wadapi.FileBuffer;
-import wadapi.LumpUtilities;
-import wadapi.lump.FileBufferLump;
-import wadapi.lump.PaletteLump;
-import wadapi.structure.Palette;
+import org.digitalmodular.wadapi.FileBuffer;
+import org.digitalmodular.wadapi.LumpUtilities;
+import org.digitalmodular.wadapi.lump.FileBufferLump;
+import org.digitalmodular.wadapi.lump.PaletteLump;
+import org.digitalmodular.wadapi.structure.Palette;
 
 /**
  * @author Zom-B

@@ -1,6 +1,6 @@
-package wadapi.lump;
+package org.digitalmodular.wadapi.lump;
 
-import wadapi.LumpType;
+import org.digitalmodular.wadapi.LumpType;
 
 /**
  * @author Zom-B

@@ -1,4 +1,4 @@
-package wadapi.io;
+package org.digitalmodular.wadapi.io;
 
 import java.io.IOException;
 import java.nio.channels.FileChannel;
@@ -14,16 +14,16 @@ import java.util.logging.Logger;
 import static java.util.logging.Level.FINER;
 import static java.util.logging.Level.FINEST;
 
-import wadapi.FileBuffer;
-import wadapi.LumpType;
-import wadapi.LumpTypeAssigner;
-import wadapi.MapLumpTypeAssigner;
-import wadapi.NamedLumpTypeAssigner;
-import wadapi.SectionLumpTypeAssigner;
-import wadapi.WadFile;
-import wadapi.WadType;
-import wadapi.lump.FileBufferLump;
-import wadapi.lump.Lump;
+import org.digitalmodular.wadapi.FileBuffer;
+import org.digitalmodular.wadapi.LumpType;
+import org.digitalmodular.wadapi.LumpTypeAssigner;
+import org.digitalmodular.wadapi.MapLumpTypeAssigner;
+import org.digitalmodular.wadapi.NamedLumpTypeAssigner;
+import org.digitalmodular.wadapi.SectionLumpTypeAssigner;
+import org.digitalmodular.wadapi.WadFile;
+import org.digitalmodular.wadapi.WadType;
+import org.digitalmodular.wadapi.lump.FileBufferLump;
+import org.digitalmodular.wadapi.lump.Lump;
 
 /**
  * Example usage:

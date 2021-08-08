@@ -1,4 +1,4 @@
-package wadapi.io;
+package org.digitalmodular.wadapi.io;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireAtLeast;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireStringLengthBetween;

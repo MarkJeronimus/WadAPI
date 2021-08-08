@@ -1,10 +1,10 @@
-package wadapi.lump;
+package org.digitalmodular.wadapi.lump;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import wadapi.structure.Palette;
-import static wadapi.LumpType.PLAYPAL;
+import org.digitalmodular.wadapi.structure.Palette;
+import static org.digitalmodular.wadapi.LumpType.PLAYPAL;
 
 /**
  * @author Zom-B

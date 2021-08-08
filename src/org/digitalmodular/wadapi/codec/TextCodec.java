@@ -1,11 +1,11 @@
-package wadapi.codec;
+package org.digitalmodular.wadapi.codec;
 
 import org.digitalmodular.utilities.annotation.Singleton;
 
-import wadapi.FileBuffer;
-import wadapi.LumpType;
-import wadapi.lump.FileBufferLump;
-import wadapi.lump.TextLump;
+import org.digitalmodular.wadapi.FileBuffer;
+import org.digitalmodular.wadapi.LumpType;
+import org.digitalmodular.wadapi.lump.FileBufferLump;
+import org.digitalmodular.wadapi.lump.TextLump;
 
 /**
  * @author Zom-B

@@ -1,9 +1,9 @@
-package wadapi.lump;
+package org.digitalmodular.wadapi.lump;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static wadapi.LumpType.PNAMES;
+import static org.digitalmodular.wadapi.LumpType.PNAMES;
 
 /**
  * @author Zom-B

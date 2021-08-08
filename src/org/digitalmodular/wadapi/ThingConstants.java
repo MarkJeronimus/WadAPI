@@ -1,4 +1,4 @@
-package wadapi;
+package org.digitalmodular.wadapi;
 
 import java.awt.Color;
 
@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
-import wadapi.structure.Thing;
+import org.digitalmodular.wadapi.structure.Thing;
 
 /**
  * @author Zom-B

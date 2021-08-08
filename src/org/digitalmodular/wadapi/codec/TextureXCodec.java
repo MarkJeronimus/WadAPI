@@ -1,14 +1,14 @@
-package wadapi.codec;
+package org.digitalmodular.wadapi.codec;
 
 import java.util.List;
 
 import org.digitalmodular.utilities.annotation.Singleton;
 
-import wadapi.FileBuffer;
-import wadapi.lump.FileBufferLump;
-import wadapi.lump.MapTexturesLump;
-import wadapi.structure.MapPatch;
-import wadapi.structure.MapTexture;
+import org.digitalmodular.wadapi.FileBuffer;
+import org.digitalmodular.wadapi.lump.FileBufferLump;
+import org.digitalmodular.wadapi.lump.MapTexturesLump;
+import org.digitalmodular.wadapi.structure.MapPatch;
+import org.digitalmodular.wadapi.structure.MapTexture;
 
 /**
  * @author Zom-B

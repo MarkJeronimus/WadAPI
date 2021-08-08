@@ -1,4 +1,4 @@
-package wadapi.structure;
+package org.digitalmodular.wadapi.structure;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireAtLeast;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;

@@ -1,10 +1,10 @@
-package wadapi.structure;
+package org.digitalmodular.wadapi.structure;
 
 import org.jetbrains.annotations.Nullable;
 
-import wadapi.GameType;
-import wadapi.ThingConstants;
-import wadapi.ThingData;
+import org.digitalmodular.wadapi.GameType;
+import org.digitalmodular.wadapi.ThingConstants;
+import org.digitalmodular.wadapi.ThingData;
 
 /**
  * @author Zom-B

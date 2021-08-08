@@ -1,12 +1,12 @@
-package wadapi.lump;
+package org.digitalmodular.wadapi.lump;
 
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import wadapi.structure.Palette;
-import wadapi.structure.Sprite;
-import wadapi.structure.SpritePost;
-import static wadapi.LumpType.SPRITE;
+import org.digitalmodular.wadapi.structure.Palette;
+import org.digitalmodular.wadapi.structure.Sprite;
+import org.digitalmodular.wadapi.structure.SpritePost;
+import static org.digitalmodular.wadapi.LumpType.SPRITE;
 
 /**
  * @author Zom-B

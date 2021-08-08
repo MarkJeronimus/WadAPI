@@ -1,8 +1,8 @@
-package wadapi.codec;
+package org.digitalmodular.wadapi.codec;
 
-import wadapi.FileBuffer;
-import wadapi.lump.BinaryLump;
-import wadapi.lump.FileBufferLump;
+import org.digitalmodular.wadapi.FileBuffer;
+import org.digitalmodular.wadapi.lump.BinaryLump;
+import org.digitalmodular.wadapi.lump.FileBufferLump;
 
 /**
  * @author Zom-B

@@ -1,10 +1,10 @@
-package wadapi.lump;
+package org.digitalmodular.wadapi.lump;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import wadapi.structure.MapTexture;
-import static wadapi.LumpType.TEXTUREX;
+import org.digitalmodular.wadapi.LumpType;
+import org.digitalmodular.wadapi.structure.MapTexture;
 
 /**
  * @author Zom-B
@@ -14,7 +14,7 @@ public class MapTexturesLump extends Lump {
 	private final List<MapTexture> textures;
 
 	public MapTexturesLump(String name, int initialCapacity) {
-		super(name, TEXTUREX);
+		super(name, LumpType.TEXTUREX);
 
 		textures = new ArrayList<>(initialCapacity);
 	}

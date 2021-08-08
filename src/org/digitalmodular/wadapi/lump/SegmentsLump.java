@@ -1,7 +1,7 @@
-package wadapi.lump;
+package org.digitalmodular.wadapi.lump;
 
-import wadapi.structure.Segment;
-import static wadapi.LumpType.SEGS;
+import org.digitalmodular.wadapi.structure.Segment;
+import static org.digitalmodular.wadapi.LumpType.SEGS;
 
 /**
  * @author Zom-B

@@ -1,4 +1,4 @@
-package wadapi;
+package org.digitalmodular.wadapi;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -7,7 +7,7 @@ import static java.util.logging.Level.FINE;
 import static java.util.logging.Level.FINER;
 import static java.util.logging.Level.WARNING;
 
-import wadapi.lump.FileBufferLump;
+import org.digitalmodular.wadapi.lump.FileBufferLump;
 
 /**
  * @author Zom-B

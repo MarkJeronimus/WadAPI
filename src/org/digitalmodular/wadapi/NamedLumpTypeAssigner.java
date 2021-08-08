@@ -1,8 +1,8 @@
-package wadapi;
+package org.digitalmodular.wadapi;
 
 import java.util.List;
 
-import wadapi.lump.FileBufferLump;
+import org.digitalmodular.wadapi.lump.FileBufferLump;
 
 /**
  * @author Zom-B

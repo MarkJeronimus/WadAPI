@@ -1,4 +1,4 @@
-package wadapi;
+package org.digitalmodular.wadapi;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

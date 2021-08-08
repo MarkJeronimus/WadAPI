@@ -1,7 +1,7 @@
-package wadapi.lump;
+package org.digitalmodular.wadapi.lump;
 
-import wadapi.structure.Subsector;
-import static wadapi.LumpType.SSECTORS;
+import org.digitalmodular.wadapi.LumpType;
+import org.digitalmodular.wadapi.structure.Subsector;
 
 /**
  * @author Zom-B
@@ -9,6 +9,6 @@ import static wadapi.LumpType.SSECTORS;
 // Created 2018-01-21
 public class SubsectorsLump extends ListLump<Subsector> {
 	public SubsectorsLump(String name, int initialCapacity) {
-		super(name, SSECTORS, "subsector", initialCapacity);
+		super(name, LumpType.SSECTORS, "subsector", initialCapacity);
 	}
 }

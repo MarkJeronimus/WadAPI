@@ -1,7 +1,7 @@
-package wadapi.lump;
+package org.digitalmodular.wadapi.lump;
 
-import wadapi.structure.Thing;
-import static wadapi.LumpType.THINGS;
+import org.digitalmodular.wadapi.LumpType;
+import org.digitalmodular.wadapi.structure.Thing;
 
 /**
  * @author Zom-B
@@ -9,6 +9,6 @@ import static wadapi.LumpType.THINGS;
 // Created 2018-01-21
 public class ThingsLump extends ListLump<Thing> {
 	public ThingsLump(String name, int initialCapacity) {
-		super(name, THINGS, "thing", initialCapacity);
+		super(name, LumpType.THINGS, "thing", initialCapacity);
 	}
 }

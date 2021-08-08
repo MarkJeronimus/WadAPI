@@ -1,4 +1,4 @@
-package wadapi.structure;
+package org.digitalmodular.wadapi.structure;
 
 import java.awt.image.BufferedImage;
 

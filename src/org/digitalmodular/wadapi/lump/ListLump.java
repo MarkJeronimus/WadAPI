@@ -1,4 +1,4 @@
-package wadapi.lump;
+package org.digitalmodular.wadapi.lump;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -7,7 +7,7 @@ import static org.digitalmodular.utilities.ValidatorUtilities.requireAtLeast;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireStringLengthAtLeast;
 
-import wadapi.LumpType;
+import org.digitalmodular.wadapi.LumpType;
 
 /**
  * @param <T> Type of element to store in this list.

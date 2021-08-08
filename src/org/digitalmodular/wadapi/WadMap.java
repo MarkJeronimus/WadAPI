@@ -1,21 +1,21 @@
-package wadapi;
+package org.digitalmodular.wadapi;
 
 import org.jetbrains.annotations.Nullable;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireThat;
 
-import wadapi.lump.BinaryLump;
-import wadapi.lump.LinedefsLump;
-import wadapi.lump.Lump;
-import wadapi.lump.NodesLump;
-import wadapi.lump.SectorsLump;
-import wadapi.lump.SegmentsLump;
-import wadapi.lump.SidedefsLump;
-import wadapi.lump.SubsectorsLump;
-import wadapi.lump.TextLump;
-import wadapi.lump.ThingsLump;
-import wadapi.lump.VerticesLump;
+import org.digitalmodular.wadapi.lump.BinaryLump;
+import org.digitalmodular.wadapi.lump.LinedefsLump;
+import org.digitalmodular.wadapi.lump.Lump;
+import org.digitalmodular.wadapi.lump.NodesLump;
+import org.digitalmodular.wadapi.lump.SectorsLump;
+import org.digitalmodular.wadapi.lump.SegmentsLump;
+import org.digitalmodular.wadapi.lump.SidedefsLump;
+import org.digitalmodular.wadapi.lump.SubsectorsLump;
+import org.digitalmodular.wadapi.lump.TextLump;
+import org.digitalmodular.wadapi.lump.ThingsLump;
+import org.digitalmodular.wadapi.lump.VerticesLump;
 
 /**
  * @author Zom-B

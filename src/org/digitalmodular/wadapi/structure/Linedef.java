@@ -1,4 +1,4 @@
-package wadapi.structure;
+package org.digitalmodular.wadapi.structure;
 
 /**
  * A Linedef, as used for editing, and as input to the BSP builder.

@@ -1,4 +1,4 @@
-package wadapi;
+package org.digitalmodular.wadapi;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -13,13 +13,13 @@ import org.jetbrains.annotations.Nullable;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
-import wadapi.codec.MapCodec;
-import wadapi.io.LumpPointer;
-import wadapi.io.MapPointers;
-import wadapi.io.MapPointersBuilder;
-import wadapi.io.WadFileIO;
-import wadapi.lump.FileBufferLump;
-import wadapi.lump.Lump;
+import org.digitalmodular.wadapi.codec.MapCodec;
+import org.digitalmodular.wadapi.io.LumpPointer;
+import org.digitalmodular.wadapi.io.MapPointers;
+import org.digitalmodular.wadapi.io.MapPointersBuilder;
+import org.digitalmodular.wadapi.io.WadFileIO;
+import org.digitalmodular.wadapi.lump.FileBufferLump;
+import org.digitalmodular.wadapi.lump.Lump;
 
 /**
  * @author Zom-B

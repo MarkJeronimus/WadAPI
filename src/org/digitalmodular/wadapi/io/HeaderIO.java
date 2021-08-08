@@ -1,4 +1,4 @@
-package wadapi.io;
+package org.digitalmodular.wadapi.io;
 
 import java.io.IOException;
 import java.nio.channels.ReadableByteChannel;
@@ -6,7 +6,7 @@ import java.nio.channels.WritableByteChannel;
 
 import org.digitalmodular.utilities.annotation.StaticClass;
 
-import wadapi.FileBuffer;
+import org.digitalmodular.wadapi.FileBuffer;
 
 /**
  * @author Zom-B

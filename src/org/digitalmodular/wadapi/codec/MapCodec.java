@@ -1,17 +1,17 @@
-package wadapi.codec;
+package org.digitalmodular.wadapi.codec;
 
 import org.jetbrains.annotations.Nullable;
 
 import org.digitalmodular.utilities.annotation.UtilityClass;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
-import wadapi.FileBuffer;
-import wadapi.LumpUtilities;
-import wadapi.WadMap;
-import wadapi.io.LumpPointer;
-import wadapi.io.MapPointers;
-import wadapi.lump.FileBufferLump;
-import wadapi.lump.Lump;
+import org.digitalmodular.wadapi.FileBuffer;
+import org.digitalmodular.wadapi.LumpUtilities;
+import org.digitalmodular.wadapi.WadMap;
+import org.digitalmodular.wadapi.io.LumpPointer;
+import org.digitalmodular.wadapi.io.MapPointers;
+import org.digitalmodular.wadapi.lump.FileBufferLump;
+import org.digitalmodular.wadapi.lump.Lump;
 
 /**
  * @author Zom-B

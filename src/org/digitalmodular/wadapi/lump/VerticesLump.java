@@ -1,9 +1,9 @@
-package wadapi.lump;
+package org.digitalmodular.wadapi.lump;
 
 import java.awt.Rectangle;
 
-import wadapi.structure.Vertex;
-import static wadapi.LumpType.VERTEXES;
+import org.digitalmodular.wadapi.structure.Vertex;
+import static org.digitalmodular.wadapi.LumpType.VERTEXES;
 
 /**
  * @author Zom-B

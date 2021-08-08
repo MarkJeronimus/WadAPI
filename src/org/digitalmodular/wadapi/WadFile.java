@@ -1,4 +1,4 @@
-package wadapi;
+package org.digitalmodular.wadapi;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireAtLeast;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
-import wadapi.lump.Lump;
+import org.digitalmodular.wadapi.lump.Lump;
 
 /**
  * @author Zom-B

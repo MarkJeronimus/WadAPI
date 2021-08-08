@@ -1,7 +1,7 @@
-package wadapi.lump;
+package org.digitalmodular.wadapi.lump;
 
-import wadapi.structure.Node;
-import static wadapi.LumpType.NODES;
+import org.digitalmodular.wadapi.structure.Node;
+import static org.digitalmodular.wadapi.LumpType.NODES;
 
 /**
  * @author Zom-B

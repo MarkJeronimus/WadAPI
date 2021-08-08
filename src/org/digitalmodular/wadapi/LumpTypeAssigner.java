@@ -1,12 +1,12 @@
-package wadapi;
+package org.digitalmodular.wadapi;
 
 import java.util.List;
 import java.util.logging.Logger;
 import static java.util.logging.Level.FINE;
 import static java.util.logging.Level.FINER;
 
-import wadapi.lump.FileBufferLump;
-import wadapi.lump.Lump;
+import org.digitalmodular.wadapi.lump.FileBufferLump;
+import org.digitalmodular.wadapi.lump.Lump;
 
 /**
  * @author Zom-B

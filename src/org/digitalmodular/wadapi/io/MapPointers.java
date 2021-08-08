@@ -1,4 +1,4 @@
-package wadapi.io;
+package org.digitalmodular.wadapi.io;
 
 import java.util.ArrayList;
 import java.util.Collection;

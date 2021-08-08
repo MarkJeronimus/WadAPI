@@ -1,7 +1,7 @@
-package wadapi.lump;
+package org.digitalmodular.wadapi.lump;
 
-import wadapi.structure.Sidedef;
-import static wadapi.LumpType.SIDEDEFS;
+import org.digitalmodular.wadapi.LumpType;
+import org.digitalmodular.wadapi.structure.Sidedef;
 
 /**
  * @author Zom-B
@@ -9,6 +9,6 @@ import static wadapi.LumpType.SIDEDEFS;
 // Created 2018-01-21
 public class SidedefsLump extends ListLump<Sidedef> {
 	public SidedefsLump(String name, int initialCapacity) {
-		super(name, SIDEDEFS, "sidedef", initialCapacity);
+		super(name, LumpType.SIDEDEFS, "sidedef", initialCapacity);
 	}
 }

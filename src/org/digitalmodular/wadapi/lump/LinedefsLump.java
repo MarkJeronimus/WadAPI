@@ -1,7 +1,7 @@
-package wadapi.lump;
+package org.digitalmodular.wadapi.lump;
 
-import wadapi.structure.Linedef;
-import static wadapi.LumpType.LINEDEFS;
+import org.digitalmodular.wadapi.structure.Linedef;
+import static org.digitalmodular.wadapi.LumpType.LINEDEFS;
 
 /**
  * @author Zom-B

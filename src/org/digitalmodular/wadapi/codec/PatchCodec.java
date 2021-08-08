@@ -1,12 +1,12 @@
-package wadapi.codec;
+package org.digitalmodular.wadapi.codec;
 
 import java.util.Arrays;
 
 import org.digitalmodular.utilities.annotation.Singleton;
 
-import wadapi.FileBuffer;
-import wadapi.lump.FileBufferLump;
-import wadapi.lump.PatchLump;
+import org.digitalmodular.wadapi.FileBuffer;
+import org.digitalmodular.wadapi.lump.FileBufferLump;
+import org.digitalmodular.wadapi.lump.PatchLump;
 
 /**
  * @author Zom-B

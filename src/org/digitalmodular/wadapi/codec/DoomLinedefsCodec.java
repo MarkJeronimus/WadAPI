@@ -1,14 +1,13 @@
-package wadapi.codec;
+package org.digitalmodular.wadapi.codec;
 
 import org.digitalmodular.utilities.annotation.Singleton;
 
-import wadapi.FileBuffer;
-import wadapi.LumpUtilities;
-import wadapi.lump.FileBufferLump;
-import wadapi.lump.LinedefsLump;
-import wadapi.structure.DoomLinedef;
-import wadapi.structure.Linedef;
-import static wadapi.structure.Linedef.NO_SIDEDEF;
+import org.digitalmodular.wadapi.FileBuffer;
+import org.digitalmodular.wadapi.LumpUtilities;
+import org.digitalmodular.wadapi.lump.FileBufferLump;
+import org.digitalmodular.wadapi.lump.LinedefsLump;
+import org.digitalmodular.wadapi.structure.DoomLinedef;
+import org.digitalmodular.wadapi.structure.Linedef;
 
 /**
  * @author Zom-B
@@ -60,8 +59,8 @@ public class DoomLinedefsCodec extends LumpCodec<LinedefsLump> {
 		                       flags,
 		                       special,
 		                       tag,
-		                       frontSidedefID == 65535 ? NO_SIDEDEF : frontSidedefID,
-		                       backSidedefID == 65535 ? NO_SIDEDEF : backSidedefID);
+		                       frontSidedefID == 65535 ? Linedef.NO_SIDEDEF : frontSidedefID,
+		                       backSidedefID == 65535 ? Linedef.NO_SIDEDEF : backSidedefID);
 	}
 
 	private static void writeLinedef(DoomLinedef linedef, FileBuffer buffer) {
@@ -72,7 +71,7 @@ public class DoomLinedefsCodec extends LumpCodec<LinedefsLump> {
 		buffer.putUnsignedShort(linedef.getTag());
 		int frontSidedef = linedef.getFrontSidedef();
 		int backSidedef  = linedef.getBackSidedef();
-		buffer.putUnsignedShort(frontSidedef == NO_SIDEDEF ? 65535 : frontSidedef);
-		buffer.putUnsignedShort(backSidedef == NO_SIDEDEF ? 65535 : backSidedef);
+		buffer.putUnsignedShort(frontSidedef == Linedef.NO_SIDEDEF ? 65535 : frontSidedef);
+		buffer.putUnsignedShort(backSidedef == Linedef.NO_SIDEDEF ? 65535 : backSidedef);
 	}
 }

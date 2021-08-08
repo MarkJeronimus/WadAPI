@@ -1,4 +1,4 @@
-package wadapi.codec;
+package org.digitalmodular.wadapi.codec;
 
 import java.nio.charset.StandardCharsets;
 

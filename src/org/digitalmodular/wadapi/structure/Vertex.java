@@ -1,4 +1,4 @@
-package wadapi.structure;
+package org.digitalmodular.wadapi.structure;
 
 /**
  * A coordinate in Doom's "FIXED" 16.16 format, but since Java doesn't support Fixed,\

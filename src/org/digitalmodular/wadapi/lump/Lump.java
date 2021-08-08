@@ -1,9 +1,9 @@
-package wadapi.lump;
+package org.digitalmodular.wadapi.lump;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireStringLengthBetween;
 
-import wadapi.LumpType;
+import org.digitalmodular.wadapi.LumpType;
 
 /**
  * @author Zom-B

@@ -1,4 +1,4 @@
-package wadapi;
+package org.digitalmodular.wadapi;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,19 +9,19 @@ import org.jetbrains.annotations.Nullable;
 import org.digitalmodular.utilities.annotation.UtilityClass;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
-import wadapi.codec.BinaryCodec;
-import wadapi.codec.FlatCodec;
-import wadapi.codec.LumpCodec;
-import wadapi.codec.MarkerCodec;
-import wadapi.codec.PaletteCodec;
-import wadapi.codec.PatchCodec;
-import wadapi.codec.PatchNamesCodec;
-import wadapi.codec.SpriteCodec;
-import wadapi.codec.TextCodec;
-import wadapi.codec.TextureXCodec;
-import wadapi.io.LumpPointer;
-import wadapi.lump.FileBufferLump;
-import wadapi.lump.Lump;
+import org.digitalmodular.wadapi.codec.BinaryCodec;
+import org.digitalmodular.wadapi.codec.FlatCodec;
+import org.digitalmodular.wadapi.codec.LumpCodec;
+import org.digitalmodular.wadapi.codec.MarkerCodec;
+import org.digitalmodular.wadapi.codec.PaletteCodec;
+import org.digitalmodular.wadapi.codec.PatchCodec;
+import org.digitalmodular.wadapi.codec.PatchNamesCodec;
+import org.digitalmodular.wadapi.codec.SpriteCodec;
+import org.digitalmodular.wadapi.codec.TextCodec;
+import org.digitalmodular.wadapi.codec.TextureXCodec;
+import org.digitalmodular.wadapi.io.LumpPointer;
+import org.digitalmodular.wadapi.lump.FileBufferLump;
+import org.digitalmodular.wadapi.lump.Lump;
 
 /**
  * @author Zom-B

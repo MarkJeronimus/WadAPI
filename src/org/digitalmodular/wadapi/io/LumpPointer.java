@@ -1,4 +1,4 @@
-package wadapi.io;
+package org.digitalmodular.wadapi.io;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
@@ -6,9 +6,9 @@ import org.jetbrains.annotations.Nullable;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireAtLeast;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
-import wadapi.WadFile;
-import wadapi.WadStorage;
-import wadapi.lump.Lump;
+import org.digitalmodular.wadapi.WadFile;
+import org.digitalmodular.wadapi.WadStorage;
+import org.digitalmodular.wadapi.lump.Lump;
 
 /**
  * @author Zom-B
