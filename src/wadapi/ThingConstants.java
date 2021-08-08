@@ -110,6 +110,7 @@ public class ThingConstants {
 		DOOM.add(   89, ThingType.MONSTER     , 38, 12, true ,  20,  32, false, true , "BOSFB0"  , "Monsters Spawner");
 		DOOM.add(   87, ThingType.MONSTER     , 39, 12, true ,  20,  32, false, true , "TFOGB0"  , "Monsters Target");
 		DOOM.add(   72, ThingType.MONSTER     , 40, 12, true ,  16,  72, true , true , "KEENA0"  , "Commander Keen");
+		DOOM.add( 2035, ThingType.MONSTER     , 41,  3, false,  10,  32, false, true , "BAR1A0"  , "Barrel");
 
 		DOOM.add( 2005, ThingType.WEAPON      ,  0, 14, false,  20,  25, false, false, "CSAWA0"  , "Chainsaw");
 		DOOM.add( 5010, ThingType.WEAPON      ,  1, 14, false,  20,  25, false, false, "PISTA0"  , "Pistol");
@@ -192,7 +193,6 @@ public class ThingConstants {
 		DOOM.add( 9990, ThingType.BRIDGE      ,  0,  8, false,  32,   4, false, true , null      , "Custom Invisible Bridge");
 		DOOM.add( 9991, ThingType.BRIDGE      ,  0,  8, false,  32,   2, false, true , null      , "Bridge Custom");
 
-		DOOM.add( 2035, ThingType.OBSTACLE    ,  0,  3, false,  10,  32, false, true , "BAR1A0"  , "Barrel");
 		DOOM.add(   70, ThingType.OBSTACLE    ,  1,  3, false,  16,  32, false, true , "FCANA0"  , "Burning barrel");
 		DOOM.add(   48, ThingType.OBSTACLE    ,  2,  3, false,  16,  20, false, true , "ELECA0"  , "Tall techno pillar");
 		DOOM.add(   30, ThingType.OBSTACLE    ,  2,  3, false,  16,  20, false, true , "COL1A0"  , "Tall green pillar");
