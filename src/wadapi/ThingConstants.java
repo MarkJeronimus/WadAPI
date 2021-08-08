@@ -5,7 +5,6 @@ import java.awt.Color;
 import org.jetbrains.annotations.Nullable;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
-import static org.digitalmodular.utilities.ValidatorUtilities.requireRange;
 
 import wadapi.structure.DoomThing;
 import wadapi.structure.HexenThing;
@@ -763,7 +762,10 @@ public class ThingConstants {
 	}
 
 	public @Nullable ThingData get(int id) {
-		return data[requireRange(0, data.length, id, "id")];
+		if (id < 0 || id >= 32768)
+			return null;
+
+		return data[id];
 	}
 
 	@SuppressWarnings("ControlFlowStatementWithoutBraces")
