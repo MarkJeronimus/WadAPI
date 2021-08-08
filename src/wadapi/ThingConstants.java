@@ -6,8 +6,6 @@ import org.jetbrains.annotations.Nullable;
 
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
-import wadapi.structure.DoomThing;
-import wadapi.structure.HexenThing;
 import wadapi.structure.Thing;
 
 /**
@@ -720,19 +718,6 @@ public class ThingConstants {
 		// @formatter:on
 	}
 
-	public static ThingConstants get(MapFormat format) {
-		requireNonNull(format, "format");
-
-		switch (format) {
-			case DOOM:
-				return DOOM;
-			case HEXEN:
-				return HEXEN;
-			default:
-				throw new AssertionError("Unknown WadFormat: " + format);
-		}
-	}
-
 	private final ThingData[] data = new ThingData[32768];
 
 	@SuppressWarnings("MethodWithTooManyParameters")
@@ -768,16 +753,25 @@ public class ThingConstants {
 		return data[id];
 	}
 
-	@SuppressWarnings("ControlFlowStatementWithoutBraces")
-	public static @Nullable ThingData getThingData(Thing thing) {
+	public static ThingConstants get(GameType game) {
+		requireNonNull(game, "game");
+
+		switch (game) {
+			case DOOM:
+				return DOOM;
+			case HEXEN:
+				return HEXEN;
+			case HERETIC:
+			case STRIFE:
+				throw new UnsupportedOperationException("Unimplemented GameType: " + game);
+			default:
+				throw new AssertionError("Unknown GameType: " + game);
+		}
+	}
+
+	public static @Nullable ThingData getThingData(GameType game, Thing thing) {
 		requireNonNull(thing, "thing");
 
-		if (thing instanceof DoomThing)
-			return get(MapFormat.DOOM).get(thing.getType());
-		else if (thing instanceof HexenThing)
-			return get(MapFormat.HEXEN).get(thing.getType());
-		else
-			throw new UnsupportedOperationException("Not implemented: " + ThingConstants.class.getSimpleName() +
-			                                        ".getThingData() for " + thing.getClass().getSimpleName());
+		return get(game).get(thing.getType());
 	}
 }

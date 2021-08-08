@@ -2,6 +2,7 @@ package wadapi.structure;
 
 import org.jetbrains.annotations.Nullable;
 
+import wadapi.GameType;
 import wadapi.ThingConstants;
 import wadapi.ThingData;
 
@@ -56,7 +57,7 @@ public class DoomThing extends Thing {
 
 	@Override
 	public String toString() {
-		@Nullable ThingData thingData = ThingConstants.getThingData(this);
+		@Nullable ThingData thingData = ThingConstants.getThingData(GameType.DOOM, this);
 		String              thingName = thingData == null ? Integer.toString(getType()) : thingData.getName();
 
 		StringBuilder sb = new StringBuilder(128);
