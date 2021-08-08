@@ -21,7 +21,10 @@ import wadapi.structure.Subsector;
 import wadapi.structure.Vertex;
 
 /**
- * Handles XNOD nodes.
+ * Decode "ZDoom Extended nodes" (XNOD) lump into the existing VERTEXES lump and into new SSECTORS, SEGS, and NODES lumps.
+ * <p>
+ * It's assumed the signature is 4 bytes, and is already been verified by the calling class.
+ * This decoder will explicitly skip to the 4th byte before decoding.
  * <p>
  * See https://zdoom.org/wiki/Node#ZDoom_extended_nodes
  *
@@ -41,10 +44,7 @@ public final class ExtendedNodesCodec {
 	private static final int NODE_FIELD_SIZE      = 32;
 
 	/**
-	 * Decode an 'extended nodes' lump into the existing VERTEXES lump and into new SSECTORS, SEGS, and NODES lumps.
-	 * <p>
-	 * It's assumed the signature is 4 bytes, and is already been verified by the calling class.
-	 * This decoder will explicitly skip to the 4th byte before decoding.
+	 *
 	 */
 	public static void decode(FileBufferLump lump, WadMapBuilder builder) {
 		@Nullable VerticesLump verticesLump = builder.getVerticesLump();

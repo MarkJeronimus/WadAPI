@@ -55,6 +55,11 @@ public final class MapCodec {
 					case XNOD:
 						ExtendedNodesCodec.decode(rawNodesLump, builder);
 						break;
+					case XND4:
+						builder.setSegmentsLump(DeepSegmentsCodec.INSTANCE.decode(mapPointers.getSegmentsPointer()));
+						builder.setSubsectorsLump(DeepSubsectorsCodec.INSTANCE.decode(mapPointers.getSubsectorsPointer()));
+						builder.setNodesLump(DeepNodesCodec.INSTANCE.decode(rawNodesLump));
+						break;
 					case ZNOD:
 					case ZGLN:
 					case ZGL2:
@@ -62,7 +67,6 @@ public final class MapCodec {
 					case XGLN:
 					case XGL2:
 					case XGL3:
-					case XND4:
 						throw new UnsupportedOperationException("Not implemented yet: " + nodeFormat);
 					default:
 						throw new AssertionError("Unimplemented NodeFormat: " + nodeFormat);
