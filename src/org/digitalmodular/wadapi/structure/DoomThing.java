@@ -1,5 +1,14 @@
 package org.digitalmodular.wadapi.structure;
 
+import java.io.IOException;
+
+import org.digitalmodular.udbconfigreader.ConfigStruct;
+import org.digitalmodular.wadapi.GameConfigurationLoader;
+import org.digitalmodular.wadapi.GameResources;
+import org.digitalmodular.wadapi.GameType;
+import org.digitalmodular.wadapi.MapFormat;
+import org.digitalmodular.wadapi.SourcePort;
+
 /**
  * @author Zom-B
  */
@@ -47,8 +56,21 @@ public class DoomThing extends Thing {
 
 	@Override
 	public String toString() {
+		String thingName;
+		try {
+			ConfigStruct gameConfig = GameConfigurationLoader.loadGameConfiguration(
+					SourcePort.GZDOOM, GameType.DOOM, MapFormat.DOOM);
+			thingName = new GameResources(gameConfig).getThingName(getType());
+		} catch (IOException | IllegalArgumentException ignored) {
+			thingName = "";
+		}
+
 		StringBuilder sb = new StringBuilder(128);
 		sb.append('[').append(getType());
+
+		if (!thingName.isEmpty())
+			sb.append(" (").append(thingName).append(')');
+
 		sb.append(", x=").append(getX() / 65536.0);
 		sb.append(", y=").append(getY() / 65536.0);
 		sb.append(", angle=").append(getAngle() * 180.0f / 2147483648.0f);
