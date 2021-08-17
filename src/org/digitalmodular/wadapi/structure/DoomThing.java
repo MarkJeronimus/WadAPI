@@ -1,11 +1,5 @@
 package org.digitalmodular.wadapi.structure;
 
-import org.jetbrains.annotations.Nullable;
-
-import org.digitalmodular.wadapi.GameType;
-import org.digitalmodular.wadapi.ThingConstants;
-import org.digitalmodular.wadapi.ThingData;
-
 /**
  * @author Zom-B
  */
@@ -53,11 +47,8 @@ public class DoomThing extends Thing {
 
 	@Override
 	public String toString() {
-		@Nullable ThingData thingData = ThingConstants.getThingData(GameType.DOOM, this);
-		String              thingName = thingData == null ? Integer.toString(getType()) : thingData.getName();
-
 		StringBuilder sb = new StringBuilder(128);
-		sb.append('[').append(getType()).append(" (").append(thingName).append(')');
+		sb.append('[').append(getType());
 		sb.append(", x=").append(getX() / 65536.0);
 		sb.append(", y=").append(getY() / 65536.0);
 		sb.append(", angle=").append(getAngle() * 180.0f / 2147483648.0f);

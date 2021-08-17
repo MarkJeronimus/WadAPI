@@ -12,7 +12,7 @@ import org.digitalmodular.wadapi.structure.Thing;
  * @author Zom-B
  */
 // Created 2021-06-13
-@SuppressWarnings("LongLine")
+@Deprecated
 public class ThingConstants {
 	static final Color[] COLORS = {null,
 	                               new Color(61, 99, 212),

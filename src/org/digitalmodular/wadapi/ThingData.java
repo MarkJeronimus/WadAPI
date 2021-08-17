@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Nullable;
  * @author Zom-B
  */
 // Created 2011-08-14
+@Deprecated
 public class ThingData {
 	private final           int       id;
 	private final           ThingType thingType;
