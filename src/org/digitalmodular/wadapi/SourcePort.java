@@ -3,17 +3,25 @@ package org.digitalmodular.wadapi;
 import org.digitalmodular.utilities.ValidatorUtilities;
 
 /**
- * @author Zom-B
+ * @author zom-b
  */
-// Created 2018-01-21
-public enum MapFormat {
+// Created 2021-08-16
+public enum SourcePort {
+	BOOM("Boom"),
 	DOOM("Doom"),
+	ETERNITY("Eternity"),
+	GZDOOM("GZDoom"),
+	HERETIC("Heretic"),
 	HEXEN("Hexen"),
-	UDMF("UDMF");
+	MBF21("MBF21"),
+	STRIFE("Strife"),
+	ZANDRONUM("Zandronum"),
+	ZDAEMON("Zdaemon"),
+	ZDOOM("Zdoom");
 
 	private final String name;
 
-	MapFormat(String name) {
+	SourcePort(String name) {
 		this.name = ValidatorUtilities.requireStringLengthAtLeast(1, name, "name");
 	}
 
