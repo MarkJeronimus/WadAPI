@@ -3,7 +3,7 @@ package org.digitalmodular.wadapi;
 import org.digitalmodular.utilities.ValidatorUtilities;
 
 /**
- * @author zom-b
+ * @author Zom-B
  */
 // Created 2021-08-16
 public enum SourcePort {

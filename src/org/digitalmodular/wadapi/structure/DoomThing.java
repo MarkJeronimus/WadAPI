@@ -4,10 +4,10 @@ import java.io.IOException;
 
 import org.digitalmodular.udbconfigreader.ConfigStruct;
 import org.digitalmodular.wadapi.GameConfigurationLoader;
-import org.digitalmodular.wadapi.GameResources;
 import org.digitalmodular.wadapi.GameType;
 import org.digitalmodular.wadapi.MapFormat;
 import org.digitalmodular.wadapi.SourcePort;
+import org.digitalmodular.wadapi.resources.GameResources;
 
 /**
  * @author Zom-B
@@ -60,8 +60,9 @@ public class DoomThing extends Thing {
 		try {
 			ConfigStruct gameConfig = GameConfigurationLoader.loadGameConfiguration(
 					SourcePort.GZDOOM, GameType.DOOM, MapFormat.DOOM);
-			thingName = new GameResources(gameConfig).getThingName(getType());
-		} catch (IOException | IllegalArgumentException ignored) {
+			thingName = new GameResources(gameConfig).get(getType()).getTitle();
+		} catch (IOException | IllegalArgumentException ex) {
+			ex.printStackTrace();
 			thingName = "";
 		}
 
