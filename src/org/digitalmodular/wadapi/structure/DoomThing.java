@@ -56,21 +56,20 @@ public class DoomThing extends Thing {
 
 	@Override
 	public String toString() {
-		String thingName;
+		String name;
 		try {
 			ConfigStruct gameConfig = GameConfigurationLoader.loadGameConfiguration(
 					SourcePort.GZDOOM, GameType.DOOM, MapFormat.DOOM);
-			thingName = new GameResources(gameConfig).getThing(getType()).getTitle();
+			name = new GameResources(gameConfig).getThing(getType()).getName();
 		} catch (IOException | IllegalArgumentException ex) {
-			ex.printStackTrace();
-			thingName = "";
+			name = "";
 		}
 
 		StringBuilder sb = new StringBuilder(128);
 		sb.append('[').append(getType());
 
-		if (!thingName.isEmpty())
-			sb.append(" (").append(thingName).append(')');
+		if (!name.isEmpty())
+			sb.append(" (").append(name).append(')');
 
 		sb.append(", x=").append(getX() / 65536.0);
 		sb.append(", y=").append(getY() / 65536.0);
