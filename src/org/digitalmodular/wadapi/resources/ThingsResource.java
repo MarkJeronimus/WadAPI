@@ -122,7 +122,7 @@ public class ThingsResource {
 		if (title.isEmpty())
 			throw new IllegalArgumentException('"' + structPath + id + "\" is empty");
 
-		ThingData thing = thingTemplate.build(title);
+		ThingData thing = thingTemplate.build(id, categoryTemplate.getTitle(), title);
 		things.put(id, thing);
 	}
 
@@ -153,7 +153,7 @@ public class ThingsResource {
 		if (title.isEmpty())
 			throw new IllegalArgumentException('"' + structPath + "title\" is empty");
 
-		ThingData thing = thingTemplate.build(title);
+		ThingData thing = thingTemplate.build(id, categoryTemplate.getTitle(), title);
 		things.put(id, thing);
 	}
 

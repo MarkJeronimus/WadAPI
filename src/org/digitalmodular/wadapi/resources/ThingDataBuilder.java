@@ -1,6 +1,7 @@
 package org.digitalmodular.wadapi.resources;
 
 import org.digitalmodular.utilities.NumberUtilities;
+import static org.digitalmodular.utilities.ValidatorUtilities.requireAtLeast;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireStringLengthAtLeast;
 
@@ -100,10 +101,14 @@ public class ThingDataBuilder {
 		this.optional = optional;
 	}
 
-	public ThingData build(String title) {
+	public ThingData build(int id, String category, String title) {
+		requireAtLeast(0, id, "id");
+		requireStringLengthAtLeast(1, category, "category");
 		requireStringLengthAtLeast(1, title, "title");
 
-		return new ThingData(title,
+		return new ThingData(id,
+		                     category,
+		                     title,
 		                     sprite,
 		                     color,
 		                     alpha,

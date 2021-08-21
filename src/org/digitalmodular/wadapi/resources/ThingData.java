@@ -1,6 +1,7 @@
 package org.digitalmodular.wadapi.resources;
 
 import org.digitalmodular.utilities.NumberUtilities;
+import static org.digitalmodular.utilities.ValidatorUtilities.requireAtLeast;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireStringLengthAtLeast;
 
@@ -9,6 +10,9 @@ import static org.digitalmodular.utilities.ValidatorUtilities.requireStringLengt
  */
 // Created 2021-08-18
 public class ThingData {
+	private final int    id;
+	private final String category;
+
 	private final String  name;
 	private final String  sprite;
 	private final int     color;
@@ -29,7 +33,9 @@ public class ThingData {
 	private final int     thingLink;
 	private final boolean optional;
 
-	public ThingData(String name,
+	public ThingData(int id,
+	                 String category,
+	                 String name,
 	                 String sprite,
 	                 int color,
 	                 float alpha,
@@ -48,6 +54,8 @@ public class ThingData {
 	                 String decorateClass,
 	                 int thingLink,
 	                 boolean optional) {
+		this.id = requireAtLeast(0, id, "id");
+		this.category = requireStringLengthAtLeast(1, category, "category");
 		this.name = requireStringLengthAtLeast(1, name, "name");
 		this.sprite = sprite == null ? "" : sprite;
 		this.color = Math.max(0, color);
@@ -67,6 +75,14 @@ public class ThingData {
 		this.decorateClass = requireNonNull(decorateClass, "decorateClass");
 		this.thingLink = Math.max(0, thingLink);
 		this.optional = optional;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getCategory() {
+		return category;
 	}
 
 	public String getName() {
@@ -146,5 +162,32 @@ public class ThingData {
 	 */
 	public boolean isOptional() {
 		return optional;
+	}
+
+	@Override
+	public String toString() {
+		return "ThingData{" +
+		       "id=" + id +
+		       ", category='" + category + '\'' +
+		       ", name='" + name + '\'' +
+		       ", sprite='" + sprite + '\'' +
+		       ", color=" + color +
+		       ", alpha=" + alpha +
+		       ", renderStyle='" + renderStyle + '\'' +
+		       ", arrow=" + arrow +
+		       ", radius=" + radius +
+		       ", height=" + height +
+		       ", hangs=" + hangs +
+		       ", blocking=" + blocking +
+		       ", errorCheck=" + errorCheck +
+		       ", fixedSize=" + fixedSize +
+		       ", fixedRotation=" + fixedRotation +
+		       ", absoluteZ=" + absoluteZ +
+		       ", spriteScale=" + spriteScale +
+		       ", lockSprite=" + lockSprite +
+		       ", decorateClass='" + decorateClass + '\'' +
+		       ", thingLink=" + thingLink +
+		       ", optional=" + optional +
+		       '}';
 	}
 }
