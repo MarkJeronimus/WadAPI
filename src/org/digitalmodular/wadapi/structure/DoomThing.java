@@ -60,7 +60,7 @@ public class DoomThing extends Thing {
 		try {
 			ConfigStruct gameConfig = GameConfigurationLoader.loadGameConfiguration(
 					SourcePort.GZDOOM, GameType.DOOM, MapFormat.DOOM);
-			thingName = new GameResources(gameConfig).get(getType()).getTitle();
+			thingName = new GameResources(gameConfig).getThing(getType()).getTitle();
 		} catch (IOException | IllegalArgumentException ex) {
 			ex.printStackTrace();
 			thingName = "";

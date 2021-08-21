@@ -34,7 +34,7 @@ public class GameResources {
 		things = new ThingsResource(configStruct);
 	}
 
-	public ThingData get(int type) {
+	public ThingData getThing(int type) {
 		return things.get(type);
 	}
 }
