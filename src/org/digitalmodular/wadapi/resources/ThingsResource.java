@@ -8,6 +8,7 @@ import java.util.Set;
 import org.jetbrains.annotations.Nullable;
 
 import org.digitalmodular.utilities.annotation.StaticClass;
+import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
 import org.digitalmodular.udbconfigreader.ConfigStruct;
 
@@ -20,10 +21,12 @@ public class ThingsResource {
 	private final Set<String>             categories = new HashSet<>(64);
 	private final Map<Integer, ThingData> things     = new HashMap<>(1024);
 
-	public ThingsResource(ConfigStruct configStruct) {
-		@Nullable ConfigStruct thingTypes = configStruct.getStruct("thingtypes");
+	public ThingsResource(ConfigStruct gameConfig) {
+		requireNonNull(gameConfig, "gameConfig");
+
+		@Nullable ConfigStruct thingTypes = gameConfig.getStruct("thingtypes");
 		if (thingTypes == null) {
-			if (configStruct.get("thingtypes") != null)
+			if (gameConfig.get("thingtypes") != null)
 				throw new IllegalArgumentException("\"thingtypes\" is not a structure");
 			else
 				throw new IllegalArgumentException("\"thingtypes\" structure is missing ");
@@ -33,7 +36,7 @@ public class ThingsResource {
 			String category = thingType.getKey();
 			categories.add(category);
 
-			parseThingCategory(configStruct, category);
+			parseThingCategory(gameConfig, category);
 		}
 
 		categories.add("decorate");
@@ -111,11 +114,11 @@ public class ThingsResource {
 		                                   thingData);
 	}
 
-	public void parseStringDataAsString(String structPath,
-	                                    int id,
-	                                    String title,
-	                                    ThingCategoryBuilder categoryTemplate,
-	                                    ThingDataBuilder thingTemplate) {
+	private void parseStringDataAsString(String structPath,
+	                                     int id,
+	                                     String title,
+	                                     ThingCategoryBuilder categoryTemplate,
+	                                     ThingDataBuilder thingTemplate) {
 		if (title.isEmpty())
 			throw new IllegalArgumentException('"' + structPath + id + "\" is empty");
 
@@ -123,11 +126,11 @@ public class ThingsResource {
 		things.put(id, thing);
 	}
 
-	public void parseStringDataAsStruct(String structPath,
-	                                    int id,
-	                                    ConfigStruct thingData,
-	                                    ThingCategoryBuilder categoryTemplate,
-	                                    ThingDataBuilder thingTemplate) {
+	private void parseStringDataAsStruct(String structPath,
+	                                     int id,
+	                                     ConfigStruct thingData,
+	                                     ThingCategoryBuilder categoryTemplate,
+	                                     ThingDataBuilder thingTemplate) {
 		structPath += id + ".";
 
 		@Nullable String title = null;
@@ -239,6 +242,8 @@ public class ThingsResource {
 	}
 
 	public ThingData get(Integer id) {
+		requireNonNull(id, "id");
+
 		return things.get(id);
 	}
 }

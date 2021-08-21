@@ -1,14 +1,9 @@
 package org.digitalmodular.wadapi.resources;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
+import static org.digitalmodular.utilities.ValidatorUtilities.requireAtLeast;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
 import org.digitalmodular.udbconfigreader.ConfigStruct;
-import org.digitalmodular.udbconfigreader.GameConfigurationIO;
 
 /**
  * Wraps a ConfigStruct loaded from a game configuration file,
@@ -20,10 +15,10 @@ import org.digitalmodular.udbconfigreader.GameConfigurationIO;
 public class GameResources {
 	private final ThingsResource things;
 
-	public GameResources(ConfigStruct configStruct) {
-		requireNonNull(configStruct, "configStruct");
+	public GameResources(ConfigStruct gameConfig) {
+		requireNonNull(gameConfig, "gameConfig");
 
-		String type = configStruct.getString("type", "");
+		String type = gameConfig.getString("type", "");
 		if (!type.equals("Doom Builder 2 Game Configuration")) {
 			if (type.isEmpty())
 				throw new IllegalArgumentException("Not a Doom Builder 2 Game Configuration");
@@ -31,10 +26,12 @@ public class GameResources {
 				throw new IllegalArgumentException("Not a Doom Builder 2 Game Configuration: \"" + type + '"');
 		}
 
-		things = new ThingsResource(configStruct);
+		things = new ThingsResource(gameConfig);
 	}
 
 	public ThingData getThing(int type) {
+		requireAtLeast(0, type, "type");
+
 		return things.get(type);
 	}
 }
