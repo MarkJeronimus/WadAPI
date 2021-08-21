@@ -9,7 +9,7 @@ import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
  */
 // Created 2021-08-18
 public class ThingData {
-	private final String  title;
+	private final String  name;
 	private final String  sprite;
 	private final int     color;
 	private final float   alpha;
@@ -29,7 +29,7 @@ public class ThingData {
 	private final int     thingLink;
 	private final boolean optional;
 
-	public ThingData(String title,
+	public ThingData(String name,
 	                 String sprite,
 	                 int color,
 	                 float alpha,
@@ -48,7 +48,7 @@ public class ThingData {
 	                 String decorateClass,
 	                 int thingLink,
 	                 boolean optional) {
-		this.title = ValidatorUtilities.requireStringLengthAtLeast(1, title, "title");
+		this.name = ValidatorUtilities.requireStringLengthAtLeast(1, name, "name");
 		this.sprite = sprite == null ? "" : sprite;
 		this.color = Math.max(0, color);
 		this.alpha = NumberUtilities.clamp(0.0f, 1.0f, alpha);
@@ -69,8 +69,8 @@ public class ThingData {
 		this.optional = optional;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
 
 	public String getSprite() {

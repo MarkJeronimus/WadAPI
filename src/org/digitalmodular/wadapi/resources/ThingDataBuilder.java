@@ -100,10 +100,10 @@ public class ThingDataBuilder {
 		this.optional = optional;
 	}
 
-	public ThingData build(String title) {
-		ValidatorUtilities.requireStringLengthAtLeast(1, title, "title");
+	public ThingData build(String name) {
+		ValidatorUtilities.requireStringLengthAtLeast(1, name, "name");
 
-		return new ThingData(title,
+		return new ThingData(name,
 		                     sprite,
 		                     color,
 		                     alpha,
