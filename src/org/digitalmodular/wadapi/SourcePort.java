@@ -1,6 +1,6 @@
 package org.digitalmodular.wadapi;
 
-import org.digitalmodular.utilities.ValidatorUtilities;
+import static org.digitalmodular.utilities.ValidatorUtilities.requireStringLengthAtLeast;
 
 /**
  * @author Zom-B
@@ -22,7 +22,7 @@ public enum SourcePort {
 	private final String name;
 
 	SourcePort(String name) {
-		this.name = ValidatorUtilities.requireStringLengthAtLeast(1, name, "name");
+		this.name = requireStringLengthAtLeast(1, name, "name");
 	}
 
 	public String getName() {

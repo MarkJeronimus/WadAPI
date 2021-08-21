@@ -1,8 +1,8 @@
 package org.digitalmodular.wadapi.resources;
 
 import org.digitalmodular.utilities.NumberUtilities;
-import org.digitalmodular.utilities.ValidatorUtilities;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
+import static org.digitalmodular.utilities.ValidatorUtilities.requireStringLengthAtLeast;
 
 /**
  * @author Zom-B
@@ -48,7 +48,7 @@ public class ThingData {
 	                 String decorateClass,
 	                 int thingLink,
 	                 boolean optional) {
-		this.name = ValidatorUtilities.requireStringLengthAtLeast(1, name, "name");
+		this.name = requireStringLengthAtLeast(1, name, "name");
 		this.sprite = sprite == null ? "" : sprite;
 		this.color = Math.max(0, color);
 		this.alpha = NumberUtilities.clamp(0.0f, 1.0f, alpha);

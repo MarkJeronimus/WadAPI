@@ -9,13 +9,8 @@ import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
  */
 // Created 2021-08-18
 public class ThingCategoryBuilder {
-	private @Nullable String  name;
 	private @Nullable String  title;
 	private           boolean sorted = false;
-
-	public void setName(String name) {
-		this.name = requireNonNull(name, "name");
-	}
 
 	public void setTitle(String title) {
 		this.title = requireNonNull(title, "title");

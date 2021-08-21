@@ -1,5 +1,7 @@
 package org.digitalmodular.wadapi.resources;
 
+import org.jetbrains.annotations.Nullable;
+
 import static org.digitalmodular.utilities.ValidatorUtilities.requireAtLeast;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
 
@@ -29,7 +31,7 @@ public class GameResources {
 		things = new ThingsResource(gameConfig);
 	}
 
-	public ThingData getThing(int type) {
+	public @Nullable ThingData getThing(int type) {
 		requireAtLeast(0, type, "type");
 
 		return things.get(type);
