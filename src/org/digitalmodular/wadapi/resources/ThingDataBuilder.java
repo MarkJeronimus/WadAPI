@@ -14,7 +14,7 @@ public class ThingDataBuilder {
 	private int     color         = 0;
 	private float   alpha         = 1.0f;
 	private String  renderStyle   = "normal";
-	private int     arrow         = 0;
+	private boolean arrow         = false;
 	private int     radius        = 10;
 	private int     height        = 20;
 	private int     hangs         = 0;
@@ -46,7 +46,12 @@ public class ThingDataBuilder {
 	}
 
 	public void setArrow(int arrow) {
-		this.arrow = Math.max(0, arrow);
+		if (arrow == 0)
+			this.arrow = false;
+		else if (arrow == 1)
+			this.arrow = true;
+		else
+			throw new IllegalArgumentException("Not a valid 'arrow' value: " + arrow);
 	}
 
 	public void setRadius(int radius) {

@@ -27,10 +27,6 @@ public class ThingCategoryBuilder {
 		return sorted;
 	}
 
-	public void setSorted(boolean sorted) {
-		this.sorted = sorted;
-	}
-
 	public void setSorted(int sort) {
 		sorted = sort != 0;
 	}

@@ -18,7 +18,7 @@ public class ThingData {
 	private final int     color;
 	private final float   alpha;
 	private final String  renderStyle;
-	private final int     arrow;
+	private final boolean arrow;
 	private final int     radius;
 	private final int     height;
 	private final int     hangs;
@@ -40,7 +40,7 @@ public class ThingData {
 	                 int color,
 	                 float alpha,
 	                 String renderStyle,
-	                 int arrow,
+	                 boolean arrow,
 	                 int radius,
 	                 int height,
 	                 int hangs,
@@ -61,7 +61,7 @@ public class ThingData {
 		this.color = Math.max(0, color);
 		this.alpha = NumberUtilities.clamp(0.0f, 1.0f, alpha);
 		this.renderStyle = requireNonNull(renderStyle, "renderStyle").toLowerCase();
-		this.arrow = Math.max(0, arrow);
+		this.arrow = arrow;
 		this.radius = radius < 4 ? 8 : radius;
 		this.height = Math.max(0, height);
 		this.hangs = Math.max(0, hangs);
@@ -105,7 +105,7 @@ public class ThingData {
 		return renderStyle;
 	}
 
-	public int getArrow() {
+	public boolean isArrow() {
 		return arrow;
 	}
 
