@@ -10,10 +10,9 @@ import static org.digitalmodular.utilities.ValidatorUtilities.requireStringLengt
  */
 // Created 2021-08-18
 public class ThingData {
-	private final int    id;
-	private final String category;
-
-	private final String  name;
+	private final int     id;
+	private final String  categoryName;
+	private final String  title;
 	private final String  sprite;
 	private final int     color;
 	private final float   alpha;
@@ -34,8 +33,8 @@ public class ThingData {
 	private final boolean optional;
 
 	public ThingData(int id,
-	                 String category,
-	                 String name,
+	                 String categoryName,
+	                 String title,
 	                 String sprite,
 	                 int color,
 	                 float alpha,
@@ -55,8 +54,8 @@ public class ThingData {
 	                 int thingLink,
 	                 boolean optional) {
 		this.id = requireAtLeast(0, id, "id");
-		this.category = requireStringLengthAtLeast(1, category, "category");
-		this.name = requireStringLengthAtLeast(1, name, "name");
+		this.categoryName = requireStringLengthAtLeast(1, categoryName, "categoryName");
+		this.title = requireStringLengthAtLeast(1, title, "title");
 		this.sprite = sprite == null ? "" : sprite;
 		this.color = Math.max(0, color);
 		this.alpha = NumberUtilities.clamp(0.0f, 1.0f, alpha);
@@ -81,12 +80,12 @@ public class ThingData {
 		return id;
 	}
 
-	public String getCategory() {
-		return category;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
 	public String getSprite() {
@@ -168,8 +167,8 @@ public class ThingData {
 	public String toString() {
 		return "ThingData{" +
 		       "id=" + id +
-		       ", category='" + category + '\'' +
-		       ", name='" + name + '\'' +
+		       ", category='" + categoryName + '\'' +
+		       ", name='" + title + '\'' +
 		       ", sprite='" + sprite + '\'' +
 		       ", color=" + color +
 		       ", alpha=" + alpha +

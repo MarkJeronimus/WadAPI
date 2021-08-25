@@ -1,14 +1,15 @@
 package org.digitalmodular.wadapi.resources;
 
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 
 import org.jetbrains.annotations.Nullable;
 
 import org.digitalmodular.utilities.annotation.StaticClass;
+import static org.digitalmodular.utilities.ValidatorUtilities.requireAtLeast;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
+import static org.digitalmodular.utilities.ValidatorUtilities.requireStringLengthAtLeast;
 
 import org.digitalmodular.udbconfigreader.ConfigStruct;
 
@@ -18,8 +19,8 @@ import org.digitalmodular.udbconfigreader.ConfigStruct;
 // Created 2021-08-18
 @StaticClass
 public class ThingsResource {
-	private final Set<String>             categories = new HashSet<>(64);
-	private final Map<Integer, ThingData> things     = new HashMap<>(1024);
+	private final Map<String, ThingCategoryBuilder> categories = new LinkedHashMap<>(64);
+	private final Map<Integer, ThingData>           things     = new HashMap<>(1024);
 
 	public ThingsResource(ConfigStruct gameConfig) {
 		requireNonNull(gameConfig, "gameConfig");
@@ -34,26 +35,23 @@ public class ThingsResource {
 
 		for (Map.Entry<String, Object> thingType : thingTypes) {
 			String category = thingType.getKey();
-			categories.add(category);
 
-			parseThingCategory(gameConfig, category);
+			@Nullable ConfigStruct entries = thingTypes.getStruct(category);
+			if (entries == null)
+				throw new IllegalArgumentException("\"thingtypes." + category + "\" is not a structure");
+
+			parseThingCategory(entries);
 		}
-
-		categories.add("decorate");
 	}
 
-	private void parseThingCategory(ConfigStruct configStruct, String category) {
-		ConfigStruct thingTypes = configStruct.getStruct("thingtypes");
-		assert thingTypes != null;
+	private void parseThingCategory(ConfigStruct entries) {
+		String categoryName = entries.getName();
+		ThingCategoryBuilder categoryTemplate = categories.computeIfAbsent(
+				categoryName, ignored -> new ThingCategoryBuilder(categoryName));
 
-		@Nullable ConfigStruct entries = thingTypes.getStruct(category);
-		if (entries == null)
-			throw new IllegalArgumentException("\"thingtypes." + category + "\" is not a structure");
+		ThingDataBuilder thingTemplate = new ThingDataBuilder();
 
-		ThingCategoryBuilder categoryTemplate = new ThingCategoryBuilder();
-		ThingDataBuilder     thingTemplate    = new ThingDataBuilder();
-
-		String structPath = "thingtypes." + category + '.';
+		String structPath = "thingtypes." + categoryName + '.';
 
 		for (Map.Entry<String, Object> entry : entries)
 			parseCategoryEntry(structPath, entry, categoryTemplate, thingTemplate);
@@ -63,80 +61,73 @@ public class ThingsResource {
 	                                Map.Entry<String, Object> entry,
 	                                ThingCategoryBuilder categoryTemplate,
 	                                ThingDataBuilder thingTemplate) {
-		String key = entry.getKey();
+		boolean parsed = tryParseThingCategoryProperty(structPath, entry, categoryTemplate);
+		if (parsed)
+			return;
 
-		switch (key) {
+		parsed = tryParseThingProperty(structPath, entry, thingTemplate);
+		if (parsed)
+			return;
+
+		parseThing(structPath, entry, categoryTemplate, thingTemplate);
+	}
+
+	private static boolean tryParseThingCategoryProperty(
+			String structPath, Map.Entry<String, Object> entry, ThingCategoryBuilder categoryTemplate) {
+		switch (entry.getKey()) {
 			// @formatter:off
-			case "sort" : categoryTemplate.setSorted(parseInt   (structPath, entry)); return;
-			case "title": categoryTemplate.setTitle (parseString(structPath, entry)); return;
+			case "title": categoryTemplate.setTitle (parseString(structPath, entry)); return true;
+			case "sort" : categoryTemplate.setSorted(parseInt   (structPath, entry)); return true;
 			// @formatter:on
 			default:
 		}
-
-		boolean thingEntryParsed = tryParseThingEntry(structPath, entry, thingTemplate);
-		if (thingEntryParsed)
-			return;
-
-		try {
-			int id = Integer.parseInt(key);
-			parseThingData(structPath, id, entry.getValue(), categoryTemplate, thingTemplate);
-		} catch (NumberFormatException ignored) {
-			throw new IllegalArgumentException('"' + structPath + key + "\" is unrecognized");
-		}
+		return false;
 	}
 
-	private void parseThingData(String structPath,
-	                            int id,
-	                            Object thingData,
-	                            ThingCategoryBuilder categoryTemplate,
-	                            ThingDataBuilder thingTemplate) {
+	public void parseThing(String structPath,
+	                       Map.Entry<String, Object> entry,
+	                       ThingCategoryBuilder categoryTemplate,
+	                       ThingDataBuilder thingTemplate) {
+		try {
+			thingTemplate.setId(Integer.parseInt(entry.getKey()));
+		} catch (NumberFormatException ignored) {
+			throw new IllegalArgumentException('"' + structPath + entry.getKey() + "\" is unrecognized");
+		}
 
-		if (thingData == null) {
+		@Nullable Object thingProperties = entry.getValue();
+		String           categoryName    = categoryTemplate.getName();
+		thingTemplate.setCategoryName(categoryName);
+
+		structPath += entry.getKey();
+
+		if (thingProperties == null) {
 			// Thing defined by one include and subsequently removed by another.
 			return;
-		} else if (thingData instanceof String) {
-			parseStringDataAsString(structPath,
-			                        id,
-			                        (String)thingData,
-			                        categoryTemplate,
-			                        thingTemplate);
+		} else if (thingProperties instanceof String) {
+			parseThingFromString(structPath, (String)thingProperties, thingTemplate);
 			return;
-		} else if (thingData instanceof ConfigStruct) {
-			parseStringDataAsStruct(structPath,
-			                        id,
-			                        (ConfigStruct)thingData,
-			                        categoryTemplate,
-			                        thingTemplate);
+		} else if (thingProperties instanceof ConfigStruct) {
+			parseThingFromStruct(structPath, (ConfigStruct)thingProperties, thingTemplate);
 			return;
 		}
 
-		throw new IllegalArgumentException("Value of \"" + structPath + id + "\" is not a string or a structure: " +
-		                                   thingData);
+		throw new IllegalArgumentException("Value of \"" + structPath +
+		                                   "\" is not a string or a structure: " + thingProperties);
 	}
 
-	private void parseStringDataAsString(String structPath,
-	                                     int id,
-	                                     String title,
-	                                     ThingCategoryBuilder categoryTemplate,
-	                                     ThingDataBuilder thingTemplate) {
+	private void parseThingFromString(String structPath, String title, ThingDataBuilder thingTemplate) {
 		if (title.isEmpty())
-			throw new IllegalArgumentException('"' + structPath + id + "\" is empty");
+			throw new IllegalArgumentException("Value of \"" + structPath + "\" (title) is empty");
 
-		ThingData thing = thingTemplate.build(id, categoryTemplate.getTitle(), title);
-		things.put(id, thing);
+		ThingData thing = thingTemplate.build(title);
+		things.put(thing.getId(), thing);
 	}
 
-	private void parseStringDataAsStruct(String structPath,
-	                                     int id,
-	                                     ConfigStruct thingData,
-	                                     ThingCategoryBuilder categoryTemplate,
-	                                     ThingDataBuilder thingTemplate) {
-		structPath += id + ".";
-
+	private void parseThingFromStruct(String structPath, ConfigStruct thingData, ThingDataBuilder thingTemplate) {
 		@Nullable String title = null;
 
 		for (Map.Entry<String, Object> entry : thingData) {
-			boolean thingEntryParsed = tryParseThingEntry(structPath, entry, thingTemplate);
+			boolean thingEntryParsed = tryParseThingProperty(structPath, entry, thingTemplate);
 			if (thingEntryParsed)
 				continue;
 
@@ -145,20 +136,20 @@ public class ThingsResource {
 				continue;
 			}
 
-			throw new IllegalArgumentException('"' + structPath + entry.getKey() + "\" is unrecognized");
+			throw new IllegalArgumentException('"' + structPath + '.' + entry.getKey() + "\" is unrecognized");
 		}
 
 		if (title == null)
-			throw new IllegalArgumentException('"' + structPath + "title\" is missing");
+			throw new IllegalArgumentException('"' + structPath + ".title\" is missing");
 		if (title.isEmpty())
-			throw new IllegalArgumentException('"' + structPath + "title\" is empty");
+			throw new IllegalArgumentException('"' + structPath + ".title\" is empty");
 
-		ThingData thing = thingTemplate.build(id, categoryTemplate.getTitle(), title);
-		things.put(id, thing);
+		ThingData thing = thingTemplate.build(title);
+		things.put(thing.getId(), thing);
 	}
 
 	@SuppressWarnings("SpellCheckingInspection")
-	private static boolean tryParseThingEntry(
+	private static boolean tryParseThingProperty(
 			String structPath, Map.Entry<String, Object> entry, ThingDataBuilder thingTemplate) {
 		switch (entry.getKey()) {
 			// @formatter:off
@@ -241,8 +232,15 @@ public class ThingsResource {
 		                                   "\" is not a float");
 	}
 
-	public ThingData get(Integer id) {
+	public @Nullable ThingCategory getCategory(String name) {
+		requireStringLengthAtLeast(1, name, "name");
+
+		return categories.get(name);
+	}
+
+	public @Nullable ThingData getThing(Integer id) {
 		requireNonNull(id, "id");
+		requireAtLeast(0, id, "id");
 
 		return things.get(id);
 	}

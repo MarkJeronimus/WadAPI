@@ -1,5 +1,7 @@
 package org.digitalmodular.wadapi.resources;
 
+import org.jetbrains.annotations.Nullable;
+
 import org.digitalmodular.utilities.NumberUtilities;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireAtLeast;
 import static org.digitalmodular.utilities.ValidatorUtilities.requireNonNull;
@@ -10,24 +12,64 @@ import static org.digitalmodular.utilities.ValidatorUtilities.requireStringLengt
  */
 // Created 2021-08-18
 public class ThingDataBuilder {
-	private String  sprite        = "";
-	private int     color         = 0;
-	private float   alpha         = 1.0f;
-	private String  renderStyle   = "normal";
-	private boolean arrow         = false;
-	private int     radius        = 10;
-	private int     height        = 20;
-	private int     hangs         = 0;
-	private int     blocking      = 0;
-	private int     errorCheck    = 1;
-	private boolean fixedSize     = false;
-	private boolean fixedRotation = false;
-	private boolean absoluteZ     = false;
-	private float   spriteScale   = 1.0f;
-	private boolean lockSprite    = false;
-	private String  decorateClass = "";
-	private int     thingLink     = 0;
-	private boolean optional      = false;
+	private @Nullable Integer id;
+	private @Nullable String  categoryName;
+	private           String  sprite;
+	private           int     color;
+	private           float   alpha;
+	private           String  renderStyle;
+	private           boolean arrow;
+	private           int     radius;
+	private           int     height;
+	private           int     hangs;
+	private           int     blocking;
+	private           int     errorCheck;
+	private           boolean fixedSize;
+	private           boolean fixedRotation;
+	private           boolean absoluteZ;
+	private           float   spriteScale;
+	private           boolean lockSprite;
+	private           String  decorateClass;
+	private           int     thingLink;
+	private           boolean optional;
+
+	public ThingDataBuilder() {
+		resetAll();
+	}
+
+	private void resetThing() {
+		id = null;
+		categoryName = null;
+	}
+
+	public void resetAll() {
+		sprite = "";
+		color = 0;
+		alpha = 1.0f;
+		renderStyle = "normal";
+		arrow = false;
+		radius = 10;
+		height = 20;
+		hangs = 0;
+		blocking = 0;
+		errorCheck = 1;
+		fixedSize = false;
+		fixedRotation = false;
+		absoluteZ = false;
+		spriteScale = 1.0f;
+		lockSprite = false;
+		decorateClass = "";
+		thingLink = 0;
+		optional = false;
+	}
+
+	public void setId(Integer id) {
+		this.id = requireAtLeast(0, id, "id");
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = requireStringLengthAtLeast(1, categoryName, "categoryName");
+	}
 
 	public void setSprite(String sprite) {
 		this.sprite = sprite == null ? "" : sprite;
@@ -106,31 +148,38 @@ public class ThingDataBuilder {
 		this.optional = optional;
 	}
 
-	public ThingData build(int id, String category, String title) {
-		requireAtLeast(0, id, "id");
-		requireStringLengthAtLeast(1, category, "category");
+	public ThingData build(String title) {
+		if (id == null)
+			throw new IllegalStateException("'id' not set yet");
+		if (categoryName == null)
+			throw new IllegalStateException("'categoryName' not set yet: " + id);
+
 		requireStringLengthAtLeast(1, title, "title");
 
-		return new ThingData(id,
-		                     category,
-		                     title,
-		                     sprite,
-		                     color,
-		                     alpha,
-		                     renderStyle,
-		                     arrow,
-		                     radius,
-		                     height,
-		                     hangs,
-		                     blocking,
-		                     errorCheck,
-		                     fixedSize,
-		                     fixedRotation,
-		                     absoluteZ,
-		                     spriteScale,
-		                     lockSprite,
-		                     decorateClass,
-		                     thingLink,
-		                     optional);
+		ThingData thingData = new ThingData(id,
+		                                    categoryName,
+		                                    title,
+		                                    sprite,
+		                                    color,
+		                                    alpha,
+		                                    renderStyle,
+		                                    arrow,
+		                                    radius,
+		                                    height,
+		                                    hangs,
+		                                    blocking,
+		                                    errorCheck,
+		                                    fixedSize,
+		                                    fixedRotation,
+		                                    absoluteZ,
+		                                    spriteScale,
+		                                    lockSprite,
+		                                    decorateClass,
+		                                    thingLink,
+		                                    optional);
+
+		resetThing();
+
+		return thingData;
 	}
 }

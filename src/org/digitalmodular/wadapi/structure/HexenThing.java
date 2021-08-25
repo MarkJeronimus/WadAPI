@@ -173,7 +173,7 @@ public class HexenThing extends Thing {
 		try {
 			ConfigStruct gameConfig = GameConfigurationLoader.loadGameConfiguration(
 					SourcePort.GZDOOM, GameType.DOOM, MapFormat.DOOM);
-			name = new GameResources(gameConfig).getThing(getType()).getName();
+			name = new GameResources(gameConfig).getThing(getType()).getTitle();
 		} catch (IOException | IllegalArgumentException ex) {
 			name = "";
 		}
