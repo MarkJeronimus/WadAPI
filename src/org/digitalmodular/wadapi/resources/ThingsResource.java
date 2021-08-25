@@ -84,6 +84,41 @@ public class ThingsResource {
 		return false;
 	}
 
+	@SuppressWarnings("SpellCheckingInspection")
+	private static boolean tryParseThingProperty(
+			String structPath, Map.Entry<String, Object> entry, ThingDataBuilder thingTemplate) {
+		switch (entry.getKey()) {
+			// @formatter:off
+			case "sprite"       : thingTemplate.setSprite       (parseString (structPath, entry)); return true;
+			case "color"        : thingTemplate.setColor        (parseInt    (structPath, entry)); return true;
+			case "alpha"        : thingTemplate.setAlpha        (parseFloat  (structPath, entry)); return true;
+			case "renderstyle"  : thingTemplate.setRenderStyle  (parseString (structPath, entry)); return true;
+			case "arrow"        : thingTemplate.setArrow        (parseInt    (structPath, entry)); return true;
+			case "width"        : thingTemplate.setRadius       (parseInt    (structPath, entry)); return true;
+			case "height"       : thingTemplate.setHeight       (parseInt    (structPath, entry)); return true;
+			case "hangs"        : thingTemplate.setHangs        (parseInt    (structPath, entry)); return true;
+			case "blocking"     : thingTemplate.setBlocking     (parseInt    (structPath, entry)); return true;
+			case "error"        : thingTemplate.setErrorCheck   (parseInt    (structPath, entry)); return true;
+			case "fixedsize"    : thingTemplate.setFixedSize    (parseBoolean(structPath, entry)); return true;
+			case "fixedrotation": thingTemplate.setFixedRotation(parseBoolean(structPath, entry)); return true;
+			case "absolutez"    : thingTemplate.setAbsoluteZ    (parseBoolean(structPath, entry)); return true;
+			case "spritescale"  : thingTemplate.setSpriteScale  (parseFloat  (structPath, entry)); return true;
+			case "locksprite"   : thingTemplate.setLockSprite   (parseBoolean(structPath, entry)); return true;
+			case "class"        : thingTemplate.setDecorateClass(parseString (structPath, entry)); return true;
+			case "flagsrename"  : /* TODO */                                                       return true;
+			case "thinglink"    : thingTemplate.setThingLink    (parseInt    (structPath, entry)); return true;
+			case "arg0"         : /* TODO */                                                       return true;
+			case "arg1"         : /* TODO */                                                       return true;
+			case "arg2"         : /* TODO */                                                       return true;
+			case "arg3"         : /* TODO */                                                       return true;
+			case "arg4"         : /* TODO */                                                       return true;
+			case "optional"     : thingTemplate.setOptional     (parseBoolean(structPath, entry)); return true;
+			// @formatter:on
+			default:
+				return false;
+		}
+	}
+
 	public void parseThing(String structPath,
 	                       Map.Entry<String, Object> entry,
 	                       ThingCategoryBuilder categoryTemplate,
@@ -146,41 +181,6 @@ public class ThingsResource {
 
 		ThingData thing = thingTemplate.build(title);
 		things.put(thing.getId(), thing);
-	}
-
-	@SuppressWarnings("SpellCheckingInspection")
-	private static boolean tryParseThingProperty(
-			String structPath, Map.Entry<String, Object> entry, ThingDataBuilder thingTemplate) {
-		switch (entry.getKey()) {
-			// @formatter:off
-			case "sprite"       : thingTemplate.setSprite       (parseString (structPath, entry)); return true;
-			case "color"        : thingTemplate.setColor        (parseInt    (structPath, entry)); return true;
-			case "alpha"        : thingTemplate.setAlpha        (parseFloat  (structPath, entry)); return true;
-			case "renderstyle"  : thingTemplate.setRenderStyle  (parseString (structPath, entry)); return true;
-			case "arrow"        : thingTemplate.setArrow        (parseInt    (structPath, entry)); return true;
-			case "width"        : thingTemplate.setRadius       (parseInt    (structPath, entry)); return true;
-			case "height"       : thingTemplate.setHeight       (parseInt    (structPath, entry)); return true;
-			case "hangs"        : thingTemplate.setHangs        (parseInt    (structPath, entry)); return true;
-			case "blocking"     : thingTemplate.setBlocking     (parseInt    (structPath, entry)); return true;
-			case "error"        : thingTemplate.setErrorCheck   (parseInt    (structPath, entry)); return true;
-			case "fixedsize"    : thingTemplate.setFixedSize    (parseBoolean(structPath, entry)); return true;
-			case "fixedrotation": thingTemplate.setFixedRotation(parseBoolean(structPath, entry)); return true;
-			case "absolutez"    : thingTemplate.setAbsoluteZ    (parseBoolean(structPath, entry)); return true;
-			case "spritescale"  : thingTemplate.setSpriteScale  (parseFloat  (structPath, entry)); return true;
-			case "locksprite"   : thingTemplate.setLockSprite   (parseBoolean(structPath, entry)); return true;
-			case "class"        : thingTemplate.setDecorateClass(parseString (structPath, entry)); return true;
-			case "flagsrename"  : /* TODO */                                                       return true;
-			case "thinglink"    : thingTemplate.setThingLink    (parseInt    (structPath, entry)); return true;
-			case "arg0"         : /* TODO */                                                       return true;
-			case "arg1"         : /* TODO */                                                       return true;
-			case "arg2"         : /* TODO */                                                       return true;
-			case "arg3"         : /* TODO */                                                       return true;
-			case "arg4"         : /* TODO */                                                       return true;
-			case "optional"     : thingTemplate.setOptional     (parseBoolean(structPath, entry)); return true;
-			// @formatter:on
-			default:
-				return false;
-		}
 	}
 
 	private static String parseString(String structPath, Map.Entry<String, Object> entry) {
