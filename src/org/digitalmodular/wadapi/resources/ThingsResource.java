@@ -186,7 +186,7 @@ public class ThingsResource {
 	private static String parseString(String structPath, Map.Entry<String, Object> entry) {
 		Object value = entry.getValue();
 		if (!(value instanceof ConfigStruct))
-			return value.toString().toLowerCase();
+			return value.toString();
 
 		throw new IllegalArgumentException("Value of \"" + structPath + entry.getKey() +
 		                                   "\" is not a string");
