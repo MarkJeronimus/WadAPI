@@ -1,6 +1,5 @@
 package org.digitalmodular.wadapi.resources;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -20,7 +19,7 @@ import org.digitalmodular.udbconfigreader.ConfigStruct;
 @StaticClass
 public class ThingsResource {
 	private final Map<String, ThingCategoryBuilder> categories = new LinkedHashMap<>(64);
-	private final Map<Integer, ThingData>           things     = new HashMap<>(1024);
+	private final Map<Integer, ThingData>           things     = new LinkedHashMap<>(1024);
 
 	public ThingsResource(ConfigStruct gameConfig) {
 		requireNonNull(gameConfig, "gameConfig");
