@@ -61,4 +61,8 @@ public class GameResources {
 		assert category != null : thingData;
 		return category;
 	}
+
+	public int getThingIndex(int id) {
+		return things.getThingIndex(id);
+	}
 }

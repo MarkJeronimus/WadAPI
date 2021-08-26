@@ -243,4 +243,16 @@ public class ThingsResource {
 
 		return things.get(id);
 	}
+
+	public int getThingIndex(int id) {
+		int i = 0;
+		for (ThingData thing : things.values()) {
+			if (thing.getId() == id)
+				return i;
+
+			i++;
+		}
+
+		return -1;
+	}
 }
